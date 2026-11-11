@@ -1,0 +1,977 @@
+<title>Maqueta Stranieri Propiedades</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* ============================================================
+   Stranieri Propiedades — design mockup, milestone 1 day 4
+   Palette: the brand navy #01074F read out of the client's own
+   CorelDRAW palette. Neutrals are biased toward it, never grey.
+   ============================================================ */
+:root{
+  --navy:#01074F;
+  --navy-deep:#000730;
+  --navy-tint:#1C2577;
+  --ground:#F2F3F8;
+  --surface:#FFFFFF;
+  --surface-2:#FAFBFD;
+  --ink:#141730;
+  --muted:#5A6079;
+  --line:#D9DCE8;
+  --line-soft:#E8EAF2;
+  --on-navy:#FFFFFF;
+  --on-navy-dim:#B9BDD8;
+  --venta:#01074F;
+  --alquiler:#0C5F54;
+  --alquiler-soft:#E3F1EE;
+  --warn:#8A5A00;
+  --shadow:0 1px 2px rgba(20,23,48,.06), 0 8px 24px -12px rgba(20,23,48,.18);
+  --radius:10px;
+  --sans:'Archivo', 'Segoe UI', system-ui, sans-serif;
+  --serif:'Source Serif 4', Georgia, serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --navy:#0A1270;
+    --navy-deep:#05082B;
+    --navy-tint:#3A46B4;
+    --ground:#0A0C1C;
+    --surface:#141833;
+    --surface-2:#1A1F3D;
+    --ink:#ECEEF7;
+    --muted:#A6ABC6;
+    --line:#2A3058;
+    --line-soft:#222747;
+    --on-navy:#FFFFFF;
+    --on-navy-dim:#AFB5D8;
+    --alquiler:#17846F;
+    --alquiler-soft:#11322C;
+    --warn:#E0B055;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --navy:#0A1270; --navy-deep:#05082B; --navy-tint:#3A46B4;
+  --ground:#0A0C1C; --surface:#141833; --surface-2:#1A1F3D;
+  --ink:#ECEEF7; --muted:#A6ABC6; --line:#2A3058; --line-soft:#222747;
+  --on-navy:#FFFFFF; --on-navy-dim:#AFB5D8;
+  --alquiler:#17846F; --alquiler-soft:#11322C; --warn:#E0B055;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.5;-webkit-text-size-adjust:100%}
+img{display:block;max-width:100%}
+button,select,input,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--navy-tint);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- mockup chrome (not part of the site) ---------- */
+.chrome{position:sticky;top:0;z-index:50;background:var(--navy-deep);color:var(--on-navy);
+  border-bottom:1px solid rgba(255,255,255,.14)}
+.chrome-in{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;
+  gap:10px 18px;align-items:center}
+.chrome-tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-navy-dim);
+  white-space:nowrap}
+.chrome-tag b{color:var(--on-navy);font-weight:600;letter-spacing:.08em}
+.seg{display:flex;gap:2px;background:rgba(255,255,255,.08);padding:3px;border-radius:8px}
+.seg button{background:none;border:0;padding:6px 12px;border-radius:6px;cursor:pointer;
+  color:var(--on-navy-dim);font-size:13px;font-weight:500;transition:background .15s,color .15s}
+.seg button[aria-selected="true"]{background:var(--on-navy);color:var(--navy-deep);font-weight:600}
+.chrome-right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.chrome-note{max-width:1180px;margin:0 auto;padding:0 16px 10px;font-size:12.5px;
+  color:var(--on-navy-dim);line-height:1.45}
+.chrome-note .tbc{color:var(--on-navy)}
+
+/* ---------- the device frame ---------- */
+.stage{padding:22px 16px 48px;display:flex;justify-content:center}
+.frame{container-type:inline-size;min-width:0;width:100%;max-width:1180px;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.stage[data-device="phone"] .frame{max-width:392px;border-radius:26px;border-width:8px;
+  border-color:var(--navy-deep)}
+.urlbar{display:flex;align-items:center;gap:8px;padding:7px 12px;background:var(--surface-2);
+  border-bottom:1px solid var(--line-soft);font-size:12.5px;color:var(--muted);
+  overflow:hidden;white-space:nowrap}
+.urlbar svg{flex:none;color:var(--alquiler)}
+.urlbar b{color:var(--ink);font-weight:500;flex:none}
+.urlbar span{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- site header ---------- */
+.site-head{background:var(--navy);color:var(--on-navy)}
+.head-in{padding:12px 20px;display:flex;align-items:center;gap:18px}
+.logo{height:46px;width:auto}
+.nav{margin-left:auto;display:flex;gap:4px;align-items:center}
+.nav a{padding:8px 11px;border-radius:7px;text-decoration:none;font-size:14px;font-weight:500;
+  color:var(--on-navy-dim);transition:background .15s,color .15s}
+.nav a:hover{background:rgba(255,255,255,.1);color:var(--on-navy)}
+.nav a[aria-current="page"]{color:var(--on-navy);background:rgba(255,255,255,.14)}
+.nav a.btn-wa,.btn-wa{display:inline-flex;align-items:center;gap:7px;background:var(--on-navy);color:var(--navy);
+  border:0;border-radius:7px;padding:9px 14px;font-weight:600;font-size:14px;cursor:pointer;
+  text-decoration:none}
+.btn-wa svg{flex:none}
+.burger{margin-left:auto;display:none;background:rgba(255,255,255,.1);border:0;color:var(--on-navy);
+  border-radius:7px;padding:9px 11px;cursor:pointer}
+@container (max-width:760px){
+  .nav{display:none;order:3}
+  .burger{display:block;order:2}
+  .head-in{padding:10px 14px;gap:10px;flex-wrap:wrap}
+  .logo{height:36px}
+  /* the burger opens the same nav, stacked under the bar */
+  .site-head.open .nav{display:flex;flex-direction:column;align-items:stretch;
+    flex-basis:100%;margin-left:0;gap:2px;padding-top:6px;
+    border-top:1px solid rgba(255,255,255,.16)}
+  .site-head.open .nav a{padding:11px 10px;font-size:15px}
+  .site-head.open .btn-wa{justify-content:center;margin-top:6px}
+}
+
+/* ---------- screens ---------- */
+.screen{display:none}
+.screen.on{display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+@container (max-width:760px){.wrap{padding:0 14px}}
+section{padding:40px 0}
+@container (max-width:760px){section{padding:26px 0}}
+
+h1,h2,h3{font-weight:600;text-wrap:balance;margin:0}
+h1{font-size:30px;line-height:1.18;letter-spacing:-.01em}
+h2{font-size:21px;letter-spacing:-.005em}
+h3{font-size:16px}
+@container (max-width:760px){h1{font-size:23px}h2{font-size:18px}}
+.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  font-weight:600}
+.lede{font-family:var(--serif);font-size:17px;line-height:1.6;color:var(--muted);max-width:60ch}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:18px}
+.sec-head a{margin-left:auto;font-size:13.5px;font-weight:600;color:var(--navy-tint);
+  text-decoration:none;white-space:nowrap}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- hero: the La Plata plan, drawn not photographed ----------
+   The city is a square grid crossed by diagonals. That geometry is the
+   one piece of local vocabulary the design can carry for free. */
+.hero{position:relative;background:var(--navy);color:var(--on-navy);overflow:hidden;
+  padding:46px 0 0}
+.hero::before,.hero::after{content:"";position:absolute;inset:0;pointer-events:none}
+.hero::before{background:
+   repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,transparent 1px 44px),
+   repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 44px)}
+.hero::after{background:
+   linear-gradient(45deg,transparent calc(50% - .5px),rgba(255,255,255,.16) 50%,transparent calc(50% + .5px)),
+   linear-gradient(-45deg,transparent calc(50% - .5px),rgba(255,255,255,.16) 50%,transparent calc(50% + .5px))}
+.hero .wrap{position:relative;z-index:1}
+.hero h1{max-width:19ch}
+.hero p{font-family:var(--serif);font-size:17px;color:var(--on-navy-dim);max-width:48ch;margin:12px 0 0}
+.cred{display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-size:12.5px;
+  color:var(--on-navy-dim);border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:5px 13px}
+.cred b{color:var(--on-navy);font-weight:600}
+
+.searchbar{margin:30px 0 0;background:var(--surface);border-radius:var(--radius) var(--radius) 0 0;
+  padding:14px;display:grid;gap:10px;grid-template-columns:1fr 1fr 1fr auto;box-shadow:var(--shadow)}
+@container (max-width:760px){.searchbar{grid-template-columns:1fr 1fr;margin-top:22px}}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.field label{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+  font-weight:600}
+.field select,.field input,.field textarea{background:var(--surface-2);border:1px solid var(--line);
+  border-radius:7px;padding:9px 10px;width:100%}
+.btn{background:var(--navy);color:var(--on-navy);border:0;border-radius:7px;padding:11px 20px;
+  font-weight:600;cursor:pointer;align-self:end;white-space:nowrap}
+.btn:hover{background:var(--navy-tint)}
+.btn-ghost{background:transparent;color:var(--navy-tint);border:1px solid var(--line);
+  border-radius:7px;padding:10px 16px;font-weight:600;cursor:pointer}
+@container (max-width:760px){.searchbar .btn{grid-column:1/-1}}
+
+/* ---------- facts strip ---------- */
+.facts{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--line-soft);
+  background:var(--surface-2)}
+.fact{flex:1 1 170px;padding:16px 20px;border-right:1px solid var(--line-soft)}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-size:22px;font-weight:600;letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums}
+.fact span{font-size:12.5px;color:var(--muted)}
+
+/* ---------- property cards ---------- */
+.grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+@container (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+@container (max-width:620px){.grid{grid-template-columns:1fr;gap:14px}}
+.card{text-decoration:none;color:inherit;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;cursor:pointer;text-align:left;padding:0;
+  transition:border-color .15s,transform .15s,box-shadow .15s}
+.card:hover{border-color:var(--navy-tint);transform:translateY(-2px);box-shadow:var(--shadow)}
+.card-img{position:relative;aspect-ratio:4/3;background:var(--surface-2);overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;left:10px;top:10px;font-size:11px;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;padding:4px 9px;border-radius:5px;background:var(--navy);color:#fff}
+.badge.alq{background:var(--alquiler)}
+.codigo{position:absolute;right:10px;top:10px;font-size:11px;font-weight:600;padding:4px 8px;
+  border-radius:5px;background:rgba(0,0,0,.55);color:#fff;letter-spacing:.04em}
+.shots{position:absolute;right:10px;bottom:10px;font-size:11px;padding:3px 8px;border-radius:5px;
+  background:rgba(0,0,0,.55);color:#fff;font-variant-numeric:tabular-nums}
+.card-body{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.price{font-size:19px;font-weight:600;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.price small{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:.04em}
+.card h3{font-size:15px;font-weight:600;line-height:1.35}
+.addr{font-size:13.5px;color:var(--muted);line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+.chip{font-size:11.5px;border:1px solid var(--line);border-radius:5px;padding:3px 8px;color:var(--muted)}
+.chip.t{border-color:var(--line-soft);background:var(--surface-2);color:var(--ink);font-weight:500}
+.specs{display:flex;flex-wrap:wrap;gap:10px 14px;font-size:13px;color:var(--muted);
+  font-variant-numeric:tabular-nums}
+.specs i{font-style:normal;color:var(--ink);font-weight:600}
+
+/* ---------- type index ---------- */
+.types{display:flex;flex-wrap:wrap;gap:8px}
+.tbtn{display:inline-flex;align-items:baseline;gap:7px;background:var(--surface);
+  border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;font-weight:500}
+.tbtn:hover{border-color:var(--navy-tint);color:var(--navy-tint)}
+.tbtn span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ---------- tasaciones band ---------- */
+.band{background:var(--navy);color:var(--on-navy);border-radius:var(--radius);
+  padding:26px 28px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.band h2{color:var(--on-navy)}
+.band p{margin:6px 0 0;font-family:var(--serif);color:var(--on-navy-dim);max-width:52ch}
+.band .btn{background:var(--on-navy);color:var(--navy);margin-left:auto}
+.band .btn:hover{background:var(--on-navy-dim)}
+
+/* ---------- results screen ---------- */
+.results>*{min-width:0}
+.results{display:grid;grid-template-columns:238px 1fr;gap:26px;align-items:start}
+@container (max-width:900px){.results{grid-template-columns:1fr}}
+.filters{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;display:flex;flex-direction:column;gap:14px;position:sticky;top:14px}
+@container (max-width:900px){.filters{position:static}}
+.filters h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ops{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:3px}
+.ops button{flex:1;background:none;border:0;padding:7px 4px;border-radius:5px;cursor:pointer;
+  font-size:13px;font-weight:500;color:var(--muted)}
+.ops button[aria-pressed="true"]{background:var(--navy);color:#fff;font-weight:600}
+.checks{display:flex;flex-direction:column;gap:7px;max-height:none}
+.checks label{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
+.checks input{accent-color:var(--navy);width:15px;height:15px;margin:0}
+.checks em{margin-left:auto;font-style:normal;font-size:12px;color:var(--muted);
+  font-variant-numeric:tabular-nums}
+.rhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.rhead p{margin:0;font-size:14px;color:var(--muted)}
+.rhead p b{color:var(--ink);font-weight:600}
+.rhead select{margin-left:auto;background:var(--surface);border:1px solid var(--line);
+  border-radius:7px;padding:8px 10px}
+.empty{border:1px dashed var(--line);border-radius:var(--radius);padding:30px;text-align:center;
+  color:var(--muted)}
+
+/* ---------- property detail ---------- */
+.ficha>*{min-width:0}
+.ficha{display:grid;grid-template-columns:1fr 316px;gap:28px;align-items:start}
+@container (max-width:900px){.ficha{grid-template-columns:1fr;gap:22px}}
+.gallery{display:flex;flex-direction:column;gap:8px}
+.gmain{aspect-ratio:3/2;border-radius:var(--radius);overflow:hidden;background:var(--surface-2);
+  position:relative}
+.gmain img{width:100%;height:100%;object-fit:cover}
+.gthumbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.gthumbs button{flex:none;width:84px;aspect-ratio:4/3;border-radius:7px;overflow:hidden;padding:0;
+  border:2px solid transparent;background:none;cursor:pointer}
+.gthumbs button[aria-current="true"]{border-color:var(--navy-tint)}
+.gthumbs img{width:100%;height:100%;object-fit:cover}
+.ficha-head{display:flex;flex-direction:column;gap:10px;margin:22px 0 0}
+.ficha-head .price{font-size:28px}
+.block{border-top:1px solid var(--line-soft);padding:22px 0 0;margin-top:22px;
+  display:flex;flex-direction:column;gap:12px}
+.block h2{font-size:17px}
+.desc{font-family:var(--serif);font-size:16.5px;line-height:1.65;max-width:66ch;white-space:pre-line}
+.dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;
+  background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--radius);
+  overflow:hidden}
+.dl div{background:var(--surface);padding:12px 14px}
+.dl dt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.dl dd{margin:3px 0 0;font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* map: hand-drawn grid, because 24 of the 29 listings have no coordinates yet */
+.map{aspect-ratio:16/9;border:1px solid var(--line);border-radius:var(--radius);position:relative;
+  overflow:hidden;background:var(--surface-2)}
+.map::before{content:"";position:absolute;inset:0;background:
+   repeating-linear-gradient(0deg,var(--line-soft) 0 1px,transparent 1px 38px),
+   repeating-linear-gradient(90deg,var(--line-soft) 0 1px,transparent 1px 38px),
+   linear-gradient(45deg,transparent calc(50% - 1px),var(--line) 50%,transparent calc(50% + 1px))}
+.pin{position:absolute;left:50%;top:50%;width:16px;height:16px;border-radius:50%;
+  background:var(--navy);border:3px solid var(--surface);transform:translate(-50%,-50%);
+  box-shadow:0 0 0 7px color-mix(in srgb,var(--navy) 18%,transparent)}
+.map figcaption{position:absolute;left:0;right:0;bottom:0;background:var(--surface);
+  border-top:1px solid var(--line-soft);padding:9px 12px;font-size:12.5px;color:var(--muted)}
+
+.aside{display:flex;flex-direction:column;gap:14px;position:sticky;top:14px}
+@container (max-width:900px){.aside{position:static}}
+.panel{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2);
+  padding:16px;display:flex;flex-direction:column;gap:12px}
+.agent{display:flex;gap:12px;align-items:center}
+.avatar{width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;flex:none;
+  display:grid;place-items:center;font-weight:600;letter-spacing:.02em}
+.agent b{display:block;font-size:15px}
+.agent span{font-size:12.5px;color:var(--muted);line-height:1.35;display:block}
+.form{display:flex;flex-direction:column;gap:10px}
+.form textarea{min-height:84px;resize:vertical}
+.wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--alquiler);
+  color:#fff;border:0;border-radius:7px;padding:11px 14px;font-weight:600;cursor:pointer}
+.small{font-size:12px;color:var(--muted)}
+
+/* ---------- contact screen ---------- */
+.contact>*{min-width:0}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+@container (max-width:860px){.contact{grid-template-columns:1fr;gap:20px}}
+.office{display:flex;flex-direction:column;gap:16px}
+.office-row{display:flex;gap:12px;align-items:flex-start}
+.office-row svg{flex:none;margin-top:2px;color:var(--navy-tint)}
+.office-row b{display:block;font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin-bottom:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@container (max-width:620px){.two{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+.site-foot{background:var(--navy-deep);color:var(--on-navy-dim);margin-top:10px}
+.foot-in{max-width:1080px;margin:0 auto;padding:30px 20px;display:grid;
+  grid-template-columns:1.3fr 1fr 1fr;gap:26px}
+@container (max-width:760px){.foot-in{grid-template-columns:1fr;gap:20px;padding:24px 14px}}
+.site-foot h4{margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--on-navy);font-weight:600}
+.site-foot a{display:block;color:var(--on-navy-dim);text-decoration:none;font-size:14px;
+  padding:3px 0}
+.site-foot a:hover{color:var(--on-navy)}
+.site-foot p{margin:0;font-size:13px;line-height:1.55}
+.legal{border-top:1px solid rgba(255,255,255,.12);padding:14px 20px;font-size:12px;
+  max-width:1080px;margin:0 auto;color:var(--on-navy-dim)}
+
+/* data the client still has to give us, marked rather than invented */
+.tbc{border-bottom:1px dotted currentColor;opacity:.75;cursor:help}
+</style>
+
+<div class="chrome">
+  <div class="chrome-in">
+    <div class="chrome-tag">Maqueta de diseño · <b>Etapa 1</b></div>
+    <div class="seg" role="tablist" aria-label="Pantallas">
+      <button role="tab" data-screen="inicio" aria-selected="true">Inicio</button>
+      <button role="tab" data-screen="buscar" aria-selected="false">Propiedades</button>
+      <button role="tab" data-screen="ficha" aria-selected="false">Ficha</button>
+      <button role="tab" data-screen="contacto" aria-selected="false">Contacto</button>
+    </div>
+    <div class="chrome-right">
+      <div class="seg" role="group" aria-label="Dispositivo">
+        <button data-device="desktop" aria-selected="true">Escritorio</button>
+        <button data-device="phone" aria-selected="false">Celular</button>
+      </div>
+    </div>
+  </div>
+  <p class="chrome-note">Las propiedades, los precios, las direcciones y las fotos son
+    tuyas, no son de muestra. Se ven <b class="num" id="n-shown">23</b> de tus
+    <b class="num" id="n-all">33</b>: las otras <b class="num" id="n-gap">10</b> no tienen ninguna foto en el sitio viejo, así que
+    entran cuando me pases las tuyas. Las fotos que ves son las de 500&nbsp;px que están
+    hoy publicadas — con tus originales se ven mucho mejor. Lo que figura
+    <span class="tbc">así</span> es un dato que todavía no tengo.</p>
+</div>
+
+<div class="stage" data-device="desktop">
+<div class="frame">
+
+  <div class="urlbar">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+      <rect x="4" y="10.5" width="16" height="11" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path>
+    </svg>
+    <b>stranieripropiedades.com.ar</b><span id="url-path">/</span>
+  </div>
+
+  <header class="site-head">
+    <div class="head-in">
+      <img class="logo" src="logo-stranieri.png" alt="Stranieri Propiedades">
+      <nav class="nav">
+        <a href="#" data-go="inicio" aria-current="page">Inicio</a>
+        <a href="#" data-go="buscar">Propiedades</a>
+        <a href="#" data-go="tasaciones">Tasaciones</a>
+        <a href="#" data-go="nosotros">Nosotros</a>
+        <a href="#" data-go="contacto">Contacto</a>
+        <a class="btn-wa" href="#" data-go="contacto">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.8-.2-1-.3-2.4-1.1-3.7-2.6-1-1.2-1.6-2.4-1.8-3-.2-.6-.3-1.2 0-1.7.2-.4.7-.9 1-1 .2-.1.6-.1.8.3l.7 1.4c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6.3.5.8 1.1 1.3 1.5.6.5 1.1.7 1.4.8.2.1.4 0 .5-.1l.6-.7c.2-.2.4-.2.6-.1l1.4.7c.3.2.4.3.4.5 0 .2 0 .7-.1 1Z"/></svg>
+          WhatsApp
+        </a>
+      </nav>
+      <button class="burger" aria-label="Menú" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== INICIO ===================== -->
+  <main class="screen on" id="screen-inicio">
+    <div class="hero">
+      <div class="wrap">
+        <p class="eyebrow" style="color:var(--on-navy-dim)">La Plata · Dolores · Bavio</p>
+        <h1>Casas, campos y departamentos en La Plata y alrededores</h1>
+        <p>Propiedades en venta y en alquiler, atendidas por un martillero público
+           matriculado. Si te interesa alguna, hablás directamente conmigo.</p>
+        <div class="cred">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3 4 6v6c0 4.4 3.4 8.3 8 9 4.6-.7 8-4.6 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          Mauro Stranieri · Martillero y Corredor Público · <b>Col. 7103 L° XIII F° 88</b>
+        </div>
+        <form class="searchbar" id="hero-search">
+          <div class="field">
+            <label for="h-op">Operación</label>
+            <select id="h-op"><option value="">Venta y alquiler</option><option>Venta</option><option>Alquiler</option></select>
+          </div>
+          <div class="field">
+            <label for="h-tipo">Tipo</label>
+            <select id="h-tipo"><option value="">Todos los tipos</option></select>
+          </div>
+          <div class="field">
+            <label for="h-loc">Localidad</label>
+            <select id="h-loc"><option value="">Todas</option></select>
+          </div>
+          <button class="btn" type="submit">Buscar</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="facts" id="facts"></div>
+
+    <section>
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="eyebrow">Selección</p>
+            <h2>Propiedades destacadas</h2>
+          </div>
+          <a href="#" data-go="buscar">Ver todas →</a>
+        </div>
+        <div class="grid" id="grid-destacadas"></div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head"><div><p class="eyebrow">Índice</p><h2>Buscá por tipo</h2></div></div>
+        <div class="types" id="types"></div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="band">
+          <div>
+            <h2>¿Querés saber cuánto vale tu propiedad?</h2>
+            <p>Tasación sin cargo y sin compromiso, hecha por martillero matriculado.
+               Me contás dónde está y coordinamos una visita.</p>
+          </div>
+          <button class="btn" data-go="contacto">Pedir tasación</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== PROPIEDADES ===================== -->
+  <main class="screen" id="screen-buscar">
+    <section>
+      <div class="wrap">
+        <div class="sec-head" style="margin-bottom:22px">
+          <div><p class="eyebrow">Catálogo completo</p><h1>Propiedades</h1></div>
+        </div>
+        <div class="results">
+          <aside class="filters">
+            <div>
+              <h3>Operación</h3>
+              <div class="ops" id="f-ops" style="margin-top:8px">
+                <button data-op="" aria-pressed="true">Todas</button>
+                <button data-op="Venta" aria-pressed="false">Venta</button>
+                <button data-op="Alquiler" aria-pressed="false">Alquiler</button>
+              </div>
+            </div>
+            <div>
+              <h3>Tipo</h3>
+              <div class="checks" id="f-types" style="margin-top:9px"></div>
+            </div>
+            <div>
+              <h3>Localidad</h3>
+              <div class="checks" id="f-locs" style="margin-top:9px"></div>
+            </div>
+            <button class="btn-ghost" id="f-clear" type="button">Limpiar filtros</button>
+          </aside>
+          <div>
+            <div class="rhead">
+              <p id="r-count"></p>
+              <select id="r-sort">
+                <option value="fotos">Más fotos primero</option>
+                <option value="precio-asc">Menor precio</option>
+                <option value="precio-desc">Mayor precio</option>
+              </select>
+            </div>
+            <div class="grid" id="grid-resultados"></div>
+            <div class="empty" id="r-empty" hidden>No hay propiedades con esos filtros.
+              Probá quitando alguno.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FICHA ===================== -->
+  <main class="screen" id="screen-ficha">
+    <section>
+      <div class="wrap">
+        <div class="ficha">
+          <div>
+            <div class="gallery">
+              <figure class="gmain" style="margin:0"><img id="g-main" alt=""></figure>
+              <div class="gthumbs" id="g-thumbs"></div>
+            </div>
+            <div class="ficha-head" id="f-head"></div>
+            <div class="block" id="f-specs"></div>
+            <div class="block" id="f-desc"></div>
+            <div class="block" id="f-map"></div>
+          </div>
+          <aside class="aside">
+            <div class="panel">
+              <div class="agent">
+                <div class="avatar">MS</div>
+                <div>
+                  <b>Mauro Stranieri</b>
+                  <span>Martillero y Corredor Público<br>Col. 7103 L° XIII F° 88</span>
+                </div>
+              </div>
+              <button class="wa">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.8-.2-1-.3-2.4-1.1-3.7-2.6-1-1.2-1.6-2.4-1.8-3-.2-.6-.3-1.2 0-1.7.2-.4.7-.9 1-1 .2-.1.6-.1.8.3l.7 1.4c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6.3.5.8 1.1 1.3 1.5.6.5 1.1.7 1.4.8.2.1.4 0 .5-.1l.6-.7c.2-.2.4-.2.6-.1l1.4.7c.3.2.4.3.4.5 0 .2 0 .7-.1 1Z"/></svg>
+                Consultar por WhatsApp
+              </button>
+              <p class="small">Teléfono: <span class="tbc" title="Dato pendiente: pasame el número que querés publicar">a confirmar</span></p>
+            </div>
+            <form class="panel form" id="ficha-form">
+              <h3>Consultar esta propiedad</h3>
+              <div class="field"><label for="c1">Nombre</label><input id="c1" placeholder="Tu nombre"></div>
+              <div class="field"><label for="c2">Teléfono o WhatsApp</label><input id="c2" placeholder="221 …"></div>
+              <div class="field"><label for="c3">Email</label><input id="c3" type="email" placeholder="tumail@ejemplo.com"></div>
+              <div class="field"><label for="c4">Mensaje</label><textarea id="c4"></textarea></div>
+              <button class="btn" type="submit" style="align-self:stretch">Enviar consulta</button>
+              <p class="small">La consulta llega a tu casilla de mail con el código de la
+                propiedad en el asunto.</p>
+            </form>
+          </aside>
+        </div>
+        <div class="block">
+          <div class="sec-head"><div><p class="eyebrow">También te puede interesar</p>
+            <h2>Propiedades similares</h2></div></div>
+          <div class="grid" id="grid-similares"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== CONTACTO ===================== -->
+  <main class="screen" id="screen-contacto">
+    <section>
+      <div class="wrap">
+        <div class="sec-head" style="margin-bottom:22px">
+          <div><p class="eyebrow">Hablemos</p><h1>Contacto y tasaciones</h1></div>
+        </div>
+        <div class="contact">
+          <div class="office">
+            <p class="lede">Atiendo personalmente. Escribime por el formulario, por
+              WhatsApp o pasá por la oficina.</p>
+            <div class="office-row">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-5.3 7-11a7 7 0 1 0-14 0c0 5.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <div><b>Oficina</b>Calle 56 n° 1242, e/ 19 y 20<br>La Plata, Buenos Aires</div>
+            </div>
+            <div class="office-row">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 5h16v14H4z"/><path d="m4 6 8 6 8-6"/></svg>
+              <div><b>Mail</b><span class="tbc" title="Dato pendiente: a qué casilla querés que lleguen las consultas">a confirmar cuál de tus dos casillas</span></div>
+            </div>
+            <div class="office-row">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a1 1 0 0 1-1 1A17 17 0 0 1 4 5a1 1 0 0 1 1-1Z"/></svg>
+              <div><b>Teléfono y WhatsApp</b><span class="tbc" title="Dato pendiente: el número que querés publicar">a confirmar</span></div>
+            </div>
+            <div class="office-row">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3 4 6v6c0 4.4 3.4 8.3 8 9 4.6-.7 8-4.6 8-9V6l-8-3Z"/></svg>
+              <div><b>Matrícula</b>Mauro Stranieri · Martillero y Corredor Público<br>Col. 7103 L° XIII F° 88</div>
+            </div>
+            <figure class="map" style="margin:0">
+              <div class="pin"></div>
+              <figcaption>Calle 56 e/ 19 y 20 — a cuatro cuadras de Plaza Italia.</figcaption>
+            </figure>
+          </div>
+          <form class="panel form">
+            <h3>Escribime</h3>
+            <div class="two">
+              <div class="field"><label for="k1">Nombre</label><input id="k1" placeholder="Tu nombre"></div>
+              <div class="field"><label for="k2">Teléfono</label><input id="k2" placeholder="221 …"></div>
+            </div>
+            <div class="field"><label for="k3">Email</label><input id="k3" type="email" placeholder="tumail@ejemplo.com"></div>
+            <div class="field">
+              <label for="k4">Motivo</label>
+              <select id="k4">
+                <option>Consulta por una propiedad</option>
+                <option>Quiero tasar mi propiedad</option>
+                <option>Quiero poner mi propiedad en venta o alquiler</option>
+                <option>Administración de alquileres</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="field"><label for="k5">Mensaje</label><textarea id="k5"
+              placeholder="Contame en qué te puedo ayudar"></textarea></div>
+            <button class="btn" type="submit" style="align-self:stretch">Enviar</button>
+            <p class="small">Te respondo dentro del día. Las consultas llegan a tu mail,
+              no quedan guardadas en el sitio.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="foot-in">
+      <div>
+        <img class="logo" src="logo-stranieri.png" alt="Stranieri Propiedades" style="height:58px;margin-bottom:12px">
+        <p>Mauro Stranieri<br>Martillero y Corredor Público<br>Col. 7103 L° XIII F° 88</p>
+      </div>
+      <div>
+        <h4>Propiedades</h4>
+        <a href="#" data-go="buscar">En venta</a>
+        <a href="#" data-go="buscar">En alquiler</a>
+        <a href="#" data-go="buscar">Campos y fracciones</a>
+        <a href="#" data-go="buscar">Terrenos y lotes</a>
+      </div>
+      <div>
+        <h4>La inmobiliaria</h4>
+        <a href="#" data-go="nosotros">Nosotros</a>
+        <a href="#" data-go="tasaciones">Tasaciones</a>
+        <a href="#" data-go="contacto">Contacto</a>
+        <p style="margin-top:10px">Calle 56 n° 1242, e/ 19 y 20<br>La Plata, Buenos Aires</p>
+      </div>
+    </div>
+    <div class="legal">© 2026 Stranieri Propiedades · La Plata, Buenos Aires</div>
+  </footer>
+</div>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  "use strict";
+  var D = window.STRANIERI, P = D.properties;
+  var nf = new Intl.NumberFormat('es-AR');
+
+  function price(p){
+    var sym = p.currency === 'USD' ? 'USD' : '$';
+    return '<span class="price">' + sym + ' ' + nf.format(p.price) +
+      (p.operation === 'Alquiler' ? ' <small>por mes</small>' : '') + '</span>';
+  }
+  function titleOf(p){
+    if (p.title) return p.title;
+    return p.types[0] + ' en ' + p.address;
+  }
+  function slug(s){
+    return s.normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  }
+  function pathOf(p){
+    return '/' + slug(p.types[0] + '-en-' + p.operation) + '/' +
+      slug(p.address + '-' + p.locality) + '-' + p.codigo.toLowerCase();
+  }
+  function specList(p){
+    var out = [];
+    if (p.bedrooms)  out.push('<span><i>' + p.bedrooms + '</i> dorm.</span>');
+    if (p.bathrooms) out.push('<span><i>' + p.bathrooms + '</i> baño' + (p.bathrooms>1?'s':'') + '</span>');
+    if (p.covered)   out.push('<span><i>' + nf.format(p.covered) + '</i> m² cub.</span>');
+    if (p.uncovered) out.push('<span><i>' + nf.format(p.uncovered) + '</i> m² descub.</span>');
+    return out.length ? '<div class="specs">' + out.join('') + '</div>' : '';
+  }
+  function card(p){
+    var b = document.createElement('a');
+    b.className = 'card';
+    b.href = '#';
+    b.innerHTML =
+      '<div class="card-img">' +
+        '<img src="' + p.images[0] + '" alt="' + titleOf(p) + '" loading="lazy">' +
+        '<span class="badge' + (p.operation==='Alquiler'?' alq':'') + '">' + p.operation + '</span>' +
+        '<span class="codigo">' + p.codigo + '</span>' +
+        '<span class="shots">' + p.images.length + ' fotos</span>' +
+      '</div>' +
+      '<div class="card-body">' +
+        price(p) +
+        '<h3>' + titleOf(p) + '</h3>' +
+        '<p class="addr">' + p.address + ' · ' + p.locality + '</p>' +
+        specList(p) +
+        '<div class="chips">' + p.types.map(function(t){
+          return '<span class="chip t">' + t + '</span>'; }).join('') + '</div>' +
+      '</div>';
+    b.addEventListener('click', function(e){ e.preventDefault(); openFicha(p.codigo); });
+    return b;
+  }
+  function fill(el, list){
+    el.innerHTML = '';
+    list.forEach(function(p){ el.appendChild(card(p)); });
+  }
+
+  /* ---------- home ---------- */
+  // Counts on anything clickable are counted over the properties actually shown,
+  // so a filter never promises more than it returns. The headline figures in the
+  // facts strip describe the whole portfolio and say so.
+  document.getElementById('n-shown').textContent = P.length;
+  document.getElementById('n-all').textContent = D.counts.unique;
+  document.getElementById('n-gap').textContent = D.counts.unique - P.length;
+
+  var shownTypes = {}, shownLocs = {};
+  P.forEach(function(p){
+    p.types.forEach(function(t){ shownTypes[t] = (shownTypes[t] || 0) + 1; });
+    shownLocs[p.locality] = (shownLocs[p.locality] || 0) + 1;
+  });
+  var types = Object.keys(shownTypes).sort(function(a,b){ return shownTypes[b]-shownTypes[a]; });
+  var locs = Object.keys(shownLocs).sort(function(a,b){ return shownLocs[b]-shownLocs[a]; });
+
+  var allLocs = Object.keys(D.by_locality);
+  document.getElementById('facts').innerHTML = [
+    ['' + D.counts.unique, 'propiedades en cartera'],
+    ['' + (D.by_operation.Venta || 0), 'en venta'],
+    ['' + (D.by_operation.Alquiler || 0), 'en alquiler'],
+    [allLocs.length + ' localidades', allLocs.join(' · ')]
+  ].map(function(f){
+    return '<div class="fact"><b>' + f[0] + '</b><span>' + f[1] + '</span></div>';
+  }).join('');
+
+  fill(document.getElementById('grid-destacadas'), P.slice(0, 6));
+
+  document.getElementById('types').innerHTML = types.map(function(t){
+    return '<button class="tbtn" data-type="' + t + '">' + t +
+           ' <span class="num">' + shownTypes[t] + '</span></button>';
+  }).join('');
+  document.getElementById('types').addEventListener('click', function(e){
+    var b = e.target.closest('.tbtn'); if (!b) return;
+    state.types = [b.dataset.type]; state.op = ''; state.locs = [];
+    syncFilters(); show('buscar');
+  });
+
+  ['h-tipo','h-loc'].forEach(function(id){
+    var sel = document.getElementById(id);
+    (id === 'h-tipo' ? types : locs).forEach(function(v){
+      sel.appendChild(new Option(v, v));
+    });
+  });
+  document.getElementById('hero-search').addEventListener('submit', function(e){
+    e.preventDefault();
+    state.op = document.getElementById('h-op').value;
+    state.types = document.getElementById('h-tipo').value ? [document.getElementById('h-tipo').value] : [];
+    state.locs = document.getElementById('h-loc').value ? [document.getElementById('h-loc').value] : [];
+    syncFilters(); show('buscar');
+  });
+
+  /* ---------- results ---------- */
+  var state = { op:'', types:[], locs:[], sort:'fotos' };
+
+  document.getElementById('f-types').innerHTML = types.map(function(t){
+    return '<label><input type="checkbox" value="' + t + '"> ' + t +
+           ' <em>' + shownTypes[t] + '</em></label>';
+  }).join('');
+  document.getElementById('f-locs').innerHTML = locs.map(function(l){
+    return '<label><input type="checkbox" value="' + l + '"> ' + l +
+      ' <em>' + shownLocs[l] + '</em></label>';
+  }).join('');
+
+  function readChecks(id){
+    return Array.prototype.filter.call(
+      document.querySelectorAll('#' + id + ' input'), function(i){ return i.checked; }
+    ).map(function(i){ return i.value; });
+  }
+  function syncFilters(){
+    document.querySelectorAll('#f-ops button').forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.op === state.op));
+    });
+    document.querySelectorAll('#f-types input').forEach(function(i){
+      i.checked = state.types.indexOf(i.value) >= 0;
+    });
+    document.querySelectorAll('#f-locs input').forEach(function(i){
+      i.checked = state.locs.indexOf(i.value) >= 0;
+    });
+    render();
+  }
+  document.getElementById('f-ops').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    state.op = b.dataset.op; syncFilters();
+  });
+  document.getElementById('f-types').addEventListener('change', function(){
+    state.types = readChecks('f-types'); render();
+  });
+  document.getElementById('f-locs').addEventListener('change', function(){
+    state.locs = readChecks('f-locs'); render();
+  });
+  document.getElementById('f-clear').addEventListener('click', function(){
+    state = { op:'', types:[], locs:[], sort:state.sort }; syncFilters();
+  });
+  document.getElementById('r-sort').addEventListener('change', function(e){
+    state.sort = e.target.value; render();
+  });
+
+  function render(){
+    var list = P.filter(function(p){
+      if (state.op && p.operation !== state.op) return false;
+      if (state.locs.length && state.locs.indexOf(p.locality) < 0) return false;
+      if (state.types.length && !p.types.some(function(t){ return state.types.indexOf(t) >= 0; }))
+        return false;
+      return true;
+    });
+    // Prices are in two currencies and there is no rate to convert with — and
+    // inventing one would put an ARS rental between two USD sales. So currencies
+    // are kept in blocks, dollars first, and ordered within each block.
+    if (state.sort === 'precio-asc' || state.sort === 'precio-desc'){
+      var dir = state.sort === 'precio-asc' ? 1 : -1;
+      list.sort(function(a,b){
+        if (a.currency !== b.currency) return a.currency === 'USD' ? -1 : 1;
+        return (a.price - b.price) * dir;
+      });
+    }
+
+    var v = list.filter(function(p){ return p.operation === 'Venta'; }).length;
+    document.getElementById('r-count').innerHTML =
+      '<b class="num">' + list.length + '</b> propiedades' +
+      (list.length ? ' · <span class="num">' + v + '</span> en venta · <span class="num">' +
+        (list.length - v) + '</span> en alquiler' : '');
+    document.getElementById('r-empty').hidden = list.length > 0;
+    fill(document.getElementById('grid-resultados'), list);
+  }
+
+  /* ---------- detail ---------- */
+  var current = null, booted = false;
+
+  function openFicha(codigo){
+    current = P.filter(function(p){ return p.codigo === codigo; })[0] || P[0];
+    var p = current;
+
+    gallery(p, 0);
+
+    document.getElementById('f-head').innerHTML =
+      '<div class="chips">' +
+        '<span class="badge' + (p.operation==='Alquiler'?' alq':'') +
+          '" style="position:static">' + p.operation + '</span>' +
+        p.types.map(function(t){ return '<span class="chip t">' + t + '</span>'; }).join('') +
+        '<span class="chip">Código ' + p.codigo + '</span>' +
+      '</div>' +
+      '<h1>' + titleOf(p) + '</h1>' +
+      '<p class="addr" style="font-size:15px">' + p.address + ' · ' + p.locality +
+        ', Buenos Aires</p>' +
+      price(p);
+
+    var rows = [];
+    if (p.bedrooms)  rows.push(['Dormitorios', p.bedrooms]);
+    if (p.bathrooms) rows.push(['Baños', p.bathrooms]);
+    if (p.covered)   rows.push(['Superficie cubierta', nf.format(p.covered) + ' m²']);
+    if (p.uncovered) rows.push(['Superficie descubierta', nf.format(p.uncovered) + ' m²']);
+    rows.push(['Operación', p.operation]);
+    rows.push(['Tipo', p.types.join(' · ')]);
+    if (p.operation === 'Alquiler'){
+      rows.push(['Expensas', '<span class="tbc" title="Dato pendiente">a confirmar</span>']);
+      rows.push(['Garantía', '<span class="tbc" title="Dato pendiente">a confirmar</span>']);
+      rows.push(['Depósito', '<span class="tbc" title="Dato pendiente">a confirmar</span>']);
+    }
+    document.getElementById('f-specs').innerHTML =
+      '<h2>La propiedad</h2><dl class="dl">' + rows.map(function(r){
+        return '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>';
+      }).join('') + '</dl>';
+
+    document.getElementById('f-desc').innerHTML = p.description
+      ? '<h2>Descripción</h2><p class="desc">' + p.description + '</p>'
+      : '<h2>Descripción</h2><p class="desc"><span class="tbc" title="Esta propiedad no tiene texto en tu sistema; la descripción la escribo yo y la revisás">Falta la descripción — la escribo yo y la revisás.</span></p>';
+
+    document.getElementById('f-map').innerHTML =
+      '<h2>Ubicación</h2><figure class="map" style="margin:0"><div class="pin"></div>' +
+      '<figcaption>' + p.address + ', ' + p.locality +
+      (p.lat && p.lng ? ' — ubicación exacta.' : ' — ubicación aproximada por calle.') +
+      '</figcaption></figure>';
+
+    var sim = P.filter(function(o){
+      return o.codigo !== p.codigo && o.types.some(function(t){ return p.types.indexOf(t) >= 0; });
+    }).slice(0, 3);
+    fill(document.getElementById('grid-similares'), sim);
+
+    show('ficha');
+    document.getElementById('url-path').textContent = pathOf(p);
+  }
+
+  function gallery(p, idx){
+    document.getElementById('g-main').src = p.images[idx];
+    document.getElementById('g-main').alt = titleOf(p);
+    var t = document.getElementById('g-thumbs');
+    t.innerHTML = p.images.map(function(src, i){
+      return '<button type="button" data-i="' + i + '" aria-current="' + (i === idx) +
+        '"><img src="' + src + '" alt="" loading="lazy"></button>';
+    }).join('');
+  }
+  document.getElementById('g-thumbs').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b || !current) return;
+    gallery(current, Number(b.dataset.i));
+  });
+  document.getElementById('ficha-form').addEventListener('submit', function(e){
+    e.preventDefault();
+  });
+
+  /* ---------- navigation ---------- */
+  var PATHS = { inicio:'/', buscar:'/propiedades', contacto:'/contacto',
+                tasaciones:'/tasaciones', nosotros:'/nosotros' };
+
+  function show(name){
+    if (name === 'tasaciones' || name === 'nosotros'){
+      // Those two pages are in the same visual language; the mockup shows the
+      // four screens the plan asks for and routes these to Contacto.
+      name = 'contacto';
+    }
+    if (name === 'ficha' && !current){ openFicha(P[0].codigo); return; }
+    document.querySelectorAll('.screen').forEach(function(s){
+      s.classList.toggle('on', s.id === 'screen-' + name);
+    });
+    document.querySelectorAll('.chrome [data-screen]').forEach(function(b){
+      b.setAttribute('aria-selected', String(b.dataset.screen === name));
+    });
+    document.querySelectorAll('.nav a[data-go]').forEach(function(a){
+      if (a.dataset.go === name) a.setAttribute('aria-current','page');
+      else a.removeAttribute('aria-current');
+    });
+    if (name !== 'ficha') document.getElementById('url-path').textContent = PATHS[name] || '/';
+    if (head) head.classList.remove('open');
+    if (booted) window.scrollTo({ top:0, behavior:'instant' });
+  }
+
+  document.querySelector('.chrome').addEventListener('click', function(e){
+    var b = e.target.closest('[data-screen]'); if (!b) return;
+    show(b.dataset.screen);
+  });
+  document.querySelectorAll('[data-device]').forEach(function(b){
+    b.addEventListener('click', function(){ setDevice(b.dataset.device); });
+  });
+  var head = document.querySelector('.site-head');
+  function closeMenu(){
+    head.classList.remove('open');
+    document.querySelector('.burger').setAttribute('aria-expanded', 'false');
+  }
+  document.querySelector('.burger').addEventListener('click', function(){
+    var open = head.classList.toggle('open');
+    this.setAttribute('aria-expanded', String(open));
+  });
+
+  document.body.addEventListener('click', function(e){
+    var a = e.target.closest('[data-go]'); if (!a) return;
+    e.preventDefault(); closeMenu(); show(a.dataset.go);
+  });
+
+  // ?screen=ficha&device=phone — so a particular screen can be linked directly
+  var q = new URLSearchParams(location.search);
+  function setDevice(name){
+    var frame = document.querySelector('.frame');
+    document.querySelector('.stage').dataset.device = name;
+    // Resizing the frame from script can leave the container queries inside it
+    // resolved against the old width — reproduced in headless Chromium, where
+    // the phone frame kept the desktop layout and clipped. Forcing the subtree
+    // to re-lay-out is cheap and makes the toggle deterministic.
+    frame.style.display = 'none';
+    void frame.offsetHeight;
+    frame.style.display = '';
+    document.querySelectorAll('.chrome [data-device]').forEach(function(o){
+      o.setAttribute('aria-selected', String(o.dataset.device === name));
+    });
+  }
+
+  syncFilters();
+  openFicha(q.get('codigo') || 'CA82');  // CA82: the most complete record we have
+  show(q.get('screen') || 'inicio');
+  if (q.get('device') === 'phone') setDevice('phone');
+  booted = true;
+})();
+</script>
