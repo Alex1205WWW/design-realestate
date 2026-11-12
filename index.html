@@ -296,8 +296,9 @@ h3{font-size:16px}
 .agency h2{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.14;
   letter-spacing:-.015em;color:var(--navy);margin:0}
 @container (max-width:900px){.agency h2{font-size:26px}}
-.agency p{font-family:var(--serif);font-size:17px;line-height:1.6;color:var(--muted);
-  margin:14px 0 0;max-width:54ch}
+.agency p{font-family:var(--serif);font-size:16.5px;line-height:1.62;color:var(--muted);
+  margin:14px 0 0;max-width:56ch}
+.agency p + p{margin-top:12px}
 .agency-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
 .cred-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--line-soft);
   border-radius:var(--radius);overflow:hidden}
@@ -428,9 +429,32 @@ h3{font-size:16px}
   border-radius:var(--radius);overflow:hidden;cursor:pointer;text-align:left;padding:0;
   transition:border-color .15s,transform .15s,box-shadow .15s}
 .card:hover{border-color:var(--navy-tint);transform:translateY(-2px);box-shadow:var(--shadow)}
+.card:focus-visible{outline:2px solid var(--navy-tint);outline-offset:2px}
 .card-img{position:relative;aspect-ratio:4/3;background:var(--surface-2);overflow:hidden}
 .card-img img{width:100%;height:100%;object-fit:cover;
   transition:transform .8s cubic-bezier(.22,.61,.36,1)}
+
+/* ---------- flipping through a card's photographs ----------
+   Without this you have to open a property to find out whether its other
+   photographs are any better, which is a lot of clicking on a catalogue where
+   the lead photograph is often the weakest one he has. The arrows sit inside
+   the image and never trigger the card itself. */
+.card-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:34px;height:34px;border:0;border-radius:50%;cursor:pointer;
+  background:rgba(8,10,18,.52);color:#fff;display:grid;place-items:center;
+  opacity:0;transition:opacity .18s,background .18s}
+.card-nav.prev{left:8px}
+.card-nav.next{right:8px}
+.card:hover .card-nav,.card:focus-within .card-nav{opacity:1}
+.card-nav:hover{background:rgba(8,10,18,.78)}
+.card-nav:focus-visible{opacity:1}
+/* on a touch screen there is no hover, so they stay visible */
+@media (hover:none){.card-nav{opacity:1}}
+.card-count{position:absolute;left:10px;bottom:10px;z-index:3;font-size:11px;
+  padding:3px 8px;border-radius:5px;background:rgba(0,0,0,.55);color:#fff;
+  font-variant-numeric:tabular-nums;opacity:0;transition:opacity .18s}
+.card:hover .card-count,.card:focus-within .card-count{opacity:1}
+@media (hover:none){.card-count{opacity:1}}
 .card:hover .card-img img{transform:scale(1.06)}
 @media (prefers-reduced-motion:reduce){.card-img img{transition:none}
   .card:hover .card-img img{transform:none}}
@@ -465,10 +489,13 @@ h3{font-size:16px}
 .pitch-copy{padding:48px 46px;display:flex;flex-direction:column;align-items:flex-start;
   justify-content:center;gap:14px}
 @container (max-width:860px){.pitch-copy{padding:28px 22px}}
-.pitch-copy h2{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.14;
-  letter-spacing:-.015em;color:var(--navy);margin:0;max-width:18ch}
-@container (max-width:860px){.pitch-copy h2{font-size:26px}}
-.pitch-copy p{margin:0;font-size:16px;line-height:1.55;color:var(--muted);max-width:44ch}
+/* 18ch forced "¿Tenés una / propiedad para / vender o alquilar?" into three
+   stubby lines in a column that had room for two. Width first, then size. */
+.pitch-copy h2{font-family:var(--serif);font-weight:400;font-size:33px;line-height:1.16;
+  letter-spacing:-.015em;color:var(--navy);margin:0;max-width:24ch;text-wrap:balance}
+@container (max-width:1100px){.pitch-copy h2{font-size:29px}}
+@container (max-width:860px){.pitch-copy h2{font-size:26px;max-width:22ch}}
+.pitch-copy p{margin:0;font-size:16px;line-height:1.6;color:var(--muted);max-width:46ch}
 .pitch-copy .btn-ghost{margin-top:8px;background:var(--surface)}
 .pitch-art{position:relative;min-height:330px;overflow:hidden;isolation:isolate}
 @container (max-width:860px){.pitch-art{min-height:240px}}
@@ -781,9 +808,14 @@ h3{font-size:16px}
           <div>
             <p class="eyebrow">La inmobiliaria</p>
             <h2>Conocé a Mauro</h2>
-            <p>Stranieri Propiedades es la inmobiliaria de Mauro Stranieri en La Plata.
-              Cada operación la firma un martillero y corredor público matriculado, y la
-              consulta la contesta él mismo. <span class="tbc" title="Dato pendiente: desde qué año trabajás">Años
+            <p>Stranieri Propiedades es la inmobiliaria de Mauro Stranieri, en el casco
+              de La&nbsp;Plata. Acá tratás siempre con la misma persona: el que te contesta
+              el WhatsApp es el que te muestra la propiedad y el que firma la operación.
+              Sin call center y sin que te pasen de un vendedor a otro.</p>
+            <p>Comprar o alquilar una propiedad es de las decisiones más grandes que vas a
+              tomar, y merece que alguien te atienda el teléfono y te diga las cosas como
+              son — con el respaldo de un martillero y corredor público matriculado.
+              <span class="tbc" title="Dato pendiente: desde qué año trabajás, si querés que figure">Años
               en el mercado: a confirmar.</span></p>
             <div class="agency-actions">
               <button class="btn" data-go="nosotros" style="align-self:auto">Conocé la inmobiliaria</button>
@@ -813,8 +845,9 @@ h3{font-size:16px}
         <div class="pitch">
           <div class="pitch-copy">
             <h2>¿Tenés una propiedad para vender o alquilar?</h2>
-            <p>Te digo cuánto vale hoy, sin cargo y sin compromiso. Si decidís avanzar,
-              me ocupo de la publicación, las visitas y la operación, de principio a fin.</p>
+            <p>Empezá por saber cuánto vale hoy: la tasación es sin cargo y sin
+              compromiso. Si decidís avanzar, me ocupo de todo — las fotos, la
+              publicación, las visitas y la operación hasta la firma.</p>
             <button class="btn-ghost" data-go="contacto">Pedir una tasación</button>
           </div>
           <div class="pitch-art">
@@ -1071,16 +1104,34 @@ h3{font-size:16px}
     if (p.uncovered) out.push('<span><i>' + nf.format(p.uncovered) + '</i> m² descub.</span>');
     return out.length ? '<div class="specs">' + out.join('') + '</div>' : '';
   }
+  var CHEV = function(d){
+    return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+      'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="' +
+      (d === 'prev' ? 'M15 18l-6-6 6-6' : 'M9 6l6 6-6 6') + '"/></svg>';
+  };
+
   function card(p){
-    var b = document.createElement('a');
+    // A div rather than an anchor: the photo arrows are real buttons, and a
+    // button inside a link is invalid and behaves unpredictably. Keyboard
+    // access is given back explicitly below.
+    var b = document.createElement('div');
     b.className = 'card';
-    b.href = '#';
+    b.setAttribute('role', 'button');
+    b.setAttribute('tabindex', '0');
+    b.dataset.codigo = p.codigo;
+    b.dataset.i = '0';
+    var many = p.images.length > 1;
     b.innerHTML =
       '<div class="card-img">' +
         '<img src="' + p.images[0] + '" alt="' + titleOf(p) + '" loading="lazy">' +
         '<span class="badge' + (p.operation==='Alquiler'?' alq':'') + '">' + p.operation + '</span>' +
         '<span class="codigo">' + p.codigo + '</span>' +
         '<span class="shots">' + p.images.length + ' fotos</span>' +
+        (many ? '<button class="card-nav prev" type="button" data-step="-1" ' +
+                'aria-label="Foto anterior">' + CHEV('prev') + '</button>' +
+                '<button class="card-nav next" type="button" data-step="1" ' +
+                'aria-label="Foto siguiente">' + CHEV('next') + '</button>' +
+                '<span class="card-count">1/' + p.images.length + '</span>' : '') +
       '</div>' +
       '<div class="card-body">' +
         price(p) +
@@ -1090,9 +1141,31 @@ h3{font-size:16px}
         '<div class="chips">' + p.types.map(function(t){
           return '<span class="chip t">' + t + '</span>'; }).join('') + '</div>' +
       '</div>';
-    b.addEventListener('click', function(e){ e.preventDefault(); openFicha(p.codigo); });
+    b.addEventListener('click', function(e){
+      if (e.target.closest('.card-nav')) return;   // the arrows are not the card
+      e.preventDefault(); openFicha(p.codigo);
+    });
+    b.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openFicha(p.codigo); }
+    });
     return b;
   }
+
+  /* One delegated handler for every card's arrows, on any grid. It wraps at
+     both ends, so the last photograph steps round to the first. */
+  document.body.addEventListener('click', function(e){
+    var nav = e.target.closest('.card-nav'); if (!nav) return;
+    e.preventDefault(); e.stopPropagation();
+    var cardEl = nav.closest('.card');
+    var p = P.filter(function(x){ return x.codigo === cardEl.dataset.codigo; })[0];
+    if (!p) return;
+    var n = p.images.length;
+    var i = (Number(cardEl.dataset.i) + Number(nav.dataset.step) + n) % n;
+    cardEl.dataset.i = i;
+    cardEl.querySelector('.card-img img').src = p.images[i];
+    var c = cardEl.querySelector('.card-count');
+    if (c) c.textContent = (i + 1) + '/' + n;
+  });
   function fill(el, list){
     el.innerHTML = '';
     list.forEach(function(p){ el.appendChild(card(p)); });
