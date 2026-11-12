@@ -1,0 +1,151 @@
+// Hero photography. Unsplash Licence: free for commercial use, no attribution
+// required - the photographer is recorded anyway so provenance can be proven.
+// NOT taken from other agencies' sites: that would be infringement and the
+// liability would be the client's. in_use=false are shortlist alternates he
+// can swap in; only in_use=true are published.
+[
+ {
+  "file": "hero01.jpg",
+  "unsplash_id": "1564078516393-cf04bd966897",
+  "photographer": "Roberto Nickson",
+  "shows": "modern living room, warm light",
+  "source": "https://unsplash.com/photos/1564078516393-cf04bd966897",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": true
+ },
+ {
+  "file": "hero02.jpg",
+  "unsplash_id": "1600210491892-03d54c0aaf87",
+  "photographer": "Collov Home Design",
+  "shows": "bright open living space",
+  "source": "https://unsplash.com/photos/1600210491892-03d54c0aaf87",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": true
+ },
+ {
+  "file": "hero03.jpg",
+  "unsplash_id": "1613545325278-f24b0cae1224",
+  "photographer": "Zac Gudakov",
+  "shows": "architectural interior",
+  "source": "https://unsplash.com/photos/1613545325278-f24b0cae1224",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": true
+ },
+ {
+  "file": "hero04.jpg",
+  "unsplash_id": "1518733057094-95b53143d2a7",
+  "photographer": "Rhema Kallianpur",
+  "shows": "house exterior at dusk",
+  "source": "https://unsplash.com/photos/1518733057094-95b53143d2a7",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": false
+ },
+ {
+  "file": "hero05.jpg",
+  "unsplash_id": "1502005229762-cf1b2da7c5d6",
+  "photographer": "Jason Briscoe",
+  "shows": "home exterior, greenery",
+  "source": "https://unsplash.com/photos/1502005229762-cf1b2da7c5d6",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": false
+ },
+ {
+  "file": "hero06.jpg",
+  "unsplash_id": "1562438668-bcf0ca6578f0",
+  "photographer": "Liu Qiang",
+  "shows": "luxury interior",
+  "source": "https://unsplash.com/photos/1562438668-bcf0ca6578f0",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": false
+ },
+ {
+  "file": "hero07.jpg",
+  "unsplash_id": "1758523671826-d7f8217ffac3",
+  "photographer": "Vitaly Gariev",
+  "shows": "people at home, joyful",
+  "source": "https://unsplash.com/photos/1758523671826-d7f8217ffac3",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": false
+ },
+ {
+  "file": "hero08.jpg",
+  "unsplash_id": "1758523671637-5a39ea2c129b",
+  "photographer": "Vitaly Gariev",
+  "shows": "people at home, joyful",
+  "source": "https://unsplash.com/photos/1758523671637-5a39ea2c129b",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": false
+ },
+ {
+  "file": "hero09.jpg",
+  "unsplash_id": "1606932250069-62f395a08602",
+  "photographer": "Andrew Mead",
+  "shows": "couple in new home",
+  "source": "https://unsplash.com/photos/1606932250069-62f395a08602",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": true
+ },
+ {
+  "file": "hero10.jpg",
+  "unsplash_id": "1622790410882-c1f00a56083e",
+  "photographer": "HiveBoxx",
+  "shows": "moving in, new home",
+  "source": "https://unsplash.com/photos/1622790410882-c1f00a56083e",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": true
+ },
+ {
+  "file": "hero11.jpg",
+  "unsplash_id": "1772306096779-e0e4908b25ef",
+  "photographer": "Niko Samik",
+  "shows": "interior with people",
+  "source": "https://unsplash.com/photos/1772306096779-e0e4908b25ef",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": false
+ },
+ {
+  "file": "hero12.jpg",
+  "unsplash_id": "1794208248979-87453f58f7b5",
+  "photographer": "Vitaly Gariev",
+  "shows": "家 interior, people",
+  "source": "https://unsplash.com/photos/1794208248979-87453f58f7b5",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": false
+ },
+ {
+  "file": "pitch01.jpg",
+  "unsplash_id": "1741156386380-0236c72eb6f9",
+  "photographer": "Jakub Zerdzicki",
+  "shows": "agent / keys",
+  "source": "https://unsplash.com/photos/1741156386380-0236c72eb6f9",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": true
+ },
+ {
+  "file": "pitch02.jpg",
+  "unsplash_id": "1729505305192-610539203144",
+  "photographer": "Jakub Zerdzicki",
+  "shows": "agent / keys",
+  "source": "https://unsplash.com/photos/1729505305192-610539203144",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": false
+ },
+ {
+  "file": "pitch03.jpg",
+  "unsplash_id": "1770199105692-9e52ff137cad",
+  "photographer": "Aleksandra Sapozhnikova",
+  "shows": "handover",
+  "source": "https://unsplash.com/photos/1770199105692-9e52ff137cad",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": false
+ },
+ {
+  "file": "pitch04.jpg",
+  "unsplash_id": "1733244766159-f58f4184fd38",
+  "photographer": "Jakub Zerdzicki",
+  "shows": "professional, property",
+  "source": "https://unsplash.com/photos/1733244766159-f58f4184fd38",
+  "licence": "Unsplash License - free for commercial use",
+  "in_use": false
+ }
+]

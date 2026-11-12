@@ -74,11 +74,16 @@ a{color:inherit}
 .chrome-note .tbc{color:var(--on-navy)}
 
 /* ---------- the device frame ---------- */
-.stage{padding:22px 16px 48px;display:flex;justify-content:center}
-.frame{container-type:inline-size;min-width:0;width:100%;max-width:1180px;background:var(--surface);
-  border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
-.stage[data-device="phone"] .frame{max-width:392px;border-radius:26px;border-width:8px;
-  border-color:var(--navy-deep)}
+/* Full-bleed on the desktop view: the site fills the screen the way it will in
+   a real browser, rather than sitting in a centred card that makes everything
+   inside it look smaller than it is. The phone view keeps its device frame,
+   because that is the point of the phone view. */
+.stage{padding:0;display:flex;justify-content:center}
+.stage[data-device="phone"]{padding:22px 16px 48px}
+.frame{container-type:inline-size;min-width:0;width:100%;max-width:none;background:var(--surface);
+  border:0;border-radius:0;overflow:hidden}
+.stage[data-device="phone"] .frame{max-width:392px;border-radius:26px;border:8px solid var(--navy-deep);
+  box-shadow:var(--shadow)}
 .urlbar{display:flex;align-items:center;gap:8px;padding:7px 12px;background:var(--surface-2);
   border-bottom:1px solid var(--line-soft);font-size:12.5px;color:var(--muted);
   overflow:hidden;white-space:nowrap}
@@ -93,17 +98,33 @@ a{color:inherit}
    which is what he actually asked for. */
 .site-head{background:var(--surface);color:var(--ink);position:relative;z-index:3;
   border-bottom:1px solid var(--line-soft)}
-.head-in{padding:16px 24px;display:flex;align-items:center;gap:18px}
-.logo{height:62px;width:auto;flex:none}
+/* The mark is back in the bar on every screen: the hero is centred now, so the
+   bar is the only place it appears and there is nothing to duplicate. */
+.head-in{padding:18px 28px;display:flex;align-items:center;gap:18px}
+/* The mark is the strongest asset he has and he has asked for it bigger three
+   times. At 94 px it is the dominant object in the bar rather than a label
+   beside the navigation — which is the whole point of a wordmark this fine. */
+.logo{height:94px;width:auto;flex:none}
+@container (max-width:1200px){.logo{height:78px}}
 .nav{margin-left:auto;display:flex;gap:2px;align-items:center}
 .nav a{padding:9px 12px;border-radius:7px;text-decoration:none;font-size:14px;font-weight:500;
   color:var(--muted);transition:background .15s,color .15s}
 .nav a:hover{background:var(--surface-2);color:var(--ink)}
 .nav a[aria-current="page"]{color:var(--navy);font-weight:600}
-.nav a.btn-wa,.btn-wa{display:inline-flex;align-items:center;gap:7px;background:var(--navy);
-  color:#fff;border:0;border-radius:7px;padding:10px 15px;font-weight:600;font-size:14px;
-  cursor:pointer;text-decoration:none}
-.nav a.btn-wa:hover{background:var(--navy-tint);color:#fff}
+.nav a.btn-wa,.btn-wa{display:inline-flex;align-items:center;gap:8px;background:var(--surface);
+  color:var(--navy);border:1.5px solid var(--navy);border-radius:8px;padding:11px 18px;
+  font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;margin-left:12px}
+.nav a.btn-wa:hover{background:var(--navy);color:#fff}
+
+/* He wants the WhatsApp button at the foot of the screen as well: this is the
+   one action the whole site exists to produce, and on a phone the top bar is
+   the part of the page a reader has already scrolled past. */
+.wa-float{position:fixed;right:22px;bottom:22px;z-index:40;display:inline-flex;
+  align-items:center;gap:9px;background:var(--alquiler);color:#fff;border:0;
+  border-radius:999px;padding:14px 20px;font-weight:600;font-size:15px;cursor:pointer;
+  text-decoration:none;box-shadow:0 14px 34px -12px rgba(12,95,84,.75)}
+.wa-float:hover{filter:brightness(1.07)}
+@container (max-width:900px){.wa-float{right:14px;bottom:14px;padding:13px 18px;font-size:14px}}
 .btn-wa svg{flex:none}
 .burger{margin-left:auto;display:none;background:var(--surface-2);border:1px solid var(--line);
   color:var(--ink);border-radius:7px;padding:9px 11px;cursor:pointer}
@@ -111,7 +132,7 @@ a{color:inherit}
   .nav{display:none;order:3}
   .burger{display:block;order:2}
   .head-in{padding:12px 14px;gap:10px;flex-wrap:wrap}
-  .logo{height:46px}
+  .logo{height:60px}
   /* the burger opens the same nav, stacked under the bar */
   .site-head.open .nav{display:flex;flex-direction:column;align-items:stretch;
     flex-basis:100%;margin-left:0;gap:2px;padding-top:8px;
@@ -119,13 +140,30 @@ a{color:inherit}
   .site-head.open .nav a{padding:11px 10px;font-size:15px}
   .site-head.open .btn-wa{justify-content:center;margin-top:6px}
 }
+@container (max-width:460px){.logo{height:50px}}
 
 /* ---------- screens ---------- */
 .screen{display:none}
 .screen.on{display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-@container (max-width:760px){.wrap{padding:0 14px}}
+.wrap{max-width:1320px;margin:0 auto;padding:0 32px}
+@container (max-width:900px){.wrap{padding:0 18px}}
+@container (max-width:460px){.wrap{padding:0 14px}}
+/* ---------- section rhythm ----------
+   Each block gets room and a ground of its own. Alternating the surface is what
+   turns a long scroll into a sequence of places rather than one list that keeps
+   going: you can tell where you are without reading a heading. */
 section{padding:40px 0}
+.sec{padding:84px 0}
+.sec + .sec{padding-top:84px}
+@container (max-width:900px){.sec{padding:44px 0}.sec + .sec{padding-top:44px}}
+.sec--plain{background:var(--surface)}
+.sec--tint{background:var(--ground)}
+/* one inverted block, so the agency reads as a statement rather than a row */
+.sec--deep{background:var(--navy);color:var(--on-navy)}
+.sec--deep .eyebrow{color:var(--on-navy-dim)}
+.sec--deep h2{color:var(--on-navy)}
+.sec .sec-head{margin-bottom:26px}
+@container (max-width:900px){.sec .sec-head{margin-bottom:18px}}
 @container (max-width:760px){section{padding:26px 0}}
 
 h1,h2,h3{font-weight:600;text-wrap:balance;margin:0}
@@ -141,71 +179,85 @@ h3{font-size:16px}
   text-decoration:none;white-space:nowrap}
 .num{font-variant-numeric:tabular-nums}
 
-/* ---------- hero ----------
-   Light, editorial, and the photography carries the page rather than a colour
-   field. The reference he picked is elliman.com: a serif claim in a lot of
-   white space, then cinematic imagery, then the search. */
-.hero{position:relative;background:var(--ground);color:var(--ink);
-  border-bottom:1px solid var(--line-soft)}
-.hero-copy{padding:52px 0 0;max-width:62ch}
-@container (max-width:900px){.hero-copy{padding:30px 0 0}}
+/* ---------- the hero ----------
+   Centred and editorial: an eyebrow, a two-line serif claim with the second
+   line in italic, one supporting sentence, and then the picture. The words are
+   his — "la experiencia de sentirte en casa" is the line he wrote himself — set
+   in the arrangement asked for. */
+.hero{position:relative;background:var(--ground);padding:0 0 40px}
+@container (max-width:900px){.hero{padding:0 0 26px}}
 
-.hero-claim{font-family:var(--serif);font-weight:400;font-size:52px;line-height:1.08;
-  letter-spacing:-.02em;max-width:16ch;margin:0;text-wrap:balance;color:var(--navy)}
-.hero-sub{font-size:16.5px;color:var(--muted);margin:16px 0 0;max-width:46ch;line-height:1.55}
-@container (max-width:900px){.hero-claim{font-size:34px;max-width:18ch}
-  .hero-sub{font-size:15px;margin-top:12px}}
-@container (max-width:460px){.hero-claim{font-size:29px}}
+.hero-head{text-align:center;padding:62px 0 38px;display:flex;flex-direction:column;
+  align-items:center;gap:0}
+@container (max-width:900px){.hero-head{padding:34px 0 24px}}
+.hero-eyebrow{font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin:0 0 18px}
+@container (max-width:900px){.hero-eyebrow{font-size:10.5px;letter-spacing:.2em;margin-bottom:12px}}
+.hero-claim{font-family:var(--serif);font-weight:400;font-size:58px;line-height:1.12;
+  letter-spacing:-.02em;margin:0;color:var(--ink);text-wrap:balance}
+.hero-claim em{display:block;font-style:italic;color:var(--navy)}
+@container (max-width:1100px){.hero-claim{font-size:46px}}
+@container (max-width:900px){.hero-claim{font-size:33px}}
+@container (max-width:460px){.hero-claim{font-size:27px}}
+.hero-sub{font-size:16.5px;color:var(--muted);margin:22px 0 0;max-width:52ch;line-height:1.55}
+@container (max-width:900px){.hero-sub{font-size:14.5px;margin-top:14px}}
 
-/* ---------- the moving showcase (his "marquesina con movimiento") ----------
-   Full width and cinematic, because that is what he liked in the reference.
-   The frames are chosen by real pixel width, not by photo count: only four of
-   his properties carry a main photo at 800 px or more, and those are the only
-   ones that survive being shown this large. The rest stay in the cards. */
-.showcase{position:relative;margin:30px 0 0;border-radius:var(--radius);overflow:hidden;
-  background:var(--surface-2);box-shadow:var(--shadow)}
-@container (max-width:900px){.showcase{margin-top:20px;border-radius:8px}}
-.shot-stack{position:relative;display:block;width:100%;padding:0;border:0;background:none;
-  text-align:left;cursor:pointer;aspect-ratio:21/9}
-@container (max-width:900px){.shot-stack{aspect-ratio:4/3}}
-.shot{position:absolute;inset:0;opacity:0;transition:opacity 1s ease}
-.shot img{width:100%;height:100%;object-fit:cover;transform:scale(1.02)}
+/* ---------- the picture ----------
+   "Un recuadro con borde blanco, y adentro una imagen con movimiento." */
+.herocard{position:relative;border-radius:16px;overflow:hidden;
+  border:10px solid var(--surface);outline:1px solid var(--line);
+  box-shadow:0 30px 70px -30px rgba(20,22,31,.5);
+  /* width must be pinned: with `aspect-ratio` and a tall `min-height`, an auto
+     width grows to satisfy the ratio and the card runs past the page edge. */
+  width:100%;aspect-ratio:16/7;min-height:clamp(430px,62vh,780px);
+  display:flex;flex-direction:column;isolation:isolate}
+@container (max-width:900px){.herocard{aspect-ratio:4/3;min-height:0;border-width:7px;
+  border-radius:12px}}
+
+.shot{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;z-index:0}
+.shot img,.shot video{width:100%;height:100%;object-fit:cover;transform:scale(1.02)}
 .shot.on{opacity:1}
-.shot.on img{animation:kb 9s ease-out forwards}
+.shot.on img,.shot.on video{animation:kb 11s ease-out forwards}
 @keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.1)}}
-.shot-veil{position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(to top,rgba(10,12,20,.88) 0%,rgba(10,12,20,.34) 34%,rgba(10,12,20,0) 62%)}
-.shot-cap{position:absolute;left:0;right:0;bottom:0;padding:22px 26px;z-index:2;
-  display:flex;flex-direction:column;gap:6px;pointer-events:none}
-@container (max-width:900px){.shot-cap{padding:16px 16px}}
-.shot-op{align-self:flex-start;font-size:10.5px;font-weight:600;letter-spacing:.1em;
-  text-transform:uppercase;padding:4px 9px;border-radius:5px;background:#fff;color:var(--navy)}
-.shot-op.alq{background:var(--alquiler);color:#fff}
-.shot-price{font-size:30px;font-weight:600;letter-spacing:-.015em;color:#fff;
-  font-variant-numeric:tabular-nums}
-@container (max-width:900px){.shot-price{font-size:23px}}
-.shot-where{font-size:14px;color:rgba(255,255,255,.88);line-height:1.35}
-.dots{position:absolute;right:20px;top:20px;z-index:3;display:flex;gap:6px}
+.shot-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(8,10,18,.62) 0%,rgba(8,10,18,.16) 32%,
+    rgba(8,10,18,.52) 66%,rgba(8,10,18,.88) 100%)}
+@media (prefers-reduced-motion:reduce){.shot.on img,.shot.on video{animation:none}
+  .shot{transition:none}}
+
+.hc-top{position:relative;z-index:2;display:flex;align-items:flex-start;gap:16px;
+  padding:22px 24px 0}
+@container (max-width:900px){.hc-top{padding:14px 14px 0}}
+/* Its own backing rather than a heavier scrim over everything: deepening the
+   whole gradient to carry eight words would dull the photograph that is doing
+   the selling. Light on purpose - measured against the real pixels behind the
+   glyphs, 34% clears AA with room (the backdrop there is ~122/255 once the top
+   of the scrim has done its work). */
+.hc-label{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;
+  color:#fff;background:rgba(8,10,18,.34);padding:7px 12px;border-radius:999px;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+@container (max-width:460px){.hc-label{letter-spacing:.14em;font-size:9.5px}}
+.dots{margin-left:auto;display:flex;gap:6px;flex:none}
 .dots button{width:7px;height:7px;padding:0;border-radius:50%;border:0;cursor:pointer;
-  background:rgba(255,255,255,.45);transition:background .2s,width .2s}
+  background:rgba(255,255,255,.55);transition:background .2s,width .2s}
 .dots button[aria-current="true"]{background:#fff;width:22px;border-radius:4px}
-@media (prefers-reduced-motion:reduce){.shot.on img{animation:none}.shot{transition:none}}
 
 /* ---------- hero search ----------
-   Operation is two buttons, one of which is always on — "tendría que dejarnos
-   seleccionar uno de los dos". */
+   Lower down, as he asked — it now sits at the foot of the picture rather than
+   straight under the headline. Operation stays a forced choice of the two. */
 .searchbar{background:var(--surface);color:var(--ink);border:1px solid var(--line);
-  border-radius:var(--radius);margin:18px 0 0;
-  padding:14px;display:grid;gap:10px;grid-template-columns:1fr 1fr auto;box-shadow:var(--shadow)}
+  border-radius:var(--radius);margin:20px 0 0;padding:14px;display:grid;gap:10px;grid-template-columns:1fr 1fr 1fr auto;
+  box-shadow:var(--shadow)}
 .opseg{grid-column:1/-1;display:flex;gap:4px;background:var(--surface-2);
   border:1px solid var(--line);border-radius:8px;padding:4px}
 .opseg button{flex:1;background:none;border:0;border-radius:6px;padding:9px 6px;cursor:pointer;
   font-size:14px;font-weight:600;color:var(--muted);transition:background .15s,color .15s}
 .opseg button[aria-pressed="true"]{background:var(--navy);color:#fff}
 .opseg button[aria-pressed="true"].alq{background:var(--alquiler)}
-@container (max-width:900px){.searchbar{grid-template-columns:1fr 1fr}}
-@container (max-width:460px){.searchbar{grid-template-columns:1fr}}
-@container (max-width:460px){.searchbar .btn{grid-column:1/-1}}
+@container (max-width:1100px){.searchbar{grid-template-columns:1fr 1fr}
+  .searchbar .btn{grid-column:1/-1}}
+@container (max-width:460px){.searchbar{grid-template-columns:1fr}
+  .searchbar .btn{grid-column:1/-1}}
 
 /* ---------- form controls, used by every form on the site ---------- */
 .field{display:flex;flex-direction:column;gap:5px;min-width:0}
@@ -221,16 +273,40 @@ h3{font-size:16px}
   border-radius:7px;padding:10px 16px;font-weight:600;cursor:pointer}
 .btn-ghost:hover{background:var(--surface-2)}
 
-/* ---------- the claims band ----------
-   "Estaría bueno que tenga algunas frases donde nombramos oportunidades."
-   These three are true of his business today and are written to be replaced:
-   he said he would think about the wording, so the copy is his to confirm. */
-.claims{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);
-  border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
-@container (max-width:760px){.claims{grid-template-columns:1fr}}
-.claim{background:var(--ground);padding:22px 24px;display:flex;flex-direction:column;gap:5px}
-.claim b{font-size:15.5px;font-weight:600;color:var(--ink)}
-.claim span{font-size:13.5px;color:var(--muted);line-height:1.45}
+/* ---------- search, answering as you choose ---------- */
+.search-aside{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;margin:14px 0 0}
+.search-count{font-size:14px;color:var(--muted)}
+.search-count b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.quick{display:flex;flex-wrap:wrap;gap:7px;margin-left:auto}
+@container (max-width:760px){.quick{margin-left:0}}
+.quick button{background:var(--surface);border:1px solid var(--line);border-radius:999px;
+  padding:7px 13px;font-size:13px;color:var(--muted);cursor:pointer;
+  transition:border-color .15s,color .15s,background .15s}
+.quick button:hover{border-color:var(--navy);color:var(--navy);background:var(--surface)}
+
+/* ---------- the agency ----------
+   The reference he chose reads as a firm, not as a listings feed, and the
+   proposal promises a Quiénes Somos. This is the home page's share of it: who
+   signs the operation, where the office is, and what the matrícula is. Every
+   line here is verifiable; the two things we do not have are marked. */
+.agency{display:grid;grid-template-columns:1.15fr .85fr;gap:38px;align-items:center;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:40px 42px;box-shadow:0 30px 70px -40px rgba(0,0,0,.6)}
+@container (max-width:900px){.agency{grid-template-columns:1fr;gap:22px;padding:24px 20px}}
+.agency h2{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.14;
+  letter-spacing:-.015em;color:var(--navy);margin:0}
+@container (max-width:900px){.agency h2{font-size:26px}}
+.agency p{font-family:var(--serif);font-size:17px;line-height:1.6;color:var(--muted);
+  margin:14px 0 0;max-width:54ch}
+.agency-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.cred-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--line-soft);
+  border-radius:var(--radius);overflow:hidden}
+.cred-row{display:flex;flex-direction:column;gap:3px;padding:14px 16px;
+  border-bottom:1px solid var(--line-soft);background:var(--surface-2)}
+.cred-row:last-child{border-bottom:0}
+.cred-row b{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);font-weight:600}
+.cred-row span{font-size:15px;color:var(--ink);line-height:1.4}
 
 /* ---------- reseñas ----------
    The reference he named carries client reviews and he singled them out. The
@@ -245,8 +321,107 @@ h3{font-size:16px}
 .rev p{margin:0;font-family:var(--serif);font-size:16px;line-height:1.55;color:var(--muted)}
 .rev footer{margin-top:auto;font-size:12.5px;color:var(--muted)}
 
+/* ---------- flowing ----------
+   The reference he chose moves as you go down it rather than snapping into
+   place. One transition does most of that work: content rises a little as it
+   comes into view. It is deliberately small — 14 px and 0.7 s — because the
+   point is that the page feels unhurried, not that it performs. */
+.reveal{opacity:0;transform:translateY(14px);
+  transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1!important;transform:none!important;transition:none}
+}
+
+/* ---------- 2 · what are you looking for ----------
+   Photographic tiles rather than outline icons. Every other block on this page
+   is carried by a picture, and eight little glyphs on white read as a form, not
+   as a way in. Each tile is lit by his own sharpest photograph of that type, so
+   the section is also a second look at the stock. The counts are real: a
+   shortcut that promises eight and returns two is worse than no shortcut. */
+.shortcuts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@container (max-width:1000px){.shortcuts{grid-template-columns:repeat(3,1fr)}}
+@container (max-width:760px){.shortcuts{grid-template-columns:repeat(2,1fr)}}
+.shortcut{position:relative;overflow:hidden;border:0;padding:0;cursor:pointer;
+  border-radius:var(--radius);aspect-ratio:5/4;display:flex;align-items:flex-end;
+  isolation:isolate;background:var(--surface-2);text-align:left;
+  transition:transform .18s cubic-bezier(.22,.61,.36,1),box-shadow .18s}
+@container (max-width:760px){.shortcut{aspect-ratio:4/3}}
+.shortcut:hover{transform:translateY(-3px);box-shadow:0 18px 38px -18px rgba(20,22,31,.5)}
+.shortcut img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.shortcut:hover img{transform:scale(1.07)}
+.shortcut::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,rgba(6,8,16,.92) 0%,rgba(6,8,16,.55) 42%,
+    rgba(6,8,16,.12) 72%,rgba(6,8,16,.06) 100%)}
+.sc-in{position:relative;z-index:2;padding:14px 15px;display:flex;flex-direction:column;gap:2px}
+.sc-in b{font-size:16.5px;font-weight:600;color:#fff;letter-spacing:-.005em}
+.sc-in span{font-size:12.5px;color:rgba(255,255,255,.88);font-variant-numeric:tabular-nums}
+.sc-go{position:absolute;right:12px;bottom:12px;z-index:2;width:30px;height:30px;
+  border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;
+  color:#fff;transition:background .18s}
+.shortcut:hover .sc-go{background:rgba(255,255,255,.3)}
+@media (prefers-reduced-motion:reduce){
+  .shortcut,.shortcut img{transition:none}
+  .shortcut:hover{transform:none}.shortcut:hover img{transform:none}
+}
+
+/* a compact segmented control for the featured tabs */
+.ops-sm{margin-left:auto;padding:3px;align-self:center}
+.ops-sm button{padding:7px 14px;font-size:13px;white-space:nowrap}
+
+/* ---------- 4 · zones ----------
+   Three localities is all he works in, so these are three real cards with real
+   counts. Grouping them by "lifestyle" would be inventing a taxonomy on top of
+   three rows of data. */
+.zones{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@container (max-width:860px){.zones{grid-template-columns:1fr}}
+.zone{position:relative;overflow:hidden;border-radius:var(--radius);border:0;padding:0;
+  cursor:pointer;text-align:left;min-height:186px;display:flex;align-items:flex-end;
+  isolation:isolate;background:var(--surface-2)}
+.zone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  transition:transform .8s cubic-bezier(.22,.61,.36,1)}
+.zone:hover img{transform:scale(1.06)}
+.zone::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,rgba(8,10,18,.86) 0%,rgba(8,10,18,.34) 52%,rgba(8,10,18,.12) 100%)}
+.zone-in{position:relative;z-index:2;padding:16px 18px;display:flex;flex-direction:column;gap:3px}
+.zone-in b{font-size:19px;font-weight:600;color:#fff}
+.zone-in span{font-size:13px;color:rgba(255,255,255,.9);font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){.zone img{transition:none}.zone:hover img{transform:none}}
+
+/* ---------- 5 · tools ----------
+   Three cards, three real actions. There is deliberately no "save this search
+   and get alerts": that needs accounts and scheduled mail, which is milestone 2,
+   and a button that does nothing is worse than a button that is not there. */
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@container (max-width:860px){.tools{grid-template-columns:1fr}}
+/* The first card was a second door to the budget filter that already sits in
+   the hero. It is a code lookup now, because that is how his business actually
+   runs: he sends "te paso la CA82" by WhatsApp and the client arrives holding a
+   code with nowhere to type it. */
+.codefind{display:flex;gap:8px;width:100%;margin-top:4px}
+.codefind input{flex:1 1 auto;min-width:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:7px;padding:10px 12px;color:var(--ink);
+  font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.codefind input::placeholder{font-weight:400;letter-spacing:0;color:var(--muted);
+  text-transform:none}
+.codefind .btn{padding:10px 16px;align-self:auto}
+.tool i:empty{display:none}
+.tool i.bad{color:var(--warn)}
+.tool{display:flex;flex-direction:column;align-items:flex-start;gap:7px;border:0;
+  border-radius:var(--radius);padding:22px 22px 20px;cursor:pointer;text-align:left;
+  transition:transform .15s,box-shadow .15s}
+.tool:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.tool b{font-size:17px;font-weight:600;color:var(--ink)}
+.tool span{font-size:14px;line-height:1.5;color:var(--muted)}
+.tool i{font-style:normal;font-size:13.5px;font-weight:600;color:var(--navy);margin-top:4px}
+.tool-a{background:#EDF0FA}
+.tool-b{background:#E8F2EF}
+.tool-c{background:#F6EFE6}
+
 /* ---------- property cards ---------- */
 .grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
 @container (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
 @container (max-width:620px){.grid{grid-template-columns:1fr;gap:14px}}
 .card{text-decoration:none;color:inherit;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
@@ -254,7 +429,11 @@ h3{font-size:16px}
   transition:border-color .15s,transform .15s,box-shadow .15s}
 .card:hover{border-color:var(--navy-tint);transform:translateY(-2px);box-shadow:var(--shadow)}
 .card-img{position:relative;aspect-ratio:4/3;background:var(--surface-2);overflow:hidden}
-.card-img img{width:100%;height:100%;object-fit:cover}
+.card-img img{width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.22,.61,.36,1)}
+.card:hover .card-img img{transform:scale(1.06)}
+@media (prefers-reduced-motion:reduce){.card-img img{transition:none}
+  .card:hover .card-img img{transform:none}}
 .badge{position:absolute;left:10px;top:10px;font-size:11px;font-weight:600;letter-spacing:.06em;
   text-transform:uppercase;padding:4px 9px;border-radius:5px;background:var(--navy);color:#fff}
 .badge.alq{background:var(--alquiler)}
@@ -274,20 +453,36 @@ h3{font-size:16px}
   font-variant-numeric:tabular-nums}
 .specs i{font-style:normal;color:var(--ink);font-weight:600}
 
-/* ---------- type index ---------- */
-.types{display:flex;flex-wrap:wrap;gap:8px}
-.tbtn{display:inline-flex;align-items:baseline;gap:7px;background:var(--surface);
-  border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;font-weight:500}
-.tbtn:hover{border-color:var(--navy-tint);color:var(--navy-tint)}
-.tbtn span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-
-/* ---------- tasaciones band ---------- */
-.band{background:var(--navy);color:var(--on-navy);border-radius:var(--radius);
-  padding:26px 28px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
-.band h2{color:var(--on-navy)}
-.band p{margin:6px 0 0;font-family:var(--serif);color:var(--on-navy-dim);max-width:52ch}
-.band .btn{background:var(--on-navy);color:var(--navy);margin-left:auto}
-.band .btn:hover{background:var(--on-navy-dim)}
+/* ---------- the owner's band ----------
+   A split panel: the offer on the left, a photograph with the mark on it on the
+   right. It replaces the solid navy block that said the same thing, because a
+   flat colour band is the one shape on this page that looks like a template.
+   The photograph is a hand passing keys, deliberately not a stock "agent": a
+   model presented as the agency would imply staff he does not have. */
+.pitch{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:var(--radius);
+  overflow:hidden;border:1px solid var(--line);background:var(--surface-2)}
+@container (max-width:860px){.pitch{grid-template-columns:1fr}}
+.pitch-copy{padding:48px 46px;display:flex;flex-direction:column;align-items:flex-start;
+  justify-content:center;gap:14px}
+@container (max-width:860px){.pitch-copy{padding:28px 22px}}
+.pitch-copy h2{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.14;
+  letter-spacing:-.015em;color:var(--navy);margin:0;max-width:18ch}
+@container (max-width:860px){.pitch-copy h2{font-size:26px}}
+.pitch-copy p{margin:0;font-size:16px;line-height:1.55;color:var(--muted);max-width:44ch}
+.pitch-copy .btn-ghost{margin-top:8px;background:var(--surface)}
+.pitch-art{position:relative;min-height:330px;overflow:hidden;isolation:isolate}
+@container (max-width:860px){.pitch-art{min-height:240px}}
+.pitch-art img.shot-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.pitch-art::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to right,rgba(6,8,16,.62) 0%,rgba(6,8,16,.30) 52%,
+    rgba(6,8,16,.42) 100%)}
+.pitch-mark{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;
+  align-items:flex-start;justify-content:center;gap:10px;padding:0 42px}
+@container (max-width:860px){.pitch-mark{padding:0 22px}}
+.pitch-mark img{height:62px;width:auto;filter:drop-shadow(0 6px 20px rgba(0,0,0,.45))}
+@container (max-width:860px){.pitch-mark img{height:46px}}
+.pitch-mark span{font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+  font-weight:600;color:#fff;background:rgba(6,8,16,.34);padding:6px 12px;border-radius:999px}
 
 /* ---------- results screen ---------- */
 .results>*{min-width:0}
@@ -384,8 +579,9 @@ h3{font-size:16px}
 /* Brand navy, not the deeper shade: the logo artwork carries its own navy
    rectangle, and on navy-deep that rectangle showed as a lighter box. */
 .site-foot{background:var(--navy);color:var(--on-navy-dim);margin-top:10px}
-.foot-in{max-width:1080px;margin:0 auto;padding:30px 20px;display:grid;
-  grid-template-columns:1.3fr 1fr 1fr;gap:26px}
+.foot-in{max-width:1320px;margin:0 auto;padding:34px 32px;display:grid;
+  grid-template-columns:1.4fr repeat(4,1fr);gap:26px}
+@container (max-width:1000px){.foot-in{grid-template-columns:1fr 1fr 1fr}}
 @container (max-width:760px){.foot-in{grid-template-columns:1fr;gap:20px;padding:24px 14px}}
 .site-foot h4{margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
   color:var(--on-navy);font-weight:600}
@@ -393,8 +589,8 @@ h3{font-size:16px}
   padding:3px 0}
 .site-foot a:hover{color:var(--on-navy)}
 .site-foot p{margin:0;font-size:13px;line-height:1.55}
-.legal{border-top:1px solid rgba(255,255,255,.12);padding:14px 20px;font-size:12px;
-  max-width:1080px;margin:0 auto;color:var(--on-navy-dim)}
+.legal{border-top:1px solid rgba(255,255,255,.12);padding:14px 32px;font-size:12px;
+  max-width:1320px;margin:0 auto;color:var(--on-navy-dim)}
 
 /* data the client still has to give us, marked rather than invented */
 .tbc{border-bottom:1px dotted currentColor;opacity:.75;cursor:help}
@@ -416,8 +612,9 @@ h3{font-size:16px}
       </div>
     </div>
   </div>
-  <p class="chrome-note">Las propiedades, los precios, las direcciones y las fotos son
-    tuyas, no son de muestra. Se ven <b class="num" id="n-shown">23</b> de tus
+  <p class="chrome-note">Las propiedades, los precios, las direcciones y las fotos de
+    las fichas son tuyas, no son de muestra. <b>Las fotos grandes de arriba sí son de
+    muestra</b> (con licencia para uso comercial): van ahí hasta que me pases tu video. Se ven <b class="num" id="n-shown">23</b> de tus
     <b class="num" id="n-all">33</b>: las otras <b class="num" id="n-gap">10</b> no tienen ninguna foto en el sitio viejo, así que
     entran cuando me pases las tuyas. Las fotos que ves son las de 500&nbsp;px que están
     hoy publicadas — con tus originales se ven mucho mejor. Lo que figura
@@ -436,11 +633,11 @@ h3{font-size:16px}
 
   <header class="site-head">
     <div class="head-in">
-      <img class="logo" src="logo-stranieri-light.png" alt="Stranieri Propiedades">
+      <img class="logo" src="logo-stranieri-navy.png" alt="Stranieri Propiedades">
       <nav class="nav">
         <a href="#" data-go="inicio" aria-current="page">Inicio</a>
-        <a href="#" data-go="buscar">Propiedades</a>
-        <a href="#" data-go="tasaciones">Tasaciones</a>
+        <a href="#" data-buy="Venta">Comprar</a>
+        <a href="#" data-buy="Alquiler">Alquilar</a>
         <a href="#" data-go="nosotros">Nosotros</a>
         <a href="#" data-go="contacto">Contacto</a>
         <a class="btn-wa" href="#" data-go="contacto">
@@ -456,109 +653,197 @@ h3{font-size:16px}
 
   <!-- ===================== INICIO ===================== -->
   <main class="screen on" id="screen-inicio">
+
     <div class="hero">
       <div class="wrap">
 
-        <div class="hero-copy">
-          <h1 class="hero-claim">La experiencia de sentirte en casa</h1>
-          <p class="hero-sub">Propiedades en venta y en alquiler en La&nbsp;Plata y la
-            región, atendidas personalmente por un martillero público matriculado.</p>
+        <div class="hero-head">
+          <p class="hero-eyebrow">Espacios para lo que viene</p>
+          <h1 class="hero-claim">La experiencia<em>de sentirte en casa</em></h1>
+          <p class="hero-sub">Encontrá tu próxima oportunidad en La&nbsp;Plata y la región:
+            casas, departamentos, terrenos y campos, en venta y en alquiler.</p>
         </div>
 
-        <div class="showcase">
-          <button class="shot-stack" id="shot-stack" type="button"
-                  aria-label="Ver la propiedad destacada"></button>
-          <div class="dots" id="shot-dots" role="tablist" aria-label="Propiedades destacadas"></div>
-          <div class="shot-cap" id="shot-cap"></div>
+        <div class="herocard">
+          <div class="shot-stack" id="shot-stack"></div>
+          <div class="shot-veil"></div>
+          <div class="hc-top">
+            <span class="hc-label">Una nueva forma de encontrar tu lugar</span>
+            <div class="dots" id="shot-dots" role="tablist" aria-label="Propiedades destacadas"></div>
+          </div>
         </div>
 
         <form class="searchbar" id="hero-search">
           <div class="opseg" id="h-op" role="group" aria-label="Operación">
-            <button type="button" data-op="Venta" aria-pressed="true">En venta</button>
-            <button type="button" data-op="Alquiler" class="alq" aria-pressed="false">En alquiler</button>
+            <button type="button" data-op="Venta" aria-pressed="true">Comprar</button>
+            <button type="button" data-op="Alquiler" class="alq" aria-pressed="false">Alquilar</button>
           </div>
           <div class="field">
             <label for="h-tipo">Tipo</label>
             <select id="h-tipo"><option value="">Todos los tipos</option></select>
           </div>
           <div class="field">
-            <label for="h-loc">Localidad</label>
+            <label for="h-loc">Zona</label>
             <select id="h-loc"><option value="">Todas</option></select>
           </div>
-          <button class="btn" type="submit">Buscar</button>
+          <div class="field">
+            <label for="h-pre">Presupuesto</label>
+            <select id="h-pre"><option value="">Sin límite</option></select>
+          </div>
+          <button class="btn" type="submit">Buscar propiedades</button>
         </form>
 
-        <div style="height:34px"></div>
-      </div>
+        <div class="search-aside">
+          <p class="search-count" id="search-count"></p>
+          <div class="quick" id="quick"></div>
+        </div>
 
-      <div class="claims">
-        <div class="claim">
-          <b>Tasación sin cargo</b>
-          <span>Te digo cuánto vale tu propiedad hoy, sin compromiso y sin costo.</span>
-        </div>
-        <div class="claim">
-          <b>Martillero matriculado</b>
-          <span>Col. 7103 L° XIII F° 88. La operación la firma un profesional responsable.</span>
-        </div>
-        <div class="claim">
-          <b>Te atiendo yo</b>
-          <span>No hay call center: preguntás y te contesto yo, por WhatsApp.</span>
-        </div>
       </div>
     </div>
 
-    <section>
+    <section class="sec sec--plain">
       <div class="wrap">
         <div class="sec-head">
-          <div>
-            <p class="eyebrow">Selección</p>
-            <h2>Propiedades destacadas</h2>
-          </div>
-          <a href="#" data-go="buscar">Ver todas →</a>
+          <div><p class="eyebrow">Por dónde empezar</p><h2>¿Qué estás buscando?</h2></div>
         </div>
+        <div class="shortcuts" id="shortcuts"></div>
+      </div>
+    </section>
+
+    <section class="sec sec--tint">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><p class="eyebrow">Selección</p><h2>Oportunidades para descubrir</h2></div>
+          <div class="ops ops-sm" id="feat-ops">
+            <button data-op="Venta" aria-pressed="true">En venta</button>
+            <button data-op="Alquiler" aria-pressed="false">En alquiler</button>
+          </div>
+          <a href="#" data-go="buscar">Ver todas &rarr;</a>
+        </div>
+        <p class="lede" style="margin:-6px 0 18px">Casas, departamentos, terrenos y campos
+          <strong>en venta y en alquiler en La Plata</strong>, Dolores y Bavio.</p>
         <div class="grid" id="grid-destacadas"></div>
       </div>
     </section>
 
-    <section style="padding-top:0">
+    <section class="sec sec--plain">
       <div class="wrap">
-        <div class="sec-head"><div><p class="eyebrow">Índice</p><h2>Buscá por tipo</h2></div></div>
-        <div class="types" id="types"></div>
+        <div class="sec-head">
+          <div><p class="eyebrow">Novedades</p><h2>Recién incorporadas</h2></div>
+          <a href="#" data-go="buscar">Ver todas &rarr;</a>
+        </div>
+        <div class="grid grid-3" id="grid-nuevas"></div>
       </div>
     </section>
 
-    <section style="padding-top:0">
+    <section class="sec sec--tint">
       <div class="wrap">
         <div class="sec-head">
-          <div>
-            <p class="eyebrow">Lo que dicen</p>
-            <h2>Clientes</h2>
+          <div><p class="eyebrow">Dónde</p><h2>Encontrá una zona para vos</h2></div>
+        </div>
+        <div class="zones" id="zones"></div>
+      </div>
+    </section>
+
+    <section class="sec sec--plain">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><p class="eyebrow">Herramientas</p><h2>Tu próxima decisión, más clara</h2></div>
+        </div>
+        <div class="tools">
+          <div class="tool tool-a">
+            <b>¿Tenés el código?</b>
+            <span>Si te pasé una propiedad por WhatsApp, escribí su código y te la abro.</span>
+            <form class="codefind" id="codefind">
+              <input id="code-q" type="text" placeholder="CA82" aria-label="Código de la propiedad"
+                     autocomplete="off" spellcheck="false">
+              <button class="btn" type="submit">Ver</button>
+            </form>
+            <i id="code-msg"></i>
           </div>
+          <button class="tool tool-b" data-go="contacto">
+            <b>Pedí una tasación</b>
+            <span>Sin cargo y sin compromiso, hecha por martillero matriculado.</span>
+            <i>Pedir tasación &rarr;</i>
+          </button>
+          <button class="tool tool-c" data-go="contacto">
+            <b>Consultá por WhatsApp</b>
+            <span>Preguntá por una propiedad y te contesto yo, no un call center.</span>
+            <i>Escribir ahora &rarr;</i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec--deep">
+      <div class="wrap">
+        <div class="agency">
+          <div>
+            <p class="eyebrow">La inmobiliaria</p>
+            <h2>Conocé a Mauro</h2>
+            <p>Stranieri Propiedades es la inmobiliaria de Mauro Stranieri en La Plata.
+              Cada operación la firma un martillero y corredor público matriculado, y la
+              consulta la contesta él mismo. <span class="tbc" title="Dato pendiente: desde qué año trabajás">Años
+              en el mercado: a confirmar.</span></p>
+            <div class="agency-actions">
+              <button class="btn" data-go="nosotros" style="align-self:auto">Conocé la inmobiliaria</button>
+              <button class="btn-ghost" data-go="contacto">Pedir una tasación</button>
+            </div>
+          </div>
+          <div class="cred-list">
+            <div class="cred-row">
+              <b>Martillero y Corredor Público</b>
+              <span>Mauro Stranieri &middot; Col. 7103 L&deg; XIII F&deg; 88</span>
+            </div>
+            <div class="cred-row">
+              <b>Oficina</b>
+              <span>Calle 56 n&deg; 1242, e/ 19 y 20 &middot; La Plata, Buenos Aires</span>
+            </div>
+            <div class="cred-row">
+              <b>Atención</b>
+              <span>Por WhatsApp, por mail o en la oficina</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec--plain">
+      <div class="wrap">
+        <div class="pitch">
+          <div class="pitch-copy">
+            <h2>¿Tenés una propiedad para vender o alquilar?</h2>
+            <p>Te digo cuánto vale hoy, sin cargo y sin compromiso. Si decidís avanzar,
+              me ocupo de la publicación, las visitas y la operación, de principio a fin.</p>
+            <button class="btn-ghost" data-go="contacto">Pedir una tasación</button>
+          </div>
+          <div class="pitch-art">
+            <img class="shot-img" src="hero/pitch01.jpg" alt="" loading="lazy">
+            <div class="pitch-mark">
+              <img src="logo-stranieri-white.png" alt="Stranieri Propiedades">
+              <span>para propietarios</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec sec--plain">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><p class="eyebrow">Lo que dicen</p><h2>Clientes</h2></div>
         </div>
         <div class="revs" id="revs"></div>
         <p class="small" style="margin-top:12px">
-          <span class="tbc" title="Dato pendiente: necesito reseñas reales de clientes tuyos">Pendiente:
+          <span class="tbc" title="Dato pendiente: reseñas reales de clientes">Pendiente:
           mandame tres comentarios reales de clientes y los pongo acá con nombre y operación.</span>
           No invento reseñas: van las que te dieron de verdad.
         </p>
       </div>
     </section>
 
-    <section style="padding-top:0">
-      <div class="wrap">
-        <div class="band">
-          <div>
-            <h2>¿Querés saber cuánto vale tu propiedad?</h2>
-            <p>Tasación sin cargo y sin compromiso, hecha por martillero matriculado.
-               Me contás dónde está y coordinamos una visita.</p>
-          </div>
-          <button class="btn" data-go="contacto">Pedir tasación</button>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <!-- ===================== PROPIEDADES ===================== -->
   <main class="screen" id="screen-buscar">
     <section>
       <div class="wrap">
@@ -714,23 +999,37 @@ h3{font-size:16px}
     </section>
   </main>
 
+  <a class="wa-float" href="#" data-go="contacto">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.8-.2-1-.3-2.4-1.1-3.7-2.6-1-1.2-1.6-2.4-1.8-3-.2-.6-.3-1.2 0-1.7.2-.4.7-.9 1-1 .2-.1.6-.1.8.3l.7 1.4c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6.3.5.8 1.1 1.3 1.5.6.5 1.1.7 1.4.8.2.1.4 0 .5-.1l.6-.7c.2-.2.4-.2.6-.1l1.4.7c.3.2.4.3.4.5 0 .2 0 .7-.1 1Z"/></svg>
+    WhatsApp
+  </a>
+
   <footer class="site-foot">
     <div class="foot-in">
       <div>
-        <img class="logo" src="logo-stranieri.png" alt="Stranieri Propiedades" style="height:58px;margin-bottom:12px">
+        <img class="logo" src="logo-stranieri-white.png" alt="Stranieri Propiedades" style="height:58px;margin-bottom:12px">
         <p>Mauro Stranieri<br>Martillero y Corredor Público<br>Col. 7103 L° XIII F° 88</p>
       </div>
       <div>
-        <h4>Propiedades</h4>
-        <a href="#" data-go="buscar">En venta</a>
-        <a href="#" data-go="buscar">En alquiler</a>
-        <a href="#" data-go="buscar">Campos y fracciones</a>
-        <a href="#" data-go="buscar">Terrenos y lotes</a>
+        <h4>Comprar</h4>
+        <a href="#" data-buy="Venta">Casas en venta</a>
+        <a href="#" data-buy="Venta">Departamentos en venta</a>
+        <a href="#" data-buy="Venta">Campos y fracciones</a>
+        <a href="#" data-buy="Venta">Terrenos y lotes</a>
+      </div>
+      <div>
+        <h4>Alquilar</h4>
+        <a href="#" data-buy="Alquiler">Departamentos en alquiler</a>
+        <a href="#" data-buy="Alquiler">Locales y oficinas</a>
+      </div>
+      <div>
+        <h4>Propietarios</h4>
+        <a href="#" data-go="contacto">Pedir una tasación</a>
+        <a href="#" data-go="contacto">Publicar con Stranieri</a>
       </div>
       <div>
         <h4>La inmobiliaria</h4>
-        <a href="#" data-go="nosotros">Nosotros</a>
-        <a href="#" data-go="tasaciones">Tasaciones</a>
+        <a href="#" data-go="nosotros">Conocé a Mauro</a>
         <a href="#" data-go="contacto">Contacto</a>
         <p style="margin-top:10px">Calle 56 n° 1242, e/ 19 y 20<br>La Plata, Buenos Aires</p>
       </div>
@@ -820,45 +1119,44 @@ h3{font-size:16px}
      Five featured properties, crossfading. Chosen by photo count and then
      de-duplicated by locality so the panel does not cycle through four views
      of the same field. Every frame is one of his real listings and opens it. */
-  // Shown at 21:9 across the full width, a 338 px phone photo would be a blur.
-  // build_mockup.py records each property's real main-photo width, so the band
-  // takes the sharpest four and the soft ones stay at card size, where they
-  // hold up. This is the one place where picking on data rather than on taste
-  // is the difference between premium and broken.
-  // Resolution is a gate, not the ranking: sorting by pixels alone led the band
-  // with a flat street facade at 889 px and pushed the casco de estancia behind
-  // it. Among the photos that survive being shown this large, the best frame is
-  // the property he documented most.
-  var FEAT = P.slice()
-    .filter(function(p){ return p.main_px >= 640; })
-    .sort(function(a,b){ return b.images.length - a.images.length || b.main_px - a.main_px; })
-    .slice(0, 5);
-  if (FEAT.length < 2){
-    FEAT = P.slice().sort(function(a,b){ return b.main_px - a.main_px; }).slice(0, 5);
+  /* ---------- the hero band ----------
+     Lifestyle photography rather than his listings: his own archive tops out at
+     889 px and would be a blur across a band this wide, and the first screen is
+     making a promise about how it feels to move rather than selling one
+     property. Licensed for commercial use, provenance in design/hero/SOURCES.json.
+     His video replaces the first frame the day he sends it. */
+  var FEAT = (D.hero || []).map(function(src){ return { hero: src }; });
+  if (!FEAT.length){
+    FEAT = P.slice().sort(function(a,b){ return b.main_px - a.main_px; }).slice(0, 5)
+            .map(function(p){ return { hero: p.images[0] }; });
   }
 
   var stack = document.getElementById('shot-stack');
   var dotsEl = document.getElementById('shot-dots');
-  var capEl = document.getElementById('shot-cap');
 
-  stack.innerHTML = FEAT.map(function(p, i){
-    return '<div class="shot' + (i === 0 ? ' on' : '') + '">' +
-             '<img src="' + p.images[0] + '" alt="' + titleOf(p) + '"' +
-             (i === 0 ? '' : ' loading="lazy"') + '>' +
-           '</div>';
-  }).join('') + '<div class="shot-veil"></div>';
+  // Each frame is an image today. When his video arrives it becomes the first
+  // frame instead — same markup, same crossfade — by giving that property a
+  // `video` field in data.js. Nothing else changes.
+  stack.innerHTML = FEAT.map(function(f, i){
+    var inner = f.video
+      ? '<video src="' + f.video + '" poster="' + f.hero + '" autoplay muted loop ' +
+        'playsinline preload="metadata"></video>'
+      : '<img src="' + f.hero + '" alt=""' + (i === 0 ? '' : ' loading="lazy"') + '>';
+    return '<div class="shot' + (i === 0 ? ' on' : '') + '">' + inner + '</div>';
+  }).join('');
 
-  dotsEl.innerHTML = FEAT.map(function(p, i){
+  dotsEl.innerHTML = FEAT.map(function(f, i){
     return '<button type="button" data-i="' + i + '" aria-current="' + (i === 0) +
-           '" aria-label="' + titleOf(p).replace(/"/g, '') + '"></button>';
+           '" aria-label="Imagen ' + (i + 1) + '"></button>';
   }).join('');
 
   var shotI = 0, shotTimer = null;
-  var SHOT_MS = 5000;
+  // Slow: they should drift rather than flick past. 1.4 s of crossfade inside a
+  // 6 s dwell reads as one image becoming the next.
+  var SHOT_MS = 6000;
 
   function paintShot(i){
     shotI = i;
-    var p = FEAT[i];
     var els = stack.querySelectorAll('.shot');
     for (var k = 0; k < els.length; k++) els[k].classList.toggle('on', k === i);
     // re-trigger the push-in on the frame that just became visible
@@ -867,14 +1165,6 @@ h3{font-size:16px}
     Array.prototype.forEach.call(dotsEl.children, function(d, k){
       d.setAttribute('aria-current', String(k === i));
     });
-    capEl.innerHTML =
-      '<span class="shot-op' + (p.operation === 'Alquiler' ? ' alq' : '') + '">' +
-        p.operation + '</span>' +
-      '<span class="shot-price">' + (p.currency === 'USD' ? 'USD' : '$') + ' ' +
-        nf.format(p.price) + (p.operation === 'Alquiler' ? ' <small>por mes</small>' : '') +
-      '</span>' +
-      '<span class="shot-where">' + titleOf(p) + ' · ' + p.locality + '</span>';
-    stack.setAttribute('aria-label', 'Ver ' + titleOf(p));
   }
   function advance(){ paintShot((shotI + 1) % FEAT.length); }
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -888,13 +1178,33 @@ h3{font-size:16px}
     var b = e.target.closest('button'); if (!b) return;
     paintShot(Number(b.dataset.i)); startShots();
   });
-  stack.addEventListener('click', function(){ openFicha(FEAT[shotI].codigo); });
   // Hovering to read a caption should not have it swapped out mid-sentence.
-  document.querySelector('.showcase').addEventListener('mouseenter', stopShots);
-  document.querySelector('.showcase').addEventListener('mouseleave', startShots);
+  // Not `card` — that is the function that builds a property card, and shadowing
+  // it emptied the whole results grid while the home page went on looking fine.
+  var heroCard = document.querySelector('.herocard');
+  heroCard.addEventListener('mouseenter', stopShots);
+  heroCard.addEventListener('mouseleave', startShots);
 
   paintShot(0);
   startShots();
+
+  /* ---------- flowing ----------
+     Sections rise into view instead of appearing. The observer is given the
+     elements once; screens that are display:none simply do not intersect until
+     they are shown, which is exactly the behaviour we want when the mockup
+     switches between them. */
+  var calmMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!calmMotion && 'IntersectionObserver' in window){
+    var targets = document.querySelectorAll(
+      '.sec-head, .grid, .types, .pitch, .revs, .agency, .shortcuts, .zones, .tools, .herocard, .hero-head, .searchbar, .search-aside');
+    Array.prototype.forEach.call(targets, function(el){ el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    Array.prototype.forEach.call(targets, function(el){ io.observe(el); });
+  }
 
   // Three empty cards, deliberately. The section exists because the reference he
   // chose carries reviews and he singled them out; the content is missing because
@@ -915,13 +1225,94 @@ h3{font-size:16px}
     '</article>';
   }).join('');
 
-  document.getElementById('types').innerHTML = types.map(function(t){
-    return '<button class="tbtn" data-type="' + t + '">' + t +
-           ' <span class="num">' + shownTypes[t] + '</span></button>';
+  /* ---------- 2 · shortcuts by type ----------
+     Each tile takes the sharpest photograph among the properties of that type,
+     so the way in is a picture of the thing rather than a pictogram of it. */
+  var ARROW = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" ' +
+    'stroke="currentColor" stroke-width="2.2" stroke-linecap="round" ' +
+    'stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>';
+
+  // No tile may repeat another tile's photograph: CF4 carries both Campo and
+  // Fracción, so the sharpest-first rule put the same casco de estancia in two
+  // tiles side by side, which reads as a bug rather than as a catalogue.
+  var usedShots = {};
+  document.getElementById('shortcuts').innerHTML = types.slice(0, 8).map(function(t){
+    var pool = P.filter(function(p){ return p.types.indexOf(t) >= 0; })
+                .sort(function(a, b){ return b.main_px - a.main_px; });
+    var best = pool.filter(function(p){ return !usedShots[p.images[0]]; })[0] || pool[0];
+    usedShots[best.images[0]] = 1;
+    var n = shownTypes[t];
+    return '<button class="shortcut" data-type="' + t + '">' +
+      '<img src="' + best.images[0] + '" alt="" loading="lazy">' +
+      '<span class="sc-in"><b>' + t + '</b><span>' + n +
+        (n === 1 ? ' propiedad' : ' propiedades') + '</span></span>' +
+      '<span class="sc-go">' + ARROW + '</span>' +
+    '</button>';
   }).join('');
-  document.getElementById('types').addEventListener('click', function(e){
-    var b = e.target.closest('.tbtn'); if (!b) return;
-    state.types = [b.dataset.type]; state.op = ''; state.locs = [];
+  document.getElementById('shortcuts').addEventListener('click', function(e){
+    var b = e.target.closest('.shortcut'); if (!b) return;
+    state.op = ''; state.types = [b.dataset.type]; state.locs = []; state.max = 0;
+    syncFilters(); show('buscar');
+  });
+
+  /* ---------- 3 · featured, with its own operation tabs ---------- */
+  var featOp = 'Venta';
+  function paintFeatured(){
+    var list = P.filter(function(p){ return p.operation === featOp; }).slice(0, 6);
+    fill(document.getElementById('grid-destacadas'), list);
+  }
+  document.getElementById('feat-ops').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    featOp = b.dataset.op;
+    Array.prototype.forEach.call(this.children, function(c){
+      c.setAttribute('aria-pressed', String(c.dataset.op === featOp));
+    });
+    paintFeatured();
+  });
+  paintFeatured();
+
+  /* ---------- 3b · recently added ----------
+     There is no publication date in his export: `published` is a yes/no. The
+     system id is the proxy, and it is not a guess — ordering by id and ordering
+     by the dates inside his own photo filenames agree on the newest four
+     (DE128, LL2, CA83, CA82). From day 7 the importer records a real date and
+     this becomes exact rather than inferred. */
+  var NUEVAS = P.slice().sort(function(a, b){
+    return (Number(b.legacy_id) || 0) - (Number(a.legacy_id) || 0);
+  }).slice(0, 3);
+  fill(document.getElementById('grid-nuevas'), NUEVAS);
+
+  /* ---------- 5b · find by code ----------
+     "Te paso la CA82" is how he works, so a client arrives holding a code. */
+  var codeForm = document.getElementById('codefind');
+  var codeMsg = document.getElementById('code-msg');
+  codeForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var q = (document.getElementById('code-q').value || '').trim().toUpperCase();
+    if (!q){ codeMsg.textContent = ''; return; }
+    var hit = P.filter(function(p){ return p.codigo.toUpperCase() === q; })[0];
+    if (hit){ codeMsg.textContent = ''; codeMsg.className = ''; openFicha(hit.codigo); }
+    else {
+      codeMsg.className = 'bad';
+      codeMsg.textContent = 'No encuentro el código ' + q + '. Revisalo o escribime.';
+    }
+  });
+
+  /* ---------- 4 · zones ----------
+     The card image is the best photograph he has in that locality, so the zone
+     is shown by one of its own properties rather than by a stock skyline. */
+  var zoneList = Object.keys(shownLocs).sort(function(a,b){ return shownLocs[b]-shownLocs[a]; });
+  document.getElementById('zones').innerHTML = zoneList.map(function(l){
+    var best = P.filter(function(p){ return p.locality === l; })
+                .sort(function(a,b){ return b.main_px - a.main_px; })[0];
+    return '<button class="zone" data-loc="' + l + '">' +
+      '<img src="' + best.images[0] + '" alt="" loading="lazy">' +
+      '<span class="zone-in"><b>' + l + '</b><span>' + shownLocs[l] +
+      (shownLocs[l] === 1 ? ' propiedad' : ' propiedades') + '</span></span></button>';
+  }).join('');
+  document.getElementById('zones').addEventListener('click', function(e){
+    var b = e.target.closest('.zone'); if (!b) return;
+    state.op = ''; state.types = []; state.locs = [b.dataset.loc]; state.max = 0;
     syncFilters(); show('buscar');
   });
 
@@ -941,17 +1332,97 @@ h3{font-size:16px}
     Array.prototype.forEach.call(opSeg.children, function(c){
       c.setAttribute('aria-pressed', String(c.dataset.op === heroOp));
     });
+    paintBudget();
+    paintCount();
   });
+  /* ---------- budget ----------
+     Buckets are built from his own prices, per operation, because sale is in
+     dollars and rent in pesos and a single ladder would be nonsense in one of
+     them. Each bucket shows what it holds, so none of them is a dead end. */
+  function bucketsFor(op){
+    var vals = P.filter(function(p){ return p.operation === op; })
+                .map(function(p){ return p.price; }).sort(function(a,b){ return a-b; });
+    if (!vals.length) return [];
+    var steps = op === 'Venta' ? [50000,100000,200000,500000] : [150000,300000,600000];
+    return steps.filter(function(v){ return v < vals[vals.length-1]; })
+                .map(function(v){
+      return { max:v, n: vals.filter(function(x){ return x <= v; }).length };
+    }).filter(function(b){ return b.n > 0; });
+  }
+  function paintBudget(){
+    var sel = document.getElementById('h-pre');
+    var cur = sel.value;
+    var sym = heroOp === 'Venta' ? 'USD' : '$';
+    sel.innerHTML = '<option value="">Sin límite</option>' +
+      bucketsFor(heroOp).map(function(b){
+        return '<option value="' + b.max + '">Hasta ' + sym + ' ' + nf.format(b.max) +
+               ' (' + b.n + ')</option>';
+      }).join('');
+    if (cur && sel.querySelector('option[value="' + cur + '"]')) sel.value = cur;
+  }
+
+  // The search answers before it is pressed: the count moves as the choices
+  // move, so nobody presses Buscar to discover there is nothing there.
+  function heroMatches(){
+    var t = document.getElementById('h-tipo').value;
+    var l = document.getElementById('h-loc').value;
+    var max = Number(document.getElementById('h-pre').value || 0);
+    return P.filter(function(p){
+      if (p.operation !== heroOp) return false;
+      if (t && p.types.indexOf(t) < 0) return false;
+      if (l && p.locality !== l) return false;
+      if (max && p.price > max) return false;
+      return true;
+    }).length;
+  }
+  function paintCount(){
+    var n = heroMatches();
+    document.getElementById('search-count').innerHTML = n
+      ? 'Hay <b class="num">' + n + '</b> ' + (n === 1 ? 'propiedad' : 'propiedades') +
+        ' en ' + (heroOp === 'Venta' ? 'venta' : 'alquiler') + ' con esa búsqueda.'
+      : 'No hay propiedades con esa búsqueda. Probá quitando algún filtro.';
+  }
+  ['h-tipo','h-loc','h-pre'].forEach(function(id){
+    document.getElementById(id).addEventListener('change', paintCount);
+  });
+
+  // Four searches people actually make, built from his own inventory rather
+  // than from a list of categories a template ships with.
+  var QUICK = [
+    ['Casas en venta', 'Venta', 'Casa', ''],
+    ['Departamentos en alquiler', 'Alquiler', 'Departamento', ''],
+    ['Campos y fracciones', 'Venta', 'Campo', ''],
+    ['Todo en La Plata', '', '', 'La Plata']
+  ].filter(function(q){
+    return P.some(function(p){
+      return (!q[1] || p.operation === q[1]) && (!q[2] || p.types.indexOf(q[2]) >= 0) &&
+             (!q[3] || p.locality === q[3]);
+    });
+  });
+  document.getElementById('quick').innerHTML = QUICK.map(function(q, i){
+    return '<button type="button" data-q="' + i + '">' + q[0] + '</button>';
+  }).join('');
+  document.getElementById('quick').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    var q = QUICK[Number(b.dataset.q)];
+    state.op = q[1]; state.types = q[2] ? [q[2]] : []; state.locs = q[3] ? [q[3]] : [];
+    syncFilters(); show('buscar');
+  });
+
+  paintBudget();
+  paintCount();  // after heroOp exists, not before it is assigned
+
   document.getElementById('hero-search').addEventListener('submit', function(e){
     e.preventDefault();
     state.op = heroOp;
     state.types = document.getElementById('h-tipo').value ? [document.getElementById('h-tipo').value] : [];
     state.locs = document.getElementById('h-loc').value ? [document.getElementById('h-loc').value] : [];
+    state.max = Number(document.getElementById('h-pre').value || 0);
     syncFilters(); show('buscar');
   });
 
   /* ---------- results ---------- */
-  var state = { op:'', types:[], locs:[], sort:'fotos' };
+  var state = { op:'', types:[], locs:[], max:0, sort:'fotos' };
 
   document.getElementById('f-types').innerHTML = types.map(function(t){
     return '<label><input type="checkbox" value="' + t + '"> ' + t +
@@ -990,7 +1461,7 @@ h3{font-size:16px}
     state.locs = readChecks('f-locs'); render();
   });
   document.getElementById('f-clear').addEventListener('click', function(){
-    state = { op:'', types:[], locs:[], sort:state.sort }; syncFilters();
+    state = { op:'', types:[], locs:[], max:0, sort:state.sort }; syncFilters();
   });
   document.getElementById('r-sort').addEventListener('change', function(e){
     state.sort = e.target.value; render();
@@ -1002,6 +1473,7 @@ h3{font-size:16px}
       if (state.locs.length && state.locs.indexOf(p.locality) < 0) return false;
       if (state.types.length && !p.types.some(function(t){ return state.types.indexOf(t) >= 0; }))
         return false;
+      if (state.max && p.price > state.max) return false;
       return true;
     });
     // Prices are in two currencies and there is no rate to convert with — and
@@ -1155,6 +1627,13 @@ h3{font-size:16px}
   });
 
   document.body.addEventListener('click', function(e){
+    var buy = e.target.closest('[data-buy]');
+    if (buy){
+      e.preventDefault(); closeMenu();
+      state.op = buy.dataset.buy; state.types = []; state.locs = []; state.max = 0;
+      syncFilters(); show('buscar');
+      return;
+    }
     var a = e.target.closest('[data-go]'); if (!a) return;
     e.preventDefault(); closeMenu(); show(a.dataset.go);
   });
