@@ -274,7 +274,7 @@ h3{font-size:16px}
 .btn-ghost:hover{background:var(--surface-2)}
 
 /* ---------- search, answering as you choose ---------- */
-.search-aside{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;margin:14px 0 0}
+.search-aside{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;margin:16px 0 0}
 .search-count{font-size:14px;color:var(--muted)}
 .search-count b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
 .quick{display:flex;flex-wrap:wrap;gap:7px;margin-left:auto}
@@ -390,36 +390,6 @@ h3{font-size:16px}
 .zone-in span{font-size:13px;color:rgba(255,255,255,.9);font-variant-numeric:tabular-nums}
 @media (prefers-reduced-motion:reduce){.zone img{transition:none}.zone:hover img{transform:none}}
 
-/* ---------- 5 · tools ----------
-   Three cards, three real actions. There is deliberately no "save this search
-   and get alerts": that needs accounts and scheduled mail, which is milestone 2,
-   and a button that does nothing is worse than a button that is not there. */
-.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@container (max-width:860px){.tools{grid-template-columns:1fr}}
-/* The first card was a second door to the budget filter that already sits in
-   the hero. It is a code lookup now, because that is how his business actually
-   runs: he sends "te paso la CA82" by WhatsApp and the client arrives holding a
-   code with nowhere to type it. */
-.codefind{display:flex;gap:8px;width:100%;margin-top:4px}
-.codefind input{flex:1 1 auto;min-width:0;background:var(--surface);
-  border:1px solid var(--line);border-radius:7px;padding:10px 12px;color:var(--ink);
-  font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-.codefind input::placeholder{font-weight:400;letter-spacing:0;color:var(--muted);
-  text-transform:none}
-.codefind .btn{padding:10px 16px;align-self:auto}
-.tool i:empty{display:none}
-.tool i.bad{color:var(--warn)}
-.tool{display:flex;flex-direction:column;align-items:flex-start;gap:7px;border:0;
-  border-radius:var(--radius);padding:22px 22px 20px;cursor:pointer;text-align:left;
-  transition:transform .15s,box-shadow .15s}
-.tool:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
-.tool b{font-size:17px;font-weight:600;color:var(--ink)}
-.tool span{font-size:14px;line-height:1.5;color:var(--muted)}
-.tool i{font-style:normal;font-size:13.5px;font-weight:600;color:var(--navy);margin-top:4px}
-.tool-a{background:#EDF0FA}
-.tool-b{background:#E8F2EF}
-.tool-c{background:#F6EFE6}
-
 /* ---------- rotating shelves ----------
    "Que se vean solo dos y que vayan cambiando automáticas … para que no sea
    tan larga la página." Two at a time instead of six, moving on their own, so
@@ -448,6 +418,55 @@ h3{font-size:16px}
   border:1px solid var(--line);background:var(--surface);color:var(--navy);
   display:grid;place-items:center;transition:border-color .15s,background .15s}
 .shelf-arrows button:hover{border-color:var(--navy);background:var(--surface-2)}
+
+/* ---------- the three paths ----------
+   A visitor is one of three people, and the page should not make them work out
+   which. Buy and rent go straight into a filtered catalogue; the third goes to
+   the valuation, which is the only reason an owner is here. */
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:26px auto 0;
+  max-width:720px;width:100%}
+@container (max-width:760px){.paths{grid-template-columns:1fr;gap:9px;margin-top:20px}}
+.paths button{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 16px;transition:border-color .15s,transform .15s,box-shadow .15s}
+.paths button:hover{border-color:var(--navy);transform:translateY(-2px);box-shadow:var(--shadow)}
+.paths b{font-size:16px;font-weight:600;color:var(--navy)}
+.paths span{font-size:12.5px;color:var(--muted)}
+
+/* the code lookup lives beside the search now, not in a card of its own */
+.codefind{display:flex;align-items:center;gap:8px;margin-left:auto}
+@container (max-width:760px){.codefind{margin-left:0;width:100%}}
+.codefind label{font-size:12.5px;color:var(--muted);white-space:nowrap}
+.codefind input{width:110px;flex:0 1 auto;min-width:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:7px;padding:8px 10px;color:var(--ink);
+  font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.codefind input::placeholder{font-weight:400;letter-spacing:0;color:var(--muted);
+  text-transform:none}
+.codefind .btn-ghost{padding:8px 14px}
+.code-msg{margin:8px 0 0;font-size:13px;color:var(--warn);min-height:0}
+.code-msg:empty{display:none}
+.quick{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 0}
+
+/* the owner's four steps */
+.steps{list-style:none;counter-reset:s;margin:18px 0 6px;padding:0;display:grid;gap:10px}
+.steps li{counter-increment:s;display:flex;flex-direction:column;gap:1px;padding-left:34px;
+  position:relative}
+.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:23px;height:23px;
+  border-radius:50%;background:var(--navy);color:#fff;font-size:12px;font-weight:600;
+  display:grid;place-items:center}
+.steps b{font-size:14.5px;color:var(--ink)}
+.steps span{font-size:13.5px;color:var(--muted);line-height:1.45}
+
+/* the closing invitation */
+.closing{display:flex;align-items:center;gap:28px;flex-wrap:wrap;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:32px 34px}
+@container (max-width:760px){.closing{padding:22px 20px;gap:18px}}
+.closing h2{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.16;
+  letter-spacing:-.015em;color:var(--navy);margin:0;max-width:22ch}
+.closing p{margin:8px 0 0;font-size:15.5px;line-height:1.55;color:var(--muted);max-width:52ch}
+.closing-actions{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+@container (max-width:760px){.closing-actions{margin-left:0}}
 
 /* ---------- property cards ---------- */
 .grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
@@ -615,9 +634,12 @@ h3{font-size:16px}
 .agent span{font-size:12.5px;color:var(--muted);line-height:1.35;display:block}
 .form{display:flex;flex-direction:column;gap:10px}
 .form textarea{min-height:84px;resize:vertical}
-.wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--alquiler);
-  color:#fff;border:0;border-radius:7px;padding:11px 14px;font-weight:600;cursor:pointer}
+.wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--surface);
+  color:var(--alquiler);border:1.5px solid var(--alquiler);border-radius:7px;padding:10px 14px;
+  font-weight:600;cursor:pointer}
+.wa:hover{background:var(--alquiler);color:#fff}
 .small{font-size:12px;color:var(--muted)}
+.opt{font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted);opacity:.8}
 
 /* ---------- contact screen ---------- */
 .contact>*{min-width:0}
@@ -710,14 +732,20 @@ h3{font-size:16px}
   <!-- ===================== INICIO ===================== -->
   <main class="screen on" id="screen-inicio">
 
+    <!-- 1 · hero, search, and the three paths -->
     <div class="hero">
       <div class="wrap">
 
         <div class="hero-head">
           <p class="hero-eyebrow">Espacios para lo que viene</p>
           <h1 class="hero-claim">La experiencia<em>de sentirte en casa</em></h1>
-          <p class="hero-sub">Encontrá tu próxima oportunidad en La&nbsp;Plata y la región:
-            casas, departamentos, terrenos y campos, en venta y en alquiler.</p>
+          <p class="hero-sub">Comprá, alquilá o vendé en La&nbsp;Plata y la región, con la
+            atención personal de una inmobiliaria dirigida por un martillero matriculado.</p>
+          <div class="paths" id="paths">
+            <button type="button" data-path="Venta"><b>Comprar</b><span>Ver propiedades en venta</span></button>
+            <button type="button" data-path="Alquiler"><b>Alquilar</b><span>Ver propiedades en alquiler</span></button>
+            <button type="button" data-path="vender"><b>Quiero vender</b><span>Pedir una tasación</span></button>
+          </div>
         </div>
 
         <div class="herocard">
@@ -751,90 +779,79 @@ h3{font-size:16px}
 
         <div class="search-aside">
           <p class="search-count" id="search-count"></p>
-          <div class="quick" id="quick"></div>
+          <form class="codefind" id="codefind">
+            <label for="code-q">¿Tenés un código?</label>
+            <input id="code-q" type="text" placeholder="CA82" aria-label="Código de la propiedad"
+                   autocomplete="off" spellcheck="false">
+            <button class="btn-ghost" type="submit">Ver</button>
+          </form>
         </div>
+        <p class="code-msg" id="code-msg"></p>
+        <div class="quick" id="quick"></div>
 
       </div>
     </div>
 
+    <!-- 2 · one listing section, two tabs -->
+    <section class="sec sec--tint">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><p class="eyebrow">Propiedades</p><h2>Para ver ahora</h2></div>
+          <div class="ops ops-sm" id="list-tabs">
+            <button data-list="op" aria-pressed="true">Oportunidades</button>
+            <button data-list="new" aria-pressed="false">Recién incorporadas</button>
+          </div>
+          <a href="#" data-go="buscar">Ver todas &rarr;</a>
+        </div>
+        <div class="shelf" id="shelf-list">
+          <div class="shelf-track" id="grid-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · the owner's path, high on the page -->
     <section class="sec sec--plain">
+      <div class="wrap">
+        <div class="pitch">
+          <div class="pitch-copy">
+            <h2>¿Tenés una propiedad para vender o alquilar?</h2>
+            <p>Empezá por saber cuánto vale: solicitá una tasación hecha por martillero
+              matriculado.</p>
+            <ol class="steps">
+              <li><b>Tasación</b><span>Visitamos la propiedad y te damos un valor fundado.</span></li>
+              <li><b>Publicación</b><span>Fotos, ficha y difusión en el sitio y los portales.</span></li>
+              <li><b>Visitas</b><span>Coordinamos y acompañamos cada visita.</span></li>
+              <li><b>Cierre</b><span>Reserva, seña y firma, con la matrícula detrás.</span></li>
+            </ol>
+            <button class="btn" data-go="contacto" style="align-self:flex-start">Pedir una tasación</button>
+          </div>
+          <div class="pitch-art">
+            <img class="shot-img" src="hero/pitch01.jpg" alt="" loading="lazy">
+            <div class="pitch-mark">
+              <img src="logo-stranieri-white.png" alt="Stranieri Propiedades">
+              <span>para propietarios</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · browse: by type, then by zone -->
+    <section class="sec sec--tint">
       <div class="wrap">
         <div class="sec-head">
           <div><p class="eyebrow">Por dónde empezar</p><h2>¿Qué estás buscando?</h2></div>
         </div>
         <div class="shortcuts" id="shortcuts"></div>
-      </div>
-    </section>
 
-    <section class="sec sec--tint">
-      <div class="wrap">
-        <div class="sec-head">
-          <div><p class="eyebrow">Selección</p><h2>Oportunidades para descubrir</h2></div>
-          <div class="ops ops-sm" id="feat-ops">
-            <button data-op="Venta" aria-pressed="true">En venta</button>
-            <button data-op="Alquiler" aria-pressed="false">En alquiler</button>
-          </div>
-          <a href="#" data-go="buscar">Ver todas &rarr;</a>
-        </div>
-        <p class="lede" style="margin:-6px 0 18px">Casas, departamentos, terrenos y campos
-          <strong>en venta y en alquiler en La Plata</strong>, Dolores y Bavio.</p>
-        <div class="shelf" id="shelf-destacadas">
-          <div class="shelf-track" id="grid-destacadas"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec sec--plain">
-      <div class="wrap">
-        <div class="sec-head">
-          <div><p class="eyebrow">Novedades</p><h2>Recién incorporadas</h2></div>
-          <a href="#" data-go="buscar">Ver todas &rarr;</a>
-        </div>
-        <div class="shelf" id="shelf-nuevas">
-          <div class="shelf-track" id="grid-nuevas"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec sec--tint">
-      <div class="wrap">
-        <div class="sec-head">
+        <div class="sec-head" style="margin-top:46px">
           <div><p class="eyebrow">Dónde</p><h2>Encontrá una zona para vos</h2></div>
         </div>
         <div class="zones" id="zones"></div>
       </div>
     </section>
 
-    <section class="sec sec--plain">
-      <div class="wrap">
-        <div class="sec-head">
-          <div><p class="eyebrow">Herramientas</p><h2>Tu próxima decisión, más clara</h2></div>
-        </div>
-        <div class="tools">
-          <div class="tool tool-a">
-            <b>¿Tenés el código?</b>
-            <span>Si te pasamos una propiedad por WhatsApp, escribí su código y la abrimos.</span>
-            <form class="codefind" id="codefind">
-              <input id="code-q" type="text" placeholder="CA82" aria-label="Código de la propiedad"
-                     autocomplete="off" spellcheck="false">
-              <button class="btn" type="submit">Ver</button>
-            </form>
-            <i id="code-msg"></i>
-          </div>
-          <button class="tool tool-b" data-go="contacto">
-            <b>Pedí una tasación</b>
-            <span>Tasación de tu propiedad hecha por martillero público matriculado.</span>
-            <i>Pedir tasación &rarr;</i>
-          </button>
-          <button class="tool tool-c" data-go="contacto">
-            <b>Consultá por WhatsApp</b>
-            <span>Consultá por una propiedad y te responde la inmobiliaria, no un call center.</span>
-            <i>Escribir ahora &rarr;</i>
-          </button>
-        </div>
-      </div>
-    </section>
-
+    <!-- 5 · who we are -->
     <section class="sec sec--deep">
       <div class="wrap">
         <div class="agency">
@@ -851,7 +868,7 @@ h3{font-size:16px}
               en el mercado: a confirmar.</span></p>
             <div class="agency-actions">
               <button class="btn" data-go="nosotros" style="align-self:auto">Conocé la inmobiliaria</button>
-              <button class="btn-ghost" data-go="contacto">Pedir una tasación</button>
+              <button class="btn-ghost" data-go="contacto">Hablar con nosotros</button>
             </div>
           </div>
           <div class="cred-list">
@@ -872,27 +889,7 @@ h3{font-size:16px}
       </div>
     </section>
 
-    <section class="sec sec--plain">
-      <div class="wrap">
-        <div class="pitch">
-          <div class="pitch-copy">
-            <h2>¿Tenés una propiedad para vender o alquilar?</h2>
-            <p>Empezá por saber cuánto vale: solicitá una tasación hecha por
-              martillero matriculado. Si decidís avanzar, nos ocupamos de todo — las
-              fotos, la publicación, las visitas y la operación hasta la firma.</p>
-            <button class="btn-ghost" data-go="contacto">Pedir una tasación</button>
-          </div>
-          <div class="pitch-art">
-            <img class="shot-img" src="hero/pitch01.jpg" alt="" loading="lazy">
-            <div class="pitch-mark">
-              <img src="logo-stranieri-white.png" alt="Stranieri Propiedades">
-              <span>para propietarios</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <!-- 6 · what clients say -->
     <section class="sec sec--plain">
       <div class="wrap">
         <div class="sec-head">
@@ -904,6 +901,23 @@ h3{font-size:16px}
           mandame tres comentarios reales de clientes y los pongo acá con nombre y operación.</span>
           No invento reseñas: van las que te dieron de verdad.
         </p>
+      </div>
+    </section>
+
+    <!-- 7 · the closing invitation -->
+    <section class="sec sec--tint">
+      <div class="wrap">
+        <div class="closing">
+          <div>
+            <h2>¿No encontraste lo que buscabas?</h2>
+            <p>Decinos qué estás buscando y en qué zona. Si entra algo que encaja, te
+              avisamos antes de publicarlo.</p>
+          </div>
+          <div class="closing-actions">
+            <button class="btn" data-go="contacto">Escribinos</button>
+            <button class="btn-ghost" data-go="contacto">Consultar por WhatsApp</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -977,7 +991,8 @@ h3{font-size:16px}
                   <span>Martillero y Corredor Público<br>Col. 7103 L° XIII F° 88</span>
                 </div>
               </div>
-              <button class="wa">
+              <button class="btn" id="ficha-visita" style="align-self:stretch">Coordinar una visita</button>
+              <button class="wa" id="ficha-wa">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-1.8-.2-1-.3-2.4-1.1-3.7-2.6-1-1.2-1.6-2.4-1.8-3-.2-.6-.3-1.2 0-1.7.2-.4.7-.9 1-1 .2-.1.6-.1.8.3l.7 1.4c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6.3.5.8 1.1 1.3 1.5.6.5 1.1.7 1.4.8.2.1.4 0 .5-.1l.6-.7c.2-.2.4-.2.6-.1l1.4.7c.3.2.4.3.4.5 0 .2 0 .7-.1 1Z"/></svg>
                 Consultar por WhatsApp
               </button>
@@ -1036,25 +1051,32 @@ h3{font-size:16px}
               <figcaption>Calle 56 e/ 19 y 20 — a cuatro cuadras de Plaza Italia.</figcaption>
             </figure>
           </div>
-          <form class="panel form">
+          <form class="panel form" id="contact-form">
             <h3>Escribinos</h3>
             <div class="two">
               <div class="field"><label for="k1">Nombre</label><input id="k1" placeholder="Tu nombre"></div>
-              <div class="field"><label for="k2">Teléfono</label><input id="k2" placeholder="221 …"></div>
+              <div class="field"><label for="k2">WhatsApp</label><input id="k2" placeholder="221 …"></div>
             </div>
-            <div class="field"><label for="k3">Email</label><input id="k3" type="email" placeholder="tumail@ejemplo.com"></div>
             <div class="field">
-              <label for="k4">Motivo</label>
+              <label for="k4">¿En qué te podemos ayudar?</label>
               <select id="k4">
-                <option>Consulta por una propiedad</option>
-                <option>Quiero tasar mi propiedad</option>
-                <option>Quiero poner mi propiedad en venta o alquiler</option>
-                <option>Administración de alquileres</option>
-                <option>Otro</option>
+                <option data-kind="consulta">Consulta por una propiedad</option>
+                <option data-kind="visita">Quiero coordinar una visita</option>
+                <option data-kind="tasar">Quiero tasar mi propiedad</option>
+                <option data-kind="publicar">Quiero publicar mi propiedad</option>
+                <option data-kind="admin">Administración de alquileres</option>
+                <option data-kind="otro">Otro</option>
               </select>
             </div>
+            <!-- asked only when it is actually needed: a valuation cannot be
+                 done without knowing where the property is -->
+            <div class="field" id="k-dir-wrap" hidden>
+              <label for="k-dir">¿Dónde está la propiedad?</label>
+              <input id="k-dir" placeholder="Calle, número y localidad">
+            </div>
+            <div class="field"><label for="k3">Email <span class="opt">(opcional)</span></label><input id="k3" type="email" placeholder="tumail@ejemplo.com"></div>
             <div class="field"><label for="k5">Mensaje</label><textarea id="k5"
-              placeholder="Contame en qué te puedo ayudar"></textarea></div>
+              placeholder="Contanos en qué te podemos ayudar"></textarea></div>
             <button class="btn" type="submit" style="align-self:stretch">Enviar</button>
             <p class="small">Te respondemos dentro del día. Las consultas llegan a tu
               mail, no quedan guardadas en el sitio.</p>
@@ -1218,7 +1240,6 @@ h3{font-size:16px}
   var types = Object.keys(shownTypes).sort(function(a,b){ return shownTypes[b]-shownTypes[a]; });
   var locs = Object.keys(shownLocs).sort(function(a,b){ return shownLocs[b]-shownLocs[a]; });
 
-  fill(document.getElementById('grid-destacadas'), P.slice(0, 6));
 
   /* ---------- the showcase ----------
      Five featured properties, crossfading. Chosen by photo count and then
@@ -1330,6 +1351,25 @@ h3{font-size:16px}
     '</article>';
   }).join('');
 
+  /* ---------- the contact form, arriving with a purpose ----------
+     A visitor who pressed "quiero vender" or "coordinar una visita" should not
+     have to restate why they are writing. */
+  function setMotivo(kind, codigo){
+    var sel = document.getElementById('k4');
+    if (!sel) return;
+    var want = kind === 'tasar' ? 'tasar' : (kind === 'visita' ? 'visita' : 'consulta');
+    Array.prototype.forEach.call(sel.options, function(o){
+      if (o.dataset.kind === want) sel.value = o.value;
+    });
+    sel.dispatchEvent(new Event('change', { bubbles: true }));
+    var msg = document.getElementById('k5');
+    if (msg && codigo){
+      msg.value = want === 'visita'
+        ? 'Hola, quiero coordinar una visita a la propiedad ' + codigo + '.'
+        : 'Hola, quiero consultar por la propiedad ' + codigo + '.';
+    }
+  }
+
   /* ---------- 2 · shortcuts by type ----------
      Each tile takes the sharpest photograph among the properties of that type,
      so the way in is a picture of the thing rather than a pictogram of it. */
@@ -1361,27 +1401,34 @@ h3{font-size:16px}
   });
 
   /* ---------- 3 · featured, with its own operation tabs ---------- */
-  var featOp = 'Venta', featShelf = null;
-  function paintFeatured(){
-    // Six in the shelf, two on screen. These are the ones he will tick as
-    // "oportunidades" in the admin; until that flag exists the shelf shows the
-    // best documented of that operation, which is the same order he would pick.
-    var list = P.filter(function(p){ return p.operation === featOp; }).slice(0, 6);
-    if (featShelf){ featShelf.stop(); }
-    document.getElementById('grid-destacadas').innerHTML = '';
-    var oldFoot = document.querySelector('#shelf-destacadas .shelf-foot');
-    if (oldFoot) oldFoot.remove();
-    featShelf = shelf('grid-destacadas', list, 5500);
+  /* ---------- one listing shelf, two tabs ----------
+     Oportunidades and Recién incorporadas were two sections of the same shape,
+     one after the other. They are one section with two tabs now: the page is
+     shorter and the visitor is choosing between two readings of the catalogue
+     rather than scrolling past a repeat.
+
+     The venta/alquiler toggle that used to sit here is gone — two rows of tabs
+     on one block is a control, not a choice. Operation is chosen in the search
+     above and in the catalogue's own filters. */
+  var OPORT = P.slice(0, 6);        // best documented; his "oportunidad" tick lands day 7
+  var listShelf = null, listWhich = 'op';
+
+  function paintList(){
+    var list = listWhich === 'new' ? NUEVAS : OPORT;
+    if (listShelf) listShelf.stop();
+    document.getElementById('grid-list').innerHTML = '';
+    var foot = document.querySelector('#shelf-list .shelf-foot');
+    if (foot) foot.remove();
+    listShelf = shelf('grid-list', list, 5500);
   }
-  document.getElementById('feat-ops').addEventListener('click', function(e){
+  document.getElementById('list-tabs').addEventListener('click', function(e){
     var b = e.target.closest('button'); if (!b) return;
-    featOp = b.dataset.op;
+    listWhich = b.dataset.list;
     Array.prototype.forEach.call(this.children, function(c){
-      c.setAttribute('aria-pressed', String(c.dataset.op === featOp));
+      c.setAttribute('aria-pressed', String(c.dataset.list === listWhich));
     });
-    paintFeatured();
+    paintList();
   });
-  paintFeatured();
 
   /* ---------- a rotating shelf ----------
      Two cards visible, advancing on their own. Everything is derived from the
@@ -1488,7 +1535,17 @@ h3{font-size:16px}
   var NUEVAS = P.slice().sort(function(a, b){
     return (Number(b.legacy_id) || 0) - (Number(a.legacy_id) || 0);
   }).slice(0, 6);
-  shelf('grid-nuevas', NUEVAS, 6000);
+  paintList();
+
+  /* ---------- the three paths ----------
+     Two of them are the catalogue with one filter already set; the third is the
+     only thing an owner came for. */
+  document.getElementById('paths').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.path === 'vender'){ show('contacto'); setMotivo('tasar'); return; }
+    state.op = b.dataset.path; state.types = []; state.locs = []; state.max = 0;
+    syncFilters(); show('buscar');
+  });
 
   /* ---------- 5b · find by code ----------
      "Te paso la CA82" is how he works, so a client arrives holding a code. */
@@ -1499,11 +1556,8 @@ h3{font-size:16px}
     var q = (document.getElementById('code-q').value || '').trim().toUpperCase();
     if (!q){ codeMsg.textContent = ''; return; }
     var hit = P.filter(function(p){ return p.codigo.toUpperCase() === q; })[0];
-    if (hit){ codeMsg.textContent = ''; codeMsg.className = ''; openFicha(hit.codigo); }
-    else {
-      codeMsg.className = 'bad';
-      codeMsg.textContent = 'No encontramos el código ' + q + '. Revisalo o escribinos.';
-    }
+    if (hit){ codeMsg.textContent = ''; openFicha(hit.codigo); }
+    else { codeMsg.textContent = 'No encontramos el código ' + q + '. Revisalo o escribinos.'; }
   });
 
   /* ---------- 4 · zones ----------
@@ -1790,6 +1844,31 @@ h3{font-size:16px}
   document.getElementById('ficha-form').addEventListener('submit', function(e){
     e.preventDefault();
   });
+
+  /* The ficha's own actions. A visit is a date in his calendar; a WhatsApp is a
+     question. The code travels with both, so he never has to ask "which one?" */
+  document.getElementById('ficha-visita').addEventListener('click', function(){
+    show('contacto');
+    setMotivo('visita', current ? current.codigo : '');
+  });
+  document.getElementById('ficha-wa').addEventListener('click', function(){
+    show('contacto');
+    setMotivo('consulta', current ? current.codigo : '');
+  });
+
+  /* The address is only asked for when a valuation is the point. */
+  (function(){
+    var sel = document.getElementById('k4');
+    var wrap = document.getElementById('k-dir-wrap');
+    if (!sel || !wrap) return;
+    function sync(){
+      var o = sel.options[sel.selectedIndex];
+      var kind = o ? o.dataset.kind : '';
+      wrap.hidden = !(kind === 'tasar' || kind === 'publicar');
+    }
+    sel.addEventListener('change', sync);
+    sync();
+  })();
 
   /* ---------- navigation ---------- */
   var PATHS = { inicio:'/', buscar:'/propiedades', contacto:'/contacto',
