@@ -203,14 +203,6 @@ h3{font-size:16px}
   text-decoration:none;white-space:nowrap}
 .num{font-variant-numeric:tabular-nums}
 
-/* ---------- the hero ----------
-   Centred and editorial: an eyebrow, a two-line serif claim with the second
-   line in italic, one supporting sentence, and then the picture. The words are
-   his — "la experiencia de sentirte en casa" is the line he wrote himself — set
-   in the arrangement asked for. */
-.hero{position:relative;background:var(--ground);padding:0 0 40px}
-@container (max-width:900px){.hero{padding:0 0 26px}}
-
 /* ---------- the stage ----------
    He named two references, elliman.com and dacal.com.ar, and on arrival both
    do the same thing: one photograph fills the screen and everything else — the
@@ -223,7 +215,7 @@ h3{font-size:16px}
    often sit 60px too tall on the first paint. */
 .hero{position:relative;background:var(--ground);padding:0}
 .herostage{position:relative;overflow:hidden;isolation:isolate;
-  min-height:clamp(560px,86svh,1000px);display:flex}
+  min-height:clamp(600px,88svh,1040px);display:flex}
 @container (max-width:900px){.herostage{min-height:clamp(520px,82svh,820px)}}
 
 .hero-in{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;
@@ -236,8 +228,13 @@ h3{font-size:16px}
 @container (max-width:860px){
   .hero-mid{grid-template-columns:1fr;justify-items:center;text-align:center;gap:16px}
 }
-.hero-logo{height:clamp(92px,12.5vw,186px);width:auto;flex:none;
-  filter:drop-shadow(0 8px 30px rgba(0,0,0,.55))}
+/* "Que sea del tamaño del círculo verde — es la firma del sitio." So the mark
+   is the largest object on the first screen, roughly three times what it was.
+   Sized in cqw, not vw: the frame is the container, and vw would measure the
+   whole window — which means the phone preview inside a desktop window would
+   render a 290px mark in a 392px frame. */
+.hero-logo{height:clamp(104px,20cqw,300px);width:auto;flex:none;
+  filter:drop-shadow(0 10px 36px rgba(0,0,0,.6))}
 .hero-copy{min-width:0}
 @container (max-width:860px){.hero-copy{text-align:center}}
 
@@ -246,7 +243,7 @@ h3{font-size:16px}
    The real sentence stays in the DOM as the h1's accessible name, so a screen
    reader and a crawler never meet a half-written phrase — only the visible copy
    types. Under prefers-reduced-motion it is simply there. */
-.hero-claim{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.4vw,58px);
+.hero-claim{font-family:var(--serif);font-weight:400;font-size:clamp(28px,4.1cqw,56px);
   line-height:1.1;letter-spacing:-.02em;margin:0;color:#fff;max-width:15ch;
   min-height:2.2em;text-shadow:0 2px 30px rgba(0,0,0,.5)}
 .hero-claim em{display:block;font-style:italic}
@@ -277,9 +274,6 @@ h3{font-size:16px}
 @media (prefers-reduced-motion:reduce){.shot.on img,.shot.on video{animation:none}
   .shot{transition:none}}
 
-.hc-top{position:relative;z-index:2;display:flex;align-items:flex-start;gap:16px;
-  padding:22px 24px 0}
-@container (max-width:900px){.hc-top{padding:14px 14px 0}}
 /* Its own backing rather than a heavier scrim over everything: deepening the
    whole gradient to carry eight words would dull the photograph that is doing
    the selling. Light on purpose - measured against the real pixels behind the
@@ -331,8 +325,6 @@ h3{font-size:16px}
 .search-aside{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;margin:16px 0 0}
 .search-count{font-size:14px;color:var(--muted)}
 .search-count b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
-.quick{display:flex;flex-wrap:wrap;gap:7px;margin-left:auto}
-@container (max-width:760px){.quick{margin-left:0}}
 .quick button{background:var(--surface);border:1px solid var(--line);border-radius:999px;
   padding:7px 13px;font-size:13px;color:var(--muted);cursor:pointer;
   transition:border-color .15s,color .15s,background .15s}
@@ -813,8 +805,8 @@ h3{font-size:16px}
               <h1 class="hero-claim" aria-label="La experiencia de sentirte en casa">
                 <span class="tw" id="tw1"></span><em><span class="tw" id="tw2"></span></em>
               </h1>
-              <p class="hero-sub">Comprá, alquilá o vendé en La&nbsp;Plata y la región, con la
-                atención personal de una inmobiliaria dirigida por un martillero matriculado.</p>
+              <p class="hero-sub">Comprá, Alquilá o Vendé y recibí la atención
+                personalizada de más de 10 años de experiencia que nos avalan.</p>
             </div>
           </div>
 
@@ -933,9 +925,8 @@ h3{font-size:16px}
               Trabajamos la venta y el alquiler de casas, departamentos, terrenos y
               campos en La&nbsp;Plata, Dolores y Bavio.</p>
             <p>Acompañamos la operación de principio a fin — tasación, publicación,
-              visitas y cierre — y cada una se firma con el respaldo de la matrícula.
-              <span class="tbc" title="Dato pendiente: desde qué año trabaja la inmobiliaria, si querés que figure">Años
-              en el mercado: a confirmar.</span></p>
+              visitas y cierre — y cada una se firma con el respaldo de la matrícula,
+              con más de 10 años de experiencia que nos avalan.</p>
             <div class="agency-actions">
               <button class="btn" data-go="nosotros" style="align-self:auto">Conocé la inmobiliaria</button>
               <button class="btn-ghost" data-go="contacto">Hablar con nosotros</button>
