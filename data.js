@@ -12,7 +12,10 @@ window.STRANIERI = {
   "unique": 33,
   "published": 25,
   "unpublished": 8,
-  "with_photos": 20,
+  "with_photos": 23,
+  "shown": 20,
+  "held_back": 3,
+  "no_photos": 10,
   "with_coords": 4
  },
  "by_type": {

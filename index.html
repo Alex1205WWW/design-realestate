@@ -99,11 +99,29 @@ a{color:inherit}
 .site-head{background:var(--surface);color:var(--ink);position:relative;z-index:3;
   border-bottom:1px solid var(--line-soft)}
 /* "El menú no debería tenerlo, podríamos hacer los botones flotantes." On the
-   home screen the bar carries no mark and no ground of its own — the links
-   float over the hero and the brand is the big mark below them. */
-.frame.on-home .site-head{background:transparent;border-bottom:0}
+   home screen the bar carries no mark and no ground of its own: it lifts off
+   the page and floats over the photograph, which is what both references he
+   named do on arrival. The stage reserves room for it so nothing is covered. */
+.frame.on-home .site-head{position:relative;z-index:5;background:transparent;
+  border-bottom:0;margin-bottom:calc(-1 * var(--head-h, 82px))}
 .frame.on-home .site-head .logo{display:none}
-.frame.on-home .head-in{padding-bottom:0}
+.frame.on-home .nav a{color:rgba(255,255,255,.92);text-shadow:0 1px 10px rgba(0,0,0,.55)}
+.frame.on-home .nav a:hover{background:rgba(255,255,255,.16);color:#fff}
+.frame.on-home .nav a[aria-current="page"]{color:#fff;font-weight:600}
+.frame.on-home .nav a.btn-wa{background:rgba(10,12,20,.44);color:#fff;
+  border-color:rgba(255,255,255,.6);backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);text-shadow:none}
+.frame.on-home .nav a.btn-wa:hover{background:#fff;color:var(--navy)}
+.frame.on-home .burger{background:rgba(10,12,20,.44);border-color:rgba(255,255,255,.5);color:#fff}
+.frame.on-home .site-head.open .nav{background:rgba(10,12,20,.78);border-radius:10px;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:8px;margin-top:8px}
+/* The bar stays in flow — absolute positioning anchored it to the frame's top,
+   which is where the mock browser bar lives, and it disappeared under it. A
+   negative margin of exactly its own height lets the picture rise behind it
+   instead, and the stage pads its content clear by the same amount. The height
+   is measured and published as --head-h, not guessed: it changes with the
+   WhatsApp button's line-height and with the phone breakpoint. */
+.frame.on-home .hero-in{padding-top:calc(var(--head-h, 82px) + 24px)}
 /* The mark is back in the bar on every screen: the hero is centred now, so the
    bar is the only place it appears and there is nothing to duplicate. */
 .head-in{padding:18px 28px;display:flex;align-items:center;gap:18px}
@@ -193,59 +211,69 @@ h3{font-size:16px}
 .hero{position:relative;background:var(--ground);padding:0 0 40px}
 @container (max-width:900px){.hero{padding:0 0 26px}}
 
-/* ---------- the hero mark ----------
-   Third time he has asked: "está pequeño… en la principal tiene que tener más
-   presencia… ¿no quedaría mejor más grande en ese espacio aunque tengamos que
-   correr esa frase un poco a la derecha?"
+/* ---------- the stage ----------
+   He named two references, elliman.com and dacal.com.ar, and on arrival both
+   do the same thing: one photograph fills the screen and everything else — the
+   mark, the claim, the ways in — sits inside it rather than under it. That is
+   the "sensación de estar inmerso" he is after, so the hero stopped being a
+   band with a picture below it and became the picture.
 
-   So on the home screen the mark leaves the bar entirely and becomes the thing
-   on the left, with the words moved right exactly as he described. Every other
-   screen keeps it in the bar, which is what he also asked for — "está bien que
-   aparezca en las otras". */
-.hero-head{display:grid;grid-template-columns:auto 1fr;gap:16px 52px;align-items:center;
-  padding:58px 0 38px;text-align:left}
-.hero-logo{height:184px;width:auto;flex:none}
-@container (max-width:1200px){.hero-logo{height:150px}.hero-head{gap:16px 38px}}
-@container (max-width:900px){
-  .hero-head{grid-template-columns:1fr;justify-items:center;text-align:center;
-    padding:30px 0 24px;gap:20px}
-  .hero-logo{height:104px}
+   Height is viewport-relative but bounded, and svh not vh: on a phone vh counts
+   the browser chrome that is about to scroll away, which is why these heroes so
+   often sit 60px too tall on the first paint. */
+.hero{position:relative;background:var(--ground);padding:0}
+.herostage{position:relative;overflow:hidden;isolation:isolate;
+  min-height:clamp(560px,86svh,1000px);display:flex}
+@container (max-width:900px){.herostage{min-height:clamp(520px,82svh,820px)}}
+
+.hero-in{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;
+  max-width:1320px;margin:0 auto;width:100%;padding:26px 32px 34px}
+@container (max-width:900px){.hero-in{padding:18px 18px 24px}}
+.hero-top{display:flex;align-items:flex-start;gap:16px}
+.hero-mid{flex:1;display:grid;grid-template-columns:auto 1fr;gap:20px 52px;
+  align-items:center;padding:14px 0}
+@container (max-width:1000px){.hero-mid{gap:18px 34px}}
+@container (max-width:860px){
+  .hero-mid{grid-template-columns:1fr;justify-items:center;text-align:center;gap:16px}
 }
-@container (max-width:460px){.hero-logo{height:84px}}
+.hero-logo{height:clamp(92px,12.5vw,186px);width:auto;flex:none;
+  filter:drop-shadow(0 8px 30px rgba(0,0,0,.55))}
 .hero-copy{min-width:0}
-.hero-eyebrow{font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;
-  color:var(--muted);font-weight:600;margin:0 0 18px}
-@container (max-width:900px){.hero-eyebrow{font-size:10.5px;letter-spacing:.2em;margin-bottom:12px}}
-.hero-claim{font-family:var(--serif);font-weight:400;font-size:52px;line-height:1.12;
-  letter-spacing:-.02em;margin:0;color:var(--ink);text-wrap:balance;max-width:16ch}
-@container (max-width:900px){.hero-claim{max-width:none}}
-.hero-claim em{display:block;font-style:italic;color:var(--navy)}
-@container (max-width:1100px){.hero-claim{font-size:46px}}
-@container (max-width:900px){.hero-claim{font-size:33px}}
-@container (max-width:460px){.hero-claim{font-size:27px}}
-.hero-sub{font-size:16.5px;color:var(--muted);margin:18px 0 0;max-width:52ch;line-height:1.55}
-@container (max-width:900px){.hero-sub{font-size:14.5px;margin-top:14px}}
+@container (max-width:860px){.hero-copy{text-align:center}}
 
-/* ---------- the picture ----------
-   "Un recuadro con borde blanco, y adentro una imagen con movimiento." */
-.herocard{position:relative;border-radius:16px;overflow:hidden;
-  border:10px solid var(--surface);outline:1px solid var(--line);
-  box-shadow:0 30px 70px -30px rgba(20,22,31,.5);
-  /* width must be pinned: with `aspect-ratio` and a tall `min-height`, an auto
-     width grows to satisfy the ratio and the card runs past the page edge. */
-  width:100%;aspect-ratio:16/7;min-height:clamp(430px,62vh,780px);
-  display:flex;flex-direction:column;isolation:isolate}
-@container (max-width:900px){.herocard{aspect-ratio:4/3;min-height:0;border-width:7px;
-  border-radius:12px}}
+/* ---------- the claim, typed ----------
+   "Me gustaría que la frase apareciera como si se estuviera escribiendo."
+   The real sentence stays in the DOM as the h1's accessible name, so a screen
+   reader and a crawler never meet a half-written phrase — only the visible copy
+   types. Under prefers-reduced-motion it is simply there. */
+.hero-claim{font-family:var(--serif);font-weight:400;font-size:clamp(30px,4.4vw,58px);
+  line-height:1.1;letter-spacing:-.02em;margin:0;color:#fff;max-width:15ch;
+  min-height:2.2em;text-shadow:0 2px 30px rgba(0,0,0,.5)}
+.hero-claim em{display:block;font-style:italic}
+@container (max-width:860px){.hero-claim{max-width:none;margin-inline:auto}}
+.tw{display:inline;white-space:pre-wrap}
+.tw.typing::after{content:"";display:inline-block;width:2px;height:.82em;
+  margin-left:4px;vertical-align:-.06em;background:currentColor;
+  animation:caret 1s steps(1,end) infinite}
+@keyframes caret{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.tw.typing::after{display:none}}
 
-.shot{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;z-index:0}
+.hero-sub{font-size:16.5px;color:rgba(255,255,255,.92);margin:18px 0 0;max-width:46ch;
+  line-height:1.55;text-shadow:0 1px 14px rgba(0,0,0,.5)}
+@container (max-width:900px){.hero-sub{font-size:14.5px;margin-top:10px}}
+@container (max-width:860px){.hero-sub{margin-inline:auto}}
+
+.shot{position:absolute;inset:0;opacity:0;transition:opacity 1.8s cubic-bezier(.4,0,.2,1);z-index:0}
 .shot img,.shot video{width:100%;height:100%;object-fit:cover;transform:scale(1.02)}
 .shot.on{opacity:1}
-.shot.on img,.shot.on video{animation:kb 11s ease-out forwards}
-@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.1)}}
+.shot.on img,.shot.on video{animation:kb 14s ease-out forwards}
+@keyframes kb{from{transform:scale(1.04)}to{transform:scale(1.13) translate(-1.2%,-1.4%)}}
 .shot-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(to bottom,rgba(8,10,18,.62) 0%,rgba(8,10,18,.16) 32%,
-    rgba(8,10,18,.52) 66%,rgba(8,10,18,.88) 100%)}
+  background:
+    linear-gradient(to bottom,rgba(8,10,18,.70) 0%,rgba(8,10,18,.34) 26%,
+      rgba(8,10,18,.44) 58%,rgba(8,10,18,.86) 100%),
+    linear-gradient(to right,rgba(8,10,18,.54) 0%,rgba(8,10,18,.20) 48%,
+      rgba(8,10,18,.32) 100%)}
 @media (prefers-reduced-motion:reduce){.shot.on img,.shot.on video{animation:none}
   .shot{transition:none}}
 
@@ -270,8 +298,10 @@ h3{font-size:16px}
    Lower down, as he asked — it now sits at the foot of the picture rather than
    straight under the headline. Operation stays a forced choice of the two. */
 .searchbar{background:var(--surface);color:var(--ink);border:1px solid var(--line);
-  border-radius:var(--radius);margin:20px 0 0;padding:14px;display:grid;gap:10px;grid-template-columns:1fr 1fr 1fr auto;
-  box-shadow:var(--shadow)}
+  border-radius:var(--radius);margin:-36px 0 0;position:relative;z-index:3;
+  padding:16px;display:grid;gap:10px;grid-template-columns:1fr 1fr 1fr auto;
+  box-shadow:0 26px 60px -26px rgba(20,22,31,.55)}
+@container (max-width:900px){.searchbar{margin-top:-24px}}
 .opseg{grid-column:1/-1;display:flex;gap:4px;background:var(--surface-2);
   border:1px solid var(--line);border-radius:8px;padding:4px}
 .opseg button{flex:1;background:none;border:0;border-radius:6px;padding:9px 6px;cursor:pointer;
@@ -447,17 +477,22 @@ h3{font-size:16px}
    A visitor is one of three people, and the page should not make them work out
    which. Buy and rent go straight into a filtered catalogue; the third goes to
    the valuation, which is the only reason an owner is here. */
-.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0 0;
-  max-width:660px;width:100%}
-@container (max-width:900px){.paths{margin-left:auto;margin-right:auto}}
-@container (max-width:760px){.paths{grid-template-columns:1fr;gap:9px;margin-top:20px}
-  .paths button{align-items:center}}
-.paths button{display:flex;flex-direction:column;align-items:flex-start;gap:3px;cursor:pointer;
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-  padding:14px 16px;transition:border-color .15s,transform .15s,box-shadow .15s}
-.paths button:hover{border-color:var(--navy);transform:translateY(-2px);box-shadow:var(--shadow)}
-.paths b{font-size:16px;font-weight:600;color:var(--navy)}
-.paths span{font-size:12.5px;color:var(--muted)}
+.paths{display:grid;grid-template-columns:repeat(3,auto);gap:12px;margin:0;
+  justify-content:start;width:auto}
+@container (max-width:860px){.paths{justify-content:center}}
+@container (max-width:620px){.paths{grid-template-columns:1fr;gap:9px;width:100%}}
+.paths button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;cursor:pointer;
+  background:rgba(10,12,20,.44);border:1px solid rgba(255,255,255,.55);border-radius:10px;
+  padding:13px 22px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  transition:background .18s,border-color .18s,transform .18s}
+.paths button:hover{background:rgba(255,255,255,.96);border-color:#fff;transform:translateY(-2px)}
+.paths b{font-size:16px;font-weight:600;color:#fff}
+.paths span{font-size:12.5px;color:rgba(255,255,255,.88)}
+.paths button:hover b{color:var(--navy)}
+.paths button:hover span{color:var(--muted)}
+@container (max-width:620px){.paths button{align-items:center}}
+@media (prefers-reduced-motion:reduce){.paths button{transition:none}
+  .paths button:hover{transform:none}}
 
 /* the code lookup lives beside the search now, not in a card of its own */
 .codefind{display:flex;align-items:center;gap:8px;margin-left:auto}
@@ -496,7 +531,6 @@ h3{font-size:16px}
 
 /* ---------- property cards ---------- */
 .grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
-.grid-3{grid-template-columns:repeat(3,1fr)}
 @container (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
 @container (max-width:620px){.grid{grid-template-columns:1fr;gap:14px}}
 .card{text-decoration:none;color:inherit;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
@@ -718,9 +752,11 @@ h3{font-size:16px}
   </div>
   <p class="chrome-note">Las propiedades, los precios, las direcciones y las fotos de
     las fichas son tuyas, no son de muestra. <b>Las fotos grandes de arriba sí son de
-    muestra</b> (con licencia para uso comercial): van ahí hasta que me pases tu video. Se ven <b class="num" id="n-shown">23</b> de tus
-    <b class="num" id="n-all">33</b>: las otras <b class="num" id="n-gap">10</b> no tienen ninguna foto en el sitio viejo, así que
-    entran cuando me pases las tuyas. Las fotos que ves son las de 500&nbsp;px que están
+    muestra</b> (con licencia para uso comercial): van ahí hasta que me pases tu video. Se ven <b class="num" id="n-shown">20</b> de tus
+    <b class="num" id="n-all">33</b>: <b class="num" id="n-nophoto">10</b> no tienen ninguna
+    foto en el sitio viejo y entran cuando me pases las tuyas, y
+    <b class="num" id="n-held">3</b> las saqué yo de la maqueta porque las fotos que hay
+    no les hacen justicia. Las fotos que ves son las de 500&nbsp;px que están
     hoy publicadas — con tus originales se ven mucho mejor. Lo que figura
     <span class="tbc">así</span> es un dato que todavía no tengo.</p>
 </div>
@@ -760,32 +796,37 @@ h3{font-size:16px}
 
     <!-- 1 · hero, search, and the three paths -->
     <div class="hero">
-      <div class="wrap">
 
-        <div class="hero-head">
-          <img class="hero-logo" src="logo-stranieri-navy.png" alt="Stranieri Propiedades">
-          <div class="hero-copy">
-          <p class="hero-eyebrow">Espacios para lo que viene</p>
-          <h1 class="hero-claim">La experiencia<em>de sentirte en casa</em></h1>
-          <p class="hero-sub">Comprá, alquilá o vendé en La&nbsp;Plata y la región, con la
-            atención personal de una inmobiliaria dirigida por un martillero matriculado.</p>
+      <div class="herostage">
+        <div class="shot-stack" id="shot-stack"></div>
+        <div class="shot-veil"></div>
+
+        <div class="hero-in">
+          <div class="hero-top">
+            <span class="hc-label">Una nueva forma de encontrar tu lugar</span>
+            <div class="dots" id="shot-dots" role="tablist" aria-label="Imágenes"></div>
+          </div>
+
+          <div class="hero-mid">
+            <img class="hero-logo" src="logo-stranieri-white.png" alt="Stranieri Propiedades">
+            <div class="hero-copy">
+              <h1 class="hero-claim" aria-label="La experiencia de sentirte en casa">
+                <span class="tw" id="tw1"></span><em><span class="tw" id="tw2"></span></em>
+              </h1>
+              <p class="hero-sub">Comprá, alquilá o vendé en La&nbsp;Plata y la región, con la
+                atención personal de una inmobiliaria dirigida por un martillero matriculado.</p>
+            </div>
+          </div>
+
           <div class="paths" id="paths">
-            <button type="button" data-path="Venta"><b>Comprar</b><span>Ver propiedades en venta</span></button>
-            <button type="button" data-path="Alquiler"><b>Alquilar</b><span>Ver propiedades en alquiler</span></button>
+            <button type="button" data-path="Venta"><b>Comprar</b><span>Propiedades en venta</span></button>
+            <button type="button" data-path="Alquiler"><b>Alquilar</b><span>Propiedades en alquiler</span></button>
             <button type="button" data-path="vender"><b>Quiero vender</b><span>Pedir una tasación</span></button>
           </div>
-          </div>
         </div>
+      </div>
 
-        <div class="herocard">
-          <div class="shot-stack" id="shot-stack"></div>
-          <div class="shot-veil"></div>
-          <div class="hc-top">
-            <span class="hc-label">Una nueva forma de encontrar tu lugar</span>
-            <div class="dots" id="shot-dots" role="tablist" aria-label="Propiedades destacadas"></div>
-          </div>
-        </div>
-
+      <div class="wrap">
         <form class="searchbar" id="hero-search">
           <div class="opseg" id="h-op" role="group" aria-label="Operación">
             <button type="button" data-op="Venta" aria-pressed="true">Comprar</button>
@@ -887,10 +928,10 @@ h3{font-size:16px}
           <div>
             <p class="eyebrow">La inmobiliaria</p>
             <h2>Quiénes somos</h2>
-            <p>Stranieri Propiedades es una inmobiliaria de La&nbsp;Plata, dirigida por
-              Mauro Stranieri, martillero y corredor público matriculado. Trabajamos la
-              venta y el alquiler de casas, departamentos, terrenos y campos en
-              La&nbsp;Plata, Dolores y Bavio.</p>
+            <p>Somos una inmobiliaria con sólida presencia en la zona de La&nbsp;Plata,
+              dirigida por Mauro Stranieri, martillero y corredor público matriculado.
+              Trabajamos la venta y el alquiler de casas, departamentos, terrenos y
+              campos en La&nbsp;Plata, Dolores y Bavio.</p>
             <p>Acompañamos la operación de principio a fin — tasación, publicación,
               visitas y cierre — y cada una se firma con el respaldo de la matrícula.
               <span class="tbc" title="Dato pendiente: desde qué año trabaja la inmobiliaria, si querés que figure">Años
@@ -1259,7 +1300,8 @@ h3{font-size:16px}
   // so a filter never promises more than it returns.
   document.getElementById('n-shown').textContent = P.length;
   document.getElementById('n-all').textContent = D.counts.unique;
-  document.getElementById('n-gap').textContent = D.counts.unique - P.length;
+  document.getElementById('n-nophoto').textContent = D.counts.no_photos;
+  document.getElementById('n-held').textContent = D.counts.held_back;
 
   var shownTypes = {}, shownLocs = {};
   P.forEach(function(p){
@@ -1336,13 +1378,65 @@ h3{font-size:16px}
   // Hovering to read a caption should not have it swapped out mid-sentence.
   // Not `card` — that is the function that builds a property card, and shadowing
   // it emptied the whole results grid while the home page went on looking fine.
-  var heroCard = document.querySelector('.herocard');
+  var heroCard = document.querySelector('.herostage');
   heroCard.addEventListener('mouseenter', stopShots);
   heroCard.addEventListener('mouseleave', startShots);
 
   document.querySelector('.frame').classList.add('on-home');
+
+  /* The floating bar overlaps the picture by exactly its own height. Measure it
+     rather than hard-code it: it differs between desktop and phone, and it
+     changes if the nav ever wraps. */
+  (function(){
+    var head = document.querySelector('.site-head');
+    var frame = document.querySelector('.frame');
+    function syncHead(){
+      frame.style.setProperty('--head-h', head.offsetHeight + 'px');
+    }
+    syncHead();
+    window.addEventListener('resize', syncHead);
+    if (window.ResizeObserver) new ResizeObserver(syncHead).observe(head);
+  })();
   paintShot(0);
   startShots();
+
+  /* ---------- the claim, typed ----------
+     His words: "me gustaría que la frase apareciera como si se estuviera
+     escribiendo". Three things keep it from being a gimmick:
+
+       · the h1 already carries the whole sentence as its accessible name, so
+         assistive tech and crawlers read it complete and instantly;
+       · the box is sized for the finished text (min-height on .hero-claim), so
+         nothing below it jumps while the letters arrive;
+       · it runs once, and not at all for a reader who asked for less motion.
+
+     Speed is per character with a pause at the line break — an even cadence
+     reads like a machine, which is the opposite of the feeling he wants. */
+  (function(){
+    var LINES = ['La experiencia', 'de sentirte en casa'];
+    var a = document.getElementById('tw1'), b = document.getElementById('tw2');
+    if (!a || !b) return;
+
+    if (calm.matches){ a.textContent = LINES[0]; b.textContent = LINES[1]; return; }
+
+    var els = [a, b], li = 0, ci = 0;
+    els[0].classList.add('typing');
+    function step(){
+      var el = els[li], text = LINES[li];
+      if (ci <= text.length){
+        el.textContent = text.slice(0, ci++);
+        return setTimeout(step, 52 + Math.random() * 46);
+      }
+      el.classList.remove('typing');
+      li++; ci = 0;
+      if (li < els.length){
+        els[li].classList.add('typing');
+        return setTimeout(step, 420);           // a breath at the line break
+      }
+      els[els.length - 1].classList.add('typing');   // leave the caret blinking
+    }
+    setTimeout(step, 350);
+  })();
 
   /* ---------- flowing ----------
      Sections rise into view instead of appearing. The observer is given the
@@ -1352,7 +1446,7 @@ h3{font-size:16px}
   var calmMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!calmMotion && 'IntersectionObserver' in window){
     var targets = document.querySelectorAll(
-      '.sec-head, .grid, .types, .pitch, .revs, .agency, .shortcuts, .zones, .tools, .herocard, .hero-head, .searchbar, .search-aside');
+      '.sec-head, .grid, .pitch, .revs, .agency, .shortcuts, .zones, .searchbar, .search-aside');
     Array.prototype.forEach.call(targets, function(el){ el.classList.add('reveal'); });
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
