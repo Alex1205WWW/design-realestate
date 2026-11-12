@@ -420,6 +420,35 @@ h3{font-size:16px}
 .tool-b{background:#E8F2EF}
 .tool-c{background:#F6EFE6}
 
+/* ---------- rotating shelves ----------
+   "Que se vean solo dos y que vayan cambiando automáticas … para que no sea
+   tan larga la página." Two at a time instead of six, moving on their own, so
+   the same stock takes a third of the height.
+
+   It is a scroll container rather than a transformed track: that gives native
+   swiping on a phone and keyboard scrolling for free, and the browser does the
+   snapping. Autoplay is just a scroll, so a human grabbing it mid-slide never
+   fights the animation. */
+.shelf{position:relative}
+.shelf-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;
+  scrollbar-width:none;-ms-overflow-style:none;padding:4px 2px;margin:-4px -2px}
+.shelf-track::-webkit-scrollbar{display:none}
+.shelf-track > .card{flex:0 0 calc((100% - 18px) / 2);scroll-snap-align:start}
+@container (max-width:760px){
+  .shelf-track{gap:14px}
+  .shelf-track > .card{flex:0 0 100%}
+}
+.shelf-foot{display:flex;align-items:center;gap:12px;margin-top:16px}
+.shelf-dots{display:flex;gap:6px}
+.shelf-dots button{width:7px;height:7px;padding:0;border-radius:50%;border:0;cursor:pointer;
+  background:var(--line);transition:background .2s,width .2s}
+.shelf-dots button[aria-current="true"]{background:var(--navy);width:22px;border-radius:4px}
+.shelf-arrows{margin-left:auto;display:flex;gap:8px}
+.shelf-arrows button{width:36px;height:36px;border-radius:50%;cursor:pointer;
+  border:1px solid var(--line);background:var(--surface);color:var(--navy);
+  display:grid;place-items:center;transition:border-color .15s,background .15s}
+.shelf-arrows button:hover{border-color:var(--navy);background:var(--surface-2)}
+
 /* ---------- property cards ---------- */
 .grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
 .grid-3{grid-template-columns:repeat(3,1fr)}
@@ -749,7 +778,9 @@ h3{font-size:16px}
         </div>
         <p class="lede" style="margin:-6px 0 18px">Casas, departamentos, terrenos y campos
           <strong>en venta y en alquiler en La Plata</strong>, Dolores y Bavio.</p>
-        <div class="grid" id="grid-destacadas"></div>
+        <div class="shelf" id="shelf-destacadas">
+          <div class="shelf-track" id="grid-destacadas"></div>
+        </div>
       </div>
     </section>
 
@@ -759,7 +790,9 @@ h3{font-size:16px}
           <div><p class="eyebrow">Novedades</p><h2>Recién incorporadas</h2></div>
           <a href="#" data-go="buscar">Ver todas &rarr;</a>
         </div>
-        <div class="grid grid-3" id="grid-nuevas"></div>
+        <div class="shelf" id="shelf-nuevas">
+          <div class="shelf-track" id="grid-nuevas"></div>
+        </div>
       </div>
     </section>
 
@@ -780,7 +813,7 @@ h3{font-size:16px}
         <div class="tools">
           <div class="tool tool-a">
             <b>¿Tenés el código?</b>
-            <span>Si te pasé una propiedad por WhatsApp, escribí su código y te la abro.</span>
+            <span>Si te pasamos una propiedad por WhatsApp, escribí su código y la abrimos.</span>
             <form class="codefind" id="codefind">
               <input id="code-q" type="text" placeholder="CA82" aria-label="Código de la propiedad"
                      autocomplete="off" spellcheck="false">
@@ -790,12 +823,12 @@ h3{font-size:16px}
           </div>
           <button class="tool tool-b" data-go="contacto">
             <b>Pedí una tasación</b>
-            <span>Sin cargo y sin compromiso, hecha por martillero matriculado.</span>
+            <span>Tasación de tu propiedad hecha por martillero público matriculado.</span>
             <i>Pedir tasación &rarr;</i>
           </button>
           <button class="tool tool-c" data-go="contacto">
             <b>Consultá por WhatsApp</b>
-            <span>Preguntá por una propiedad y te contesto yo, no un call center.</span>
+            <span>Consultá por una propiedad y te responde la inmobiliaria, no un call center.</span>
             <i>Escribir ahora &rarr;</i>
           </button>
         </div>
@@ -807,15 +840,14 @@ h3{font-size:16px}
         <div class="agency">
           <div>
             <p class="eyebrow">La inmobiliaria</p>
-            <h2>Conocé a Mauro</h2>
-            <p>Stranieri Propiedades es la inmobiliaria de Mauro Stranieri, en el casco
-              de La&nbsp;Plata. Acá tratás siempre con la misma persona: el que te contesta
-              el WhatsApp es el que te muestra la propiedad y el que firma la operación.
-              Sin call center y sin que te pasen de un vendedor a otro.</p>
-            <p>Comprar o alquilar una propiedad es de las decisiones más grandes que vas a
-              tomar, y merece que alguien te atienda el teléfono y te diga las cosas como
-              son — con el respaldo de un martillero y corredor público matriculado.
-              <span class="tbc" title="Dato pendiente: desde qué año trabajás, si querés que figure">Años
+            <h2>Quiénes somos</h2>
+            <p>Stranieri Propiedades es una inmobiliaria de La&nbsp;Plata, dirigida por
+              Mauro Stranieri, martillero y corredor público matriculado. Trabajamos la
+              venta y el alquiler de casas, departamentos, terrenos y campos en
+              La&nbsp;Plata, Dolores y Bavio.</p>
+            <p>Acompañamos la operación de principio a fin — tasación, publicación,
+              visitas y cierre — y cada una se firma con el respaldo de la matrícula.
+              <span class="tbc" title="Dato pendiente: desde qué año trabaja la inmobiliaria, si querés que figure">Años
               en el mercado: a confirmar.</span></p>
             <div class="agency-actions">
               <button class="btn" data-go="nosotros" style="align-self:auto">Conocé la inmobiliaria</button>
@@ -845,9 +877,9 @@ h3{font-size:16px}
         <div class="pitch">
           <div class="pitch-copy">
             <h2>¿Tenés una propiedad para vender o alquilar?</h2>
-            <p>Empezá por saber cuánto vale hoy: la tasación es sin cargo y sin
-              compromiso. Si decidís avanzar, me ocupo de todo — las fotos, la
-              publicación, las visitas y la operación hasta la firma.</p>
+            <p>Empezá por saber cuánto vale: solicitá una tasación hecha por
+              martillero matriculado. Si decidís avanzar, nos ocupamos de todo — las
+              fotos, la publicación, las visitas y la operación hasta la firma.</p>
             <button class="btn-ghost" data-go="contacto">Pedir una tasación</button>
           </div>
           <div class="pitch-art">
@@ -981,7 +1013,7 @@ h3{font-size:16px}
         </div>
         <div class="contact">
           <div class="office">
-            <p class="lede">Atiendo personalmente. Escribime por el formulario, por
+            <p class="lede">Te atendemos personalmente. Escribinos por el formulario, por
               WhatsApp o pasá por la oficina.</p>
             <div class="office-row">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-5.3 7-11a7 7 0 1 0-14 0c0 5.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
@@ -1005,7 +1037,7 @@ h3{font-size:16px}
             </figure>
           </div>
           <form class="panel form">
-            <h3>Escribime</h3>
+            <h3>Escribinos</h3>
             <div class="two">
               <div class="field"><label for="k1">Nombre</label><input id="k1" placeholder="Tu nombre"></div>
               <div class="field"><label for="k2">Teléfono</label><input id="k2" placeholder="221 …"></div>
@@ -1024,8 +1056,8 @@ h3{font-size:16px}
             <div class="field"><label for="k5">Mensaje</label><textarea id="k5"
               placeholder="Contame en qué te puedo ayudar"></textarea></div>
             <button class="btn" type="submit" style="align-self:stretch">Enviar</button>
-            <p class="small">Te respondo dentro del día. Las consultas llegan a tu mail,
-              no quedan guardadas en el sitio.</p>
+            <p class="small">Te respondemos dentro del día. Las consultas llegan a tu
+              mail, no quedan guardadas en el sitio.</p>
           </form>
         </div>
       </div>
@@ -1329,10 +1361,17 @@ h3{font-size:16px}
   });
 
   /* ---------- 3 · featured, with its own operation tabs ---------- */
-  var featOp = 'Venta';
+  var featOp = 'Venta', featShelf = null;
   function paintFeatured(){
+    // Six in the shelf, two on screen. These are the ones he will tick as
+    // "oportunidades" in the admin; until that flag exists the shelf shows the
+    // best documented of that operation, which is the same order he would pick.
     var list = P.filter(function(p){ return p.operation === featOp; }).slice(0, 6);
-    fill(document.getElementById('grid-destacadas'), list);
+    if (featShelf){ featShelf.stop(); }
+    document.getElementById('grid-destacadas').innerHTML = '';
+    var oldFoot = document.querySelector('#shelf-destacadas .shelf-foot');
+    if (oldFoot) oldFoot.remove();
+    featShelf = shelf('grid-destacadas', list, 5500);
   }
   document.getElementById('feat-ops').addEventListener('click', function(e){
     var b = e.target.closest('button'); if (!b) return;
@@ -1344,6 +1383,102 @@ h3{font-size:16px}
   });
   paintFeatured();
 
+  /* ---------- a rotating shelf ----------
+     Two cards visible, advancing on their own. Everything is derived from the
+     live layout rather than assumed: how many fit is measured from the first
+     card's width, so the phone (one across) and the desktop (two) share one
+     implementation and there is no breakpoint to keep in sync. */
+  function shelf(trackId, list, ms){
+    var track = document.getElementById(trackId);
+    var host = track.parentNode;
+    fill(track, list);
+
+    var foot = document.createElement('div');
+    foot.className = 'shelf-foot';
+    var dots = document.createElement('div');
+    dots.className = 'shelf-dots';
+    var arrows = document.createElement('div');
+    arrows.className = 'shelf-arrows';
+    arrows.innerHTML =
+      '<button type="button" data-step="-1" aria-label="Anteriores">' + CHEV('prev') + '</button>' +
+      '<button type="button" data-step="1" aria-label="Siguientes">' + CHEV('next') + '</button>';
+    foot.appendChild(dots); foot.appendChild(arrows);
+    host.appendChild(foot);
+
+    function perView(){
+      var c = track.querySelector('.card');
+      if (!c) return 1;
+      return Math.max(1, Math.round(track.clientWidth / (c.getBoundingClientRect().width + 18)));
+    }
+    function pages(){ return Math.max(1, Math.ceil(list.length / perView())); }
+    function page(){
+      var c = track.querySelector('.card');
+      if (!c) return 0;
+      var step = (c.getBoundingClientRect().width + 18) * perView();
+      return step ? Math.round(track.scrollLeft / step) : 0;
+    }
+    function paintDots(){
+      var n = pages(), cur = Math.min(page(), n - 1);
+      if (dots.children.length !== n){
+        dots.innerHTML = '';
+        for (var k = 0; k < n; k++){
+          var b = document.createElement('button');
+          b.type = 'button'; b.dataset.p = k;
+          b.setAttribute('aria-label', 'Grupo ' + (k + 1));
+          dots.appendChild(b);
+        }
+      }
+      Array.prototype.forEach.call(dots.children, function(b, k){
+        b.setAttribute('aria-current', String(k === cur));
+      });
+      host.dataset.page = cur;
+    }
+    function go(pageIndex, smooth){
+      var c = track.querySelector('.card');
+      if (!c) return;
+      var step = (c.getBoundingClientRect().width + 18) * perView();
+      var n = pages();
+      var target = ((pageIndex % n) + n) % n;           // wraps at both ends
+      track.scrollTo({ left: target * step, behavior: smooth === false ? 'auto' : 'smooth' });
+      host.dataset.page = target;
+      Array.prototype.forEach.call(dots.children, function(b, k){
+        b.setAttribute('aria-current', String(k === target));
+      });
+    }
+
+    arrows.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b) return;
+      go(Number(host.dataset.page || 0) + Number(b.dataset.step));
+      restart();
+    });
+    dots.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b) return;
+      go(Number(b.dataset.p)); restart();
+    });
+    track.addEventListener('scroll', function(){
+      clearTimeout(track._t);
+      track._t = setTimeout(paintDots, 120);           // follow a human swipe
+    });
+
+    var timer = null;
+    function stop(){ if (timer){ clearInterval(timer); timer = null; } }
+    function restart(){
+      stop();
+      if (calm.matches || list.length <= perView()) return;
+      timer = setInterval(function(){
+        go(Number(host.dataset.page || 0) + 1);
+      }, ms);
+    }
+    // reading one should not have it slide away mid-sentence
+    host.addEventListener('mouseenter', stop);
+    host.addEventListener('mouseleave', restart);
+    host.addEventListener('focusin', stop);
+
+    paintDots();
+    restart();
+    return { go: go, paint: paintDots, restart: restart, stop: stop };
+  }
+
   /* ---------- 3b · recently added ----------
      There is no publication date in his export: `published` is a yes/no. The
      system id is the proxy, and it is not a guess — ordering by id and ordering
@@ -1352,8 +1487,8 @@ h3{font-size:16px}
      this becomes exact rather than inferred. */
   var NUEVAS = P.slice().sort(function(a, b){
     return (Number(b.legacy_id) || 0) - (Number(a.legacy_id) || 0);
-  }).slice(0, 3);
-  fill(document.getElementById('grid-nuevas'), NUEVAS);
+  }).slice(0, 6);
+  shelf('grid-nuevas', NUEVAS, 6000);
 
   /* ---------- 5b · find by code ----------
      "Te paso la CA82" is how he works, so a client arrives holding a code. */
@@ -1367,7 +1502,7 @@ h3{font-size:16px}
     if (hit){ codeMsg.textContent = ''; codeMsg.className = ''; openFicha(hit.codigo); }
     else {
       codeMsg.className = 'bad';
-      codeMsg.textContent = 'No encuentro el código ' + q + '. Revisalo o escribime.';
+      codeMsg.textContent = 'No encontramos el código ' + q + '. Revisalo o escribinos.';
     }
   });
 
