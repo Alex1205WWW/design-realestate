@@ -1,3 +1,8 @@
+<!-- This mockup is deployed publicly for the client to review, and it carries his
+     real listings. A second indexable copy of his properties is exactly the
+     duplicate-content problem this project exists to fix, so the page refuses
+     indexing itself rather than relying on host configuration. -->
+<meta name="robots" content="noindex, nofollow">
 <title>Maqueta Stranieri Propiedades</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
@@ -8,55 +13,39 @@
    CorelDRAW palette. Neutrals are biased toward it, never grey.
    ============================================================ */
 :root{
+  /* Light ground, by his instruction on 12 Nov: "me gustaría que el fondo sea
+     claro, el azul no me termina de gustar — podemos resaltar el logo de otra
+     forma". So the navy stops being the field and becomes the accent: it now
+     appears only on the logo, the buttons, the badges and the type. The
+     neutrals are warm rather than blue-grey, which is what gives a white page
+     the paper feel of the reference he chose (elliman.com) instead of the
+     cold grey of a template. */
   --navy:#01074F;
   --navy-deep:#000730;
   --navy-tint:#1C2577;
-  --ground:#F2F3F8;
+  --ground:#FBFAF7;
   --surface:#FFFFFF;
-  --surface-2:#FAFBFD;
-  --ink:#141730;
-  --muted:#5A6079;
-  --line:#D9DCE8;
-  --line-soft:#E8EAF2;
+  --surface-2:#F5F3EE;
+  --ink:#14161F;
+  --muted:#5E6172;
+  --line:#E3DFD7;
+  --line-soft:#EFECE5;
   --on-navy:#FFFFFF;
   --on-navy-dim:#B9BDD8;
   --venta:#01074F;
   --alquiler:#0C5F54;
   --alquiler-soft:#E3F1EE;
   --warn:#8A5A00;
-  --shadow:0 1px 2px rgba(20,23,48,.06), 0 8px 24px -12px rgba(20,23,48,.18);
+  --shadow:0 1px 2px rgba(20,22,31,.05), 0 10px 30px -14px rgba(20,22,31,.18);
   --radius:10px;
+  color-scheme:light;
   --sans:'Archivo', 'Segoe UI', system-ui, sans-serif;
   --serif:'Source Serif 4', Georgia, serif;
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --navy:#0A1270;
-    --navy-deep:#05082B;
-    --navy-tint:#3A46B4;
-    --ground:#0A0C1C;
-    --surface:#141833;
-    --surface-2:#1A1F3D;
-    --ink:#ECEEF7;
-    --muted:#A6ABC6;
-    --line:#2A3058;
-    --line-soft:#222747;
-    --on-navy:#FFFFFF;
-    --on-navy-dim:#AFB5D8;
-    --alquiler:#17846F;
-    --alquiler-soft:#11322C;
-    --warn:#E0B055;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.6);
-  }
-}
-:root[data-theme="dark"]{
-  --navy:#0A1270; --navy-deep:#05082B; --navy-tint:#3A46B4;
-  --ground:#0A0C1C; --surface:#141833; --surface-2:#1A1F3D;
-  --ink:#ECEEF7; --muted:#A6ABC6; --line:#2A3058; --line-soft:#222747;
-  --on-navy:#FFFFFF; --on-navy-dim:#AFB5D8;
-  --alquiler:#17846F; --alquiler-soft:#11322C; --warn:#E0B055;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.6);
-}
+/* No dark variant, deliberately. He asked for a light site — "me gustaría que el
+   fondo sea claro" — so the page commits to that look and paints it explicitly
+   rather than following the viewer's theme. A dark render would show him a site
+   he did not approve, and would also put the navy-on-white logo on a dark bar. */
 
 *{box-sizing:border-box}
 body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
@@ -97,30 +86,36 @@ a{color:inherit}
 .urlbar b{color:var(--ink);font-weight:500;flex:none}
 .urlbar span{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
 
-/* ---------- site header ---------- */
-.site-head{background:var(--navy);color:var(--on-navy)}
-.head-in{padding:12px 20px;display:flex;align-items:center;gap:18px}
-.logo{height:46px;width:auto}
-.nav{margin-left:auto;display:flex;gap:4px;align-items:center}
-.nav a{padding:8px 11px;border-radius:7px;text-decoration:none;font-size:14px;font-weight:500;
-  color:var(--on-navy-dim);transition:background .15s,color .15s}
-.nav a:hover{background:rgba(255,255,255,.1);color:var(--on-navy)}
-.nav a[aria-current="page"]{color:var(--on-navy);background:rgba(255,255,255,.14)}
-.nav a.btn-wa,.btn-wa{display:inline-flex;align-items:center;gap:7px;background:var(--on-navy);color:var(--navy);
-  border:0;border-radius:7px;padding:9px 14px;font-weight:600;font-size:14px;cursor:pointer;
-  text-decoration:none}
+/* ---------- site header ----------
+   "Podemos resaltar el logo de otra forma." The plaque is gone with the navy
+   field. On a white bar the navy mark is the darkest thing on the page, which
+   is a stronger way to carry it than a box was — and it is bigger than before,
+   which is what he actually asked for. */
+.site-head{background:var(--surface);color:var(--ink);position:relative;z-index:3;
+  border-bottom:1px solid var(--line-soft)}
+.head-in{padding:16px 24px;display:flex;align-items:center;gap:18px}
+.logo{height:62px;width:auto;flex:none}
+.nav{margin-left:auto;display:flex;gap:2px;align-items:center}
+.nav a{padding:9px 12px;border-radius:7px;text-decoration:none;font-size:14px;font-weight:500;
+  color:var(--muted);transition:background .15s,color .15s}
+.nav a:hover{background:var(--surface-2);color:var(--ink)}
+.nav a[aria-current="page"]{color:var(--navy);font-weight:600}
+.nav a.btn-wa,.btn-wa{display:inline-flex;align-items:center;gap:7px;background:var(--navy);
+  color:#fff;border:0;border-radius:7px;padding:10px 15px;font-weight:600;font-size:14px;
+  cursor:pointer;text-decoration:none}
+.nav a.btn-wa:hover{background:var(--navy-tint);color:#fff}
 .btn-wa svg{flex:none}
-.burger{margin-left:auto;display:none;background:rgba(255,255,255,.1);border:0;color:var(--on-navy);
-  border-radius:7px;padding:9px 11px;cursor:pointer}
+.burger{margin-left:auto;display:none;background:var(--surface-2);border:1px solid var(--line);
+  color:var(--ink);border-radius:7px;padding:9px 11px;cursor:pointer}
 @container (max-width:760px){
   .nav{display:none;order:3}
   .burger{display:block;order:2}
-  .head-in{padding:10px 14px;gap:10px;flex-wrap:wrap}
-  .logo{height:36px}
+  .head-in{padding:12px 14px;gap:10px;flex-wrap:wrap}
+  .logo{height:46px}
   /* the burger opens the same nav, stacked under the bar */
   .site-head.open .nav{display:flex;flex-direction:column;align-items:stretch;
-    flex-basis:100%;margin-left:0;gap:2px;padding-top:6px;
-    border-top:1px solid rgba(255,255,255,.16)}
+    flex-basis:100%;margin-left:0;gap:2px;padding-top:8px;
+    border-top:1px solid var(--line-soft)}
   .site-head.open .nav a{padding:11px 10px;font-size:15px}
   .site-head.open .btn-wa{justify-content:center;margin-top:6px}
 }
@@ -146,48 +141,109 @@ h3{font-size:16px}
   text-decoration:none;white-space:nowrap}
 .num{font-variant-numeric:tabular-nums}
 
-/* ---------- hero: the La Plata plan, drawn not photographed ----------
-   The city is a square grid crossed by diagonals. That geometry is the
-   one piece of local vocabulary the design can carry for free. */
-.hero{position:relative;background:var(--navy);color:var(--on-navy);overflow:hidden;
-  padding:46px 0 0}
-.hero::before,.hero::after{content:"";position:absolute;inset:0;pointer-events:none}
-.hero::before{background:
-   repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,transparent 1px 44px),
-   repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 44px)}
-.hero::after{background:
-   linear-gradient(45deg,transparent calc(50% - .5px),rgba(255,255,255,.16) 50%,transparent calc(50% + .5px)),
-   linear-gradient(-45deg,transparent calc(50% - .5px),rgba(255,255,255,.16) 50%,transparent calc(50% + .5px))}
-.hero .wrap{position:relative;z-index:1}
-.hero h1{max-width:19ch}
-.hero p{font-family:var(--serif);font-size:17px;color:var(--on-navy-dim);max-width:48ch;margin:12px 0 0}
-.cred{display:inline-flex;align-items:center;gap:9px;margin-top:20px;font-size:12.5px;
-  color:var(--on-navy-dim);border:1px solid rgba(255,255,255,.26);border-radius:999px;padding:5px 13px}
-.cred b{color:var(--on-navy);font-weight:600}
+/* ---------- hero ----------
+   Light, editorial, and the photography carries the page rather than a colour
+   field. The reference he picked is elliman.com: a serif claim in a lot of
+   white space, then cinematic imagery, then the search. */
+.hero{position:relative;background:var(--ground);color:var(--ink);
+  border-bottom:1px solid var(--line-soft)}
+.hero-copy{padding:52px 0 0;max-width:62ch}
+@container (max-width:900px){.hero-copy{padding:30px 0 0}}
 
-.searchbar{margin:30px 0 0;background:var(--surface);border-radius:var(--radius) var(--radius) 0 0;
-  padding:14px;display:grid;gap:10px;grid-template-columns:1fr 1fr 1fr auto;box-shadow:var(--shadow)}
-@container (max-width:760px){.searchbar{grid-template-columns:1fr 1fr;margin-top:22px}}
+.hero-claim{font-family:var(--serif);font-weight:400;font-size:52px;line-height:1.08;
+  letter-spacing:-.02em;max-width:16ch;margin:0;text-wrap:balance;color:var(--navy)}
+.hero-sub{font-size:16.5px;color:var(--muted);margin:16px 0 0;max-width:46ch;line-height:1.55}
+@container (max-width:900px){.hero-claim{font-size:34px;max-width:18ch}
+  .hero-sub{font-size:15px;margin-top:12px}}
+@container (max-width:460px){.hero-claim{font-size:29px}}
+
+/* ---------- the moving showcase (his "marquesina con movimiento") ----------
+   Full width and cinematic, because that is what he liked in the reference.
+   The frames are chosen by real pixel width, not by photo count: only four of
+   his properties carry a main photo at 800 px or more, and those are the only
+   ones that survive being shown this large. The rest stay in the cards. */
+.showcase{position:relative;margin:30px 0 0;border-radius:var(--radius);overflow:hidden;
+  background:var(--surface-2);box-shadow:var(--shadow)}
+@container (max-width:900px){.showcase{margin-top:20px;border-radius:8px}}
+.shot-stack{position:relative;display:block;width:100%;padding:0;border:0;background:none;
+  text-align:left;cursor:pointer;aspect-ratio:21/9}
+@container (max-width:900px){.shot-stack{aspect-ratio:4/3}}
+.shot{position:absolute;inset:0;opacity:0;transition:opacity 1s ease}
+.shot img{width:100%;height:100%;object-fit:cover;transform:scale(1.02)}
+.shot.on{opacity:1}
+.shot.on img{animation:kb 9s ease-out forwards}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.1)}}
+.shot-veil{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(10,12,20,.88) 0%,rgba(10,12,20,.34) 34%,rgba(10,12,20,0) 62%)}
+.shot-cap{position:absolute;left:0;right:0;bottom:0;padding:22px 26px;z-index:2;
+  display:flex;flex-direction:column;gap:6px;pointer-events:none}
+@container (max-width:900px){.shot-cap{padding:16px 16px}}
+.shot-op{align-self:flex-start;font-size:10.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;padding:4px 9px;border-radius:5px;background:#fff;color:var(--navy)}
+.shot-op.alq{background:var(--alquiler);color:#fff}
+.shot-price{font-size:30px;font-weight:600;letter-spacing:-.015em;color:#fff;
+  font-variant-numeric:tabular-nums}
+@container (max-width:900px){.shot-price{font-size:23px}}
+.shot-where{font-size:14px;color:rgba(255,255,255,.88);line-height:1.35}
+.dots{position:absolute;right:20px;top:20px;z-index:3;display:flex;gap:6px}
+.dots button{width:7px;height:7px;padding:0;border-radius:50%;border:0;cursor:pointer;
+  background:rgba(255,255,255,.45);transition:background .2s,width .2s}
+.dots button[aria-current="true"]{background:#fff;width:22px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){.shot.on img{animation:none}.shot{transition:none}}
+
+/* ---------- hero search ----------
+   Operation is two buttons, one of which is always on — "tendría que dejarnos
+   seleccionar uno de los dos". */
+.searchbar{background:var(--surface);color:var(--ink);border:1px solid var(--line);
+  border-radius:var(--radius);margin:18px 0 0;
+  padding:14px;display:grid;gap:10px;grid-template-columns:1fr 1fr auto;box-shadow:var(--shadow)}
+.opseg{grid-column:1/-1;display:flex;gap:4px;background:var(--surface-2);
+  border:1px solid var(--line);border-radius:8px;padding:4px}
+.opseg button{flex:1;background:none;border:0;border-radius:6px;padding:9px 6px;cursor:pointer;
+  font-size:14px;font-weight:600;color:var(--muted);transition:background .15s,color .15s}
+.opseg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.opseg button[aria-pressed="true"].alq{background:var(--alquiler)}
+@container (max-width:900px){.searchbar{grid-template-columns:1fr 1fr}}
+@container (max-width:460px){.searchbar{grid-template-columns:1fr}}
+@container (max-width:460px){.searchbar .btn{grid-column:1/-1}}
+
+/* ---------- form controls, used by every form on the site ---------- */
 .field{display:flex;flex-direction:column;gap:5px;min-width:0}
 .field label{font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
   font-weight:600}
 .field select,.field input,.field textarea{background:var(--surface-2);border:1px solid var(--line);
-  border-radius:7px;padding:9px 10px;width:100%}
-.btn{background:var(--navy);color:var(--on-navy);border:0;border-radius:7px;padding:11px 20px;
+  border-radius:7px;padding:10px 11px;width:100%;color:var(--ink)}
+.field select:focus,.field input:focus,.field textarea:focus{border-color:var(--navy-tint)}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:7px;padding:11px 20px;
   font-weight:600;cursor:pointer;align-self:end;white-space:nowrap}
 .btn:hover{background:var(--navy-tint)}
-.btn-ghost{background:transparent;color:var(--navy-tint);border:1px solid var(--line);
+.btn-ghost{background:transparent;color:var(--navy);border:1px solid var(--line);
   border-radius:7px;padding:10px 16px;font-weight:600;cursor:pointer}
-@container (max-width:760px){.searchbar .btn{grid-column:1/-1}}
+.btn-ghost:hover{background:var(--surface-2)}
 
-/* ---------- facts strip ---------- */
-.facts{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--line-soft);
-  background:var(--surface-2)}
-.fact{flex:1 1 170px;padding:16px 20px;border-right:1px solid var(--line-soft)}
-.fact:last-child{border-right:0}
-.fact b{display:block;font-size:22px;font-weight:600;letter-spacing:-.01em;
-  font-variant-numeric:tabular-nums}
-.fact span{font-size:12.5px;color:var(--muted)}
+/* ---------- the claims band ----------
+   "Estaría bueno que tenga algunas frases donde nombramos oportunidades."
+   These three are true of his business today and are written to be replaced:
+   he said he would think about the wording, so the copy is his to confirm. */
+.claims{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);
+  border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+@container (max-width:760px){.claims{grid-template-columns:1fr}}
+.claim{background:var(--ground);padding:22px 24px;display:flex;flex-direction:column;gap:5px}
+.claim b{font-size:15.5px;font-weight:600;color:var(--ink)}
+.claim span{font-size:13.5px;color:var(--muted);line-height:1.45}
+
+/* ---------- reseñas ----------
+   The reference he named carries client reviews and he singled them out. The
+   section is built, but NOT filled: we hold no real review from a real client
+   of his, and inventing one would be fabricating a testimonial. It shows him
+   the shape and asks him for three real ones. */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@container (max-width:900px){.revs{grid-template-columns:1fr}}
+.rev{border:1px dashed var(--line);border-radius:var(--radius);padding:20px;
+  background:var(--surface);display:flex;flex-direction:column;gap:12px;min-height:150px}
+.rev-stars{display:flex;gap:3px;color:var(--line)}
+.rev p{margin:0;font-family:var(--serif);font-size:16px;line-height:1.55;color:var(--muted)}
+.rev footer{margin-top:auto;font-size:12.5px;color:var(--muted)}
 
 /* ---------- property cards ---------- */
 .grid{display:grid;gap:18px;grid-template-columns:repeat(3,1fr)}
@@ -325,7 +381,9 @@ h3{font-size:16px}
 @container (max-width:620px){.two{grid-template-columns:1fr}}
 
 /* ---------- footer ---------- */
-.site-foot{background:var(--navy-deep);color:var(--on-navy-dim);margin-top:10px}
+/* Brand navy, not the deeper shade: the logo artwork carries its own navy
+   rectangle, and on navy-deep that rectangle showed as a lighter box. */
+.site-foot{background:var(--navy);color:var(--on-navy-dim);margin-top:10px}
 .foot-in{max-width:1080px;margin:0 auto;padding:30px 20px;display:grid;
   grid-template-columns:1.3fr 1fr 1fr;gap:26px}
 @container (max-width:760px){.foot-in{grid-template-columns:1fr;gap:20px;padding:24px 14px}}
@@ -378,7 +436,7 @@ h3{font-size:16px}
 
   <header class="site-head">
     <div class="head-in">
-      <img class="logo" src="logo-stranieri.png" alt="Stranieri Propiedades">
+      <img class="logo" src="logo-stranieri-light.png" alt="Stranieri Propiedades">
       <nav class="nav">
         <a href="#" data-go="inicio" aria-current="page">Inicio</a>
         <a href="#" data-go="buscar">Propiedades</a>
@@ -400,18 +458,24 @@ h3{font-size:16px}
   <main class="screen on" id="screen-inicio">
     <div class="hero">
       <div class="wrap">
-        <p class="eyebrow" style="color:var(--on-navy-dim)">La Plata · Dolores · Bavio</p>
-        <h1>Casas, campos y departamentos en La Plata y alrededores</h1>
-        <p>Propiedades en venta y en alquiler, atendidas por un martillero público
-           matriculado. Si te interesa alguna, hablás directamente conmigo.</p>
-        <div class="cred">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3 4 6v6c0 4.4 3.4 8.3 8 9 4.6-.7 8-4.6 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
-          Mauro Stranieri · Martillero y Corredor Público · <b>Col. 7103 L° XIII F° 88</b>
+
+        <div class="hero-copy">
+          <h1 class="hero-claim">La experiencia de sentirte en casa</h1>
+          <p class="hero-sub">Propiedades en venta y en alquiler en La&nbsp;Plata y la
+            región, atendidas personalmente por un martillero público matriculado.</p>
         </div>
+
+        <div class="showcase">
+          <button class="shot-stack" id="shot-stack" type="button"
+                  aria-label="Ver la propiedad destacada"></button>
+          <div class="dots" id="shot-dots" role="tablist" aria-label="Propiedades destacadas"></div>
+          <div class="shot-cap" id="shot-cap"></div>
+        </div>
+
         <form class="searchbar" id="hero-search">
-          <div class="field">
-            <label for="h-op">Operación</label>
-            <select id="h-op"><option value="">Venta y alquiler</option><option>Venta</option><option>Alquiler</option></select>
+          <div class="opseg" id="h-op" role="group" aria-label="Operación">
+            <button type="button" data-op="Venta" aria-pressed="true">En venta</button>
+            <button type="button" data-op="Alquiler" class="alq" aria-pressed="false">En alquiler</button>
           </div>
           <div class="field">
             <label for="h-tipo">Tipo</label>
@@ -423,10 +487,25 @@ h3{font-size:16px}
           </div>
           <button class="btn" type="submit">Buscar</button>
         </form>
+
+        <div style="height:34px"></div>
+      </div>
+
+      <div class="claims">
+        <div class="claim">
+          <b>Tasación sin cargo</b>
+          <span>Te digo cuánto vale tu propiedad hoy, sin compromiso y sin costo.</span>
+        </div>
+        <div class="claim">
+          <b>Martillero matriculado</b>
+          <span>Col. 7103 L° XIII F° 88. La operación la firma un profesional responsable.</span>
+        </div>
+        <div class="claim">
+          <b>Te atiendo yo</b>
+          <span>No hay call center: preguntás y te contesto yo, por WhatsApp.</span>
+        </div>
       </div>
     </div>
-
-    <div class="facts" id="facts"></div>
 
     <section>
       <div class="wrap">
@@ -445,6 +524,23 @@ h3{font-size:16px}
       <div class="wrap">
         <div class="sec-head"><div><p class="eyebrow">Índice</p><h2>Buscá por tipo</h2></div></div>
         <div class="types" id="types"></div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="eyebrow">Lo que dicen</p>
+            <h2>Clientes</h2>
+          </div>
+        </div>
+        <div class="revs" id="revs"></div>
+        <p class="small" style="margin-top:12px">
+          <span class="tbc" title="Dato pendiente: necesito reseñas reales de clientes tuyos">Pendiente:
+          mandame tres comentarios reales de clientes y los pongo acá con nombre y operación.</span>
+          No invento reseñas: van las que te dieron de verdad.
+        </p>
       </div>
     </section>
 
@@ -705,8 +801,7 @@ h3{font-size:16px}
 
   /* ---------- home ---------- */
   // Counts on anything clickable are counted over the properties actually shown,
-  // so a filter never promises more than it returns. The headline figures in the
-  // facts strip describe the whole portfolio and say so.
+  // so a filter never promises more than it returns.
   document.getElementById('n-shown').textContent = P.length;
   document.getElementById('n-all').textContent = D.counts.unique;
   document.getElementById('n-gap').textContent = D.counts.unique - P.length;
@@ -719,17 +814,106 @@ h3{font-size:16px}
   var types = Object.keys(shownTypes).sort(function(a,b){ return shownTypes[b]-shownTypes[a]; });
   var locs = Object.keys(shownLocs).sort(function(a,b){ return shownLocs[b]-shownLocs[a]; });
 
-  var allLocs = Object.keys(D.by_locality);
-  document.getElementById('facts').innerHTML = [
-    ['' + D.counts.unique, 'propiedades en cartera'],
-    ['' + (D.by_operation.Venta || 0), 'en venta'],
-    ['' + (D.by_operation.Alquiler || 0), 'en alquiler'],
-    [allLocs.length + ' localidades', allLocs.join(' · ')]
-  ].map(function(f){
-    return '<div class="fact"><b>' + f[0] + '</b><span>' + f[1] + '</span></div>';
+  fill(document.getElementById('grid-destacadas'), P.slice(0, 6));
+
+  /* ---------- the showcase ----------
+     Five featured properties, crossfading. Chosen by photo count and then
+     de-duplicated by locality so the panel does not cycle through four views
+     of the same field. Every frame is one of his real listings and opens it. */
+  // Shown at 21:9 across the full width, a 338 px phone photo would be a blur.
+  // build_mockup.py records each property's real main-photo width, so the band
+  // takes the sharpest four and the soft ones stay at card size, where they
+  // hold up. This is the one place where picking on data rather than on taste
+  // is the difference between premium and broken.
+  // Resolution is a gate, not the ranking: sorting by pixels alone led the band
+  // with a flat street facade at 889 px and pushed the casco de estancia behind
+  // it. Among the photos that survive being shown this large, the best frame is
+  // the property he documented most.
+  var FEAT = P.slice()
+    .filter(function(p){ return p.main_px >= 640; })
+    .sort(function(a,b){ return b.images.length - a.images.length || b.main_px - a.main_px; })
+    .slice(0, 5);
+  if (FEAT.length < 2){
+    FEAT = P.slice().sort(function(a,b){ return b.main_px - a.main_px; }).slice(0, 5);
+  }
+
+  var stack = document.getElementById('shot-stack');
+  var dotsEl = document.getElementById('shot-dots');
+  var capEl = document.getElementById('shot-cap');
+
+  stack.innerHTML = FEAT.map(function(p, i){
+    return '<div class="shot' + (i === 0 ? ' on' : '') + '">' +
+             '<img src="' + p.images[0] + '" alt="' + titleOf(p) + '"' +
+             (i === 0 ? '' : ' loading="lazy"') + '>' +
+           '</div>';
+  }).join('') + '<div class="shot-veil"></div>';
+
+  dotsEl.innerHTML = FEAT.map(function(p, i){
+    return '<button type="button" data-i="' + i + '" aria-current="' + (i === 0) +
+           '" aria-label="' + titleOf(p).replace(/"/g, '') + '"></button>';
   }).join('');
 
-  fill(document.getElementById('grid-destacadas'), P.slice(0, 6));
+  var shotI = 0, shotTimer = null;
+  var SHOT_MS = 5000;
+
+  function paintShot(i){
+    shotI = i;
+    var p = FEAT[i];
+    var els = stack.querySelectorAll('.shot');
+    for (var k = 0; k < els.length; k++) els[k].classList.toggle('on', k === i);
+    // re-trigger the push-in on the frame that just became visible
+    var img = els[i].querySelector('img');
+    img.style.animation = 'none'; void img.offsetWidth; img.style.animation = '';
+    Array.prototype.forEach.call(dotsEl.children, function(d, k){
+      d.setAttribute('aria-current', String(k === i));
+    });
+    capEl.innerHTML =
+      '<span class="shot-op' + (p.operation === 'Alquiler' ? ' alq' : '') + '">' +
+        p.operation + '</span>' +
+      '<span class="shot-price">' + (p.currency === 'USD' ? 'USD' : '$') + ' ' +
+        nf.format(p.price) + (p.operation === 'Alquiler' ? ' <small>por mes</small>' : '') +
+      '</span>' +
+      '<span class="shot-where">' + titleOf(p) + ' · ' + p.locality + '</span>';
+    stack.setAttribute('aria-label', 'Ver ' + titleOf(p));
+  }
+  function advance(){ paintShot((shotI + 1) % FEAT.length); }
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+  function startShots(){
+    stopShots();
+    if (!calm.matches && FEAT.length > 1) shotTimer = setInterval(advance, SHOT_MS);
+  }
+  function stopShots(){ if (shotTimer) { clearInterval(shotTimer); shotTimer = null; } }
+
+  dotsEl.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    paintShot(Number(b.dataset.i)); startShots();
+  });
+  stack.addEventListener('click', function(){ openFicha(FEAT[shotI].codigo); });
+  // Hovering to read a caption should not have it swapped out mid-sentence.
+  document.querySelector('.showcase').addEventListener('mouseenter', stopShots);
+  document.querySelector('.showcase').addEventListener('mouseleave', startShots);
+
+  paintShot(0);
+  startShots();
+
+  // Three empty cards, deliberately. The section exists because the reference he
+  // chose carries reviews and he singled them out; the content is missing because
+  // we have none from his clients, and a written-in testimonial would be a
+  // fabricated one.
+  var star = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">' +
+    '<path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6-5.3-3-5.3 3 1.1-6L3.4 9.4l6-.8L12 3Z"/></svg>';
+  document.getElementById('revs').innerHTML = [
+    ['Una venta', 'La Plata'],
+    ['Un alquiler', 'La Plata'],
+    ['Una tasación', 'Dolores']
+  ].map(function(r){
+    return '<article class="rev">' +
+      '<div class="rev-stars">' + star + star + star + star + star + '</div>' +
+      '<p><span class="tbc" title="Dato pendiente: la reseña real del cliente">' +
+        'Acá va el comentario de un cliente tuyo, con sus palabras.</span></p>' +
+      '<footer>' + r[0] + ' · ' + r[1] + ' · <span class="tbc">nombre a confirmar</span></footer>' +
+    '</article>';
+  }).join('');
 
   document.getElementById('types').innerHTML = types.map(function(t){
     return '<button class="tbtn" data-type="' + t + '">' + t +
@@ -747,9 +931,20 @@ h3{font-size:16px}
       sel.appendChild(new Option(v, v));
     });
   });
+  // Operation is a forced choice, so the hero always carries one of the two into
+  // the results. "Venta y alquiler" answered nothing and he asked for it to go.
+  var heroOp = 'Venta';
+  var opSeg = document.getElementById('h-op');
+  opSeg.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    heroOp = b.dataset.op;
+    Array.prototype.forEach.call(opSeg.children, function(c){
+      c.setAttribute('aria-pressed', String(c.dataset.op === heroOp));
+    });
+  });
   document.getElementById('hero-search').addEventListener('submit', function(e){
     e.preventDefault();
-    state.op = document.getElementById('h-op').value;
+    state.op = heroOp;
     state.types = document.getElementById('h-tipo').value ? [document.getElementById('h-tipo').value] : [];
     state.locs = document.getElementById('h-loc').value ? [document.getElementById('h-loc').value] : [];
     syncFilters(); show('buscar');
@@ -886,14 +1081,27 @@ h3{font-size:16px}
     document.getElementById('url-path').textContent = pathOf(p);
   }
 
+  // The strip is rebuilt only when the property changes; selecting a photo just
+  // moves the aria-current mark. Re-rendering 16 thumbnails on every tap was pure
+  // DOM churn. (It did not lose the strip's scroll position — Blink restores that
+  // across an innerHTML swap of the same width. Measured, not assumed.)
+  var galleryOf = null;
   function gallery(p, idx){
-    document.getElementById('g-main').src = p.images[idx];
-    document.getElementById('g-main').alt = titleOf(p);
+    var main = document.getElementById('g-main');
     var t = document.getElementById('g-thumbs');
-    t.innerHTML = p.images.map(function(src, i){
-      return '<button type="button" data-i="' + i + '" aria-current="' + (i === idx) +
-        '"><img src="' + src + '" alt="" loading="lazy"></button>';
-    }).join('');
+    main.src = p.images[idx];
+    main.alt = titleOf(p);
+    if (galleryOf !== p.codigo){
+      t.innerHTML = p.images.map(function(src, i){
+        return '<button type="button" data-i="' + i +
+          '"><img src="' + src + '" alt="" loading="lazy"></button>';
+      }).join('');
+      galleryOf = p.codigo;
+      t.scrollLeft = 0;
+    }
+    Array.prototype.forEach.call(t.children, function(b, i){
+      b.setAttribute('aria-current', String(i === idx));
+    });
   }
   document.getElementById('g-thumbs').addEventListener('click', function(e){
     var b = e.target.closest('button'); if (!b || !current) return;

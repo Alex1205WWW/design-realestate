@@ -68,7 +68,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "119117"
+   "legacy_id": "119117",
+   "main_px": 800,
+   "max_px": 800
   },
   {
    "codigo": "CP1",
@@ -108,7 +110,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "198856"
+   "legacy_id": "198856",
+   "main_px": 667,
+   "max_px": 667
   },
   {
    "codigo": "CF6",
@@ -143,7 +147,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": -35.0299013,
    "lng": -58.0655498,
-   "legacy_id": "216798"
+   "legacy_id": "216798",
+   "main_px": 375,
+   "max_px": 667
   },
   {
    "codigo": "102",
@@ -174,7 +180,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "1963"
+   "legacy_id": "1963",
+   "main_px": 338,
+   "max_px": 889
   },
   {
    "codigo": "CA55",
@@ -205,7 +213,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "154148"
+   "legacy_id": "154148",
+   "main_px": 375,
+   "max_px": 375
   },
   {
    "codigo": "CA57",
@@ -236,7 +246,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "154208"
+   "legacy_id": "154208",
+   "main_px": 667,
+   "max_px": 667
   },
   {
    "codigo": "CA82",
@@ -267,7 +279,9 @@ window.STRANIERI = {
    "uncovered": 60,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "289804"
+   "legacy_id": "289804",
+   "main_px": 889,
+   "max_px": 889
   },
   {
    "codigo": "CA83",
@@ -298,7 +312,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "294457"
+   "legacy_id": "294457",
+   "main_px": 889,
+   "max_px": 889
   },
   {
    "codigo": "DE106",
@@ -329,7 +345,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "226396"
+   "legacy_id": "226396",
+   "main_px": 400,
+   "max_px": 400
   },
   {
    "codigo": "DE128",
@@ -360,7 +378,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "295858"
+   "legacy_id": "295858",
+   "main_px": 889,
+   "max_px": 889
   },
   {
    "codigo": "DE86",
@@ -391,7 +411,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "107566"
+   "legacy_id": "107566",
+   "main_px": 667,
+   "max_px": 667
   },
   {
    "codigo": "DE97",
@@ -422,7 +444,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "190599"
+   "legacy_id": "190599",
+   "main_px": 375,
+   "max_px": 375
   },
   {
    "codigo": "DE98",
@@ -453,7 +477,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "198854"
+   "legacy_id": "198854",
+   "main_px": 400,
+   "max_px": 500
   },
   {
    "codigo": "OF4",
@@ -484,7 +510,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "273556"
+   "legacy_id": "273556",
+   "main_px": 376,
+   "max_px": 400
   },
   {
    "codigo": "OF5",
@@ -515,7 +543,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "286862"
+   "legacy_id": "286862",
+   "main_px": 338,
+   "max_px": 889
   },
   {
    "codigo": "QT3",
@@ -546,7 +576,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "272221"
+   "legacy_id": "272221",
+   "main_px": 667,
+   "max_px": 889
   },
   {
    "codigo": "TE3",
@@ -577,7 +609,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": -34.9774839,
    "lng": -58.042528,
-   "legacy_id": "216801"
+   "legacy_id": "216801",
+   "main_px": 667,
+   "max_px": 667
   },
   {
    "codigo": "76",
@@ -607,7 +641,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "1962"
+   "legacy_id": "1962",
+   "main_px": 400,
+   "max_px": 400
   },
   {
    "codigo": "LL2",
@@ -637,7 +673,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "294791"
+   "legacy_id": "294791",
+   "main_px": 670,
+   "max_px": 1000
   },
   {
    "codigo": "LT21",
@@ -666,7 +704,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "198850"
+   "legacy_id": "198850",
+   "main_px": 667,
+   "max_px": 667
   },
   {
    "codigo": "CA77",
@@ -694,7 +734,9 @@ window.STRANIERI = {
    "uncovered": 55,
    "lat": 0.0,
    "lng": 0.0,
-   "legacy_id": "282075"
+   "legacy_id": "282075",
+   "main_px": 375,
+   "max_px": 666
   },
   {
    "codigo": "TE4",
@@ -720,7 +762,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": -35.001579,
    "lng": -58.048907,
-   "legacy_id": "216803"
+   "legacy_id": "216803",
+   "main_px": 375,
+   "max_px": 375
   },
   {
    "codigo": "CF7",
@@ -747,7 +791,9 @@ window.STRANIERI = {
    "uncovered": null,
    "lat": -35.0306511,
    "lng": -58.0665774,
-   "legacy_id": "216799"
+   "legacy_id": "216799",
+   "main_px": 375,
+   "max_px": 375
   }
  ]
 };
