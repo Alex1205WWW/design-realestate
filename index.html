@@ -98,6 +98,12 @@ a{color:inherit}
    which is what he actually asked for. */
 .site-head{background:var(--surface);color:var(--ink);position:relative;z-index:3;
   border-bottom:1px solid var(--line-soft)}
+/* "El menú no debería tenerlo, podríamos hacer los botones flotantes." On the
+   home screen the bar carries no mark and no ground of its own — the links
+   float over the hero and the brand is the big mark below them. */
+.frame.on-home .site-head{background:transparent;border-bottom:0}
+.frame.on-home .site-head .logo{display:none}
+.frame.on-home .head-in{padding-bottom:0}
 /* The mark is back in the bar on every screen: the hero is centred now, so the
    bar is the only place it appears and there is nothing to duplicate. */
 .head-in{padding:18px 28px;display:flex;align-items:center;gap:18px}
@@ -187,19 +193,37 @@ h3{font-size:16px}
 .hero{position:relative;background:var(--ground);padding:0 0 40px}
 @container (max-width:900px){.hero{padding:0 0 26px}}
 
-.hero-head{text-align:center;padding:62px 0 38px;display:flex;flex-direction:column;
-  align-items:center;gap:0}
-@container (max-width:900px){.hero-head{padding:34px 0 24px}}
+/* ---------- the hero mark ----------
+   Third time he has asked: "está pequeño… en la principal tiene que tener más
+   presencia… ¿no quedaría mejor más grande en ese espacio aunque tengamos que
+   correr esa frase un poco a la derecha?"
+
+   So on the home screen the mark leaves the bar entirely and becomes the thing
+   on the left, with the words moved right exactly as he described. Every other
+   screen keeps it in the bar, which is what he also asked for — "está bien que
+   aparezca en las otras". */
+.hero-head{display:grid;grid-template-columns:auto 1fr;gap:16px 52px;align-items:center;
+  padding:58px 0 38px;text-align:left}
+.hero-logo{height:184px;width:auto;flex:none}
+@container (max-width:1200px){.hero-logo{height:150px}.hero-head{gap:16px 38px}}
+@container (max-width:900px){
+  .hero-head{grid-template-columns:1fr;justify-items:center;text-align:center;
+    padding:30px 0 24px;gap:20px}
+  .hero-logo{height:104px}
+}
+@container (max-width:460px){.hero-logo{height:84px}}
+.hero-copy{min-width:0}
 .hero-eyebrow{font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;
   color:var(--muted);font-weight:600;margin:0 0 18px}
 @container (max-width:900px){.hero-eyebrow{font-size:10.5px;letter-spacing:.2em;margin-bottom:12px}}
-.hero-claim{font-family:var(--serif);font-weight:400;font-size:58px;line-height:1.12;
-  letter-spacing:-.02em;margin:0;color:var(--ink);text-wrap:balance}
+.hero-claim{font-family:var(--serif);font-weight:400;font-size:52px;line-height:1.12;
+  letter-spacing:-.02em;margin:0;color:var(--ink);text-wrap:balance;max-width:16ch}
+@container (max-width:900px){.hero-claim{max-width:none}}
 .hero-claim em{display:block;font-style:italic;color:var(--navy)}
 @container (max-width:1100px){.hero-claim{font-size:46px}}
 @container (max-width:900px){.hero-claim{font-size:33px}}
 @container (max-width:460px){.hero-claim{font-size:27px}}
-.hero-sub{font-size:16.5px;color:var(--muted);margin:22px 0 0;max-width:52ch;line-height:1.55}
+.hero-sub{font-size:16.5px;color:var(--muted);margin:18px 0 0;max-width:52ch;line-height:1.55}
 @container (max-width:900px){.hero-sub{font-size:14.5px;margin-top:14px}}
 
 /* ---------- the picture ----------
@@ -423,10 +447,12 @@ h3{font-size:16px}
    A visitor is one of three people, and the page should not make them work out
    which. Buy and rent go straight into a filtered catalogue; the third goes to
    the valuation, which is the only reason an owner is here. */
-.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:26px auto 0;
-  max-width:720px;width:100%}
-@container (max-width:760px){.paths{grid-template-columns:1fr;gap:9px;margin-top:20px}}
-.paths button{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;
+.paths{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0 0;
+  max-width:660px;width:100%}
+@container (max-width:900px){.paths{margin-left:auto;margin-right:auto}}
+@container (max-width:760px){.paths{grid-template-columns:1fr;gap:9px;margin-top:20px}
+  .paths button{align-items:center}}
+.paths button{display:flex;flex-direction:column;align-items:flex-start;gap:3px;cursor:pointer;
   background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
   padding:14px 16px;transition:border-color .15s,transform .15s,box-shadow .15s}
 .paths button:hover{border-color:var(--navy);transform:translateY(-2px);box-shadow:var(--shadow)}
@@ -737,6 +763,8 @@ h3{font-size:16px}
       <div class="wrap">
 
         <div class="hero-head">
+          <img class="hero-logo" src="logo-stranieri-navy.png" alt="Stranieri Propiedades">
+          <div class="hero-copy">
           <p class="hero-eyebrow">Espacios para lo que viene</p>
           <h1 class="hero-claim">La experiencia<em>de sentirte en casa</em></h1>
           <p class="hero-sub">Comprá, alquilá o vendé en La&nbsp;Plata y la región, con la
@@ -745,6 +773,7 @@ h3{font-size:16px}
             <button type="button" data-path="Venta"><b>Comprar</b><span>Ver propiedades en venta</span></button>
             <button type="button" data-path="Alquiler"><b>Alquilar</b><span>Ver propiedades en alquiler</span></button>
             <button type="button" data-path="vender"><b>Quiero vender</b><span>Pedir una tasación</span></button>
+          </div>
           </div>
         </div>
 
@@ -1311,6 +1340,7 @@ h3{font-size:16px}
   heroCard.addEventListener('mouseenter', stopShots);
   heroCard.addEventListener('mouseleave', startShots);
 
+  document.querySelector('.frame').classList.add('on-home');
   paintShot(0);
   startShots();
 
@@ -1891,6 +1921,7 @@ h3{font-size:16px}
       if (a.dataset.go === name) a.setAttribute('aria-current','page');
       else a.removeAttribute('aria-current');
     });
+    document.querySelector('.frame').classList.toggle('on-home', name === 'inicio');
     if (name !== 'ficha') document.getElementById('url-path').textContent = PATHS[name] || '/';
     if (head) head.classList.remove('open');
     if (booted) window.scrollTo({ top:0, behavior:'instant' });
